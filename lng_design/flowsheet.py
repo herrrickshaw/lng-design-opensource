@@ -17,7 +17,8 @@ from dataclasses import dataclass, field
 TOPOLOGY = [
     ("FEED", "V101", "Feed gas"),
     ("V101", "T301", "Wet sour gas"),
-    ("T301", "AC101", "Sweet gas"),
+    ("T301", "V201", "Sweet wet gas"),
+    ("V201", "AC101", "Dry gas"),
     ("AC101", "C3LOOP", "Cooled gas"),
     ("C3LOOP", "MCHE", "Precooled gas"),
     ("MCHE", "ENDFLASH", "Subcooled LNG"),
@@ -41,6 +42,7 @@ NODE_TITLES = {
     "FEED": "Feed Gas",
     "V101": "V-101\nInlet Separator",
     "T301": "T-301\nAmine Absorber",
+    "V201": "V-201\nMolecular Sieve",
     "AC101": "A-101\nAir Cooler",
     "C3LOOP": "C3-100\nPrecool Loop",
     "MCHE": "E-201\nMCHE",
@@ -58,6 +60,7 @@ NODE_TITLES = {
 NODE_STATE_KEYS = {
     "V101": "vessel",
     "T301": "absorber",
+    "V201": "molecular_sieve",
     "AC101": "air_cooler",
     "C3LOOP": "precool",
     "MCHE": "mche",

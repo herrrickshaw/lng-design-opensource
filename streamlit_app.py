@@ -18,11 +18,14 @@ from lng_design.air_cooler import size_air_cooler
 from lng_design.air_supply import size_instrument_air_system
 from lng_design.amine_absorber import size_packed_absorber
 from lng_design.berth import berth_queueing_analysis, size_storage_tank
+from lng_design.cascade_loops import three_loop_cascade
 from lng_design.compressor import match_frame_for_stage, size_centrifugal_stage, size_multistage
 from lng_design.end_flash import flash_end_gas
 from lng_design.exchangers import size_shell_and_tube
 from lng_design.flowsheet import FlowsheetState, build_diagram, build_stream_table
 from lng_design.mche import StreamSegment, analyze_composite_curves, classify_mche_type
+from lng_design.mche_vendor_selection import compare_mche_vendors
+from lng_design.molecular_sieve import size_molecular_sieve_bed
 from lng_design.nitrogen_system import size_nitrogen_supply, size_purge
 from lng_design.precool import optimal_evap_temperature, propane_cycle_power
 from lng_design.process_selection import compare_liquefaction_cycles
@@ -45,12 +48,13 @@ if "flowsheet" not in st.session_state:
     st.session_state.flowsheet = FlowsheetState()
 flowsheet: FlowsheetState = st.session_state.flowsheet
 
-(tab_flow, tab_precool, tab_compressor, tab_absorber, tab_mche, tab_vessel,
- tab_exchanger, tab_aircooler, tab_water, tab_endflash, tab_refrigmu,
- tab_berth, tab_utilities) = st.tabs([
+(tab_flow, tab_precool, tab_compressor, tab_absorber, tab_molsieve, tab_mche,
+ tab_vessel, tab_exchanger, tab_aircooler, tab_water, tab_endflash, tab_refrigmu,
+ tab_berth, tab_utilities, tab_cascade) = st.tabs([
     "Process Flow Diagram", "C3 Pre-cool Loop", "Compressor Train", "Amine Absorber",
-    "MCHE / Pinch Check", "Separator Vessel", "Shell & Tube Exchanger", "Air Cooler",
-    "Cooling Water", "End Flash", "Refrigerant Makeup", "Storage & Berth", "Utilities",
+    "Molecular Sieve", "MCHE / Pinch Check", "Separator Vessel", "Shell & Tube Exchanger",
+    "Air Cooler", "Cooling Water", "End Flash", "Refrigerant Makeup", "Storage & Berth",
+    "Utilities", "3-Loop Cascade",
 ])
 
 # ---------------------------------------------------------------------
@@ -201,6 +205,46 @@ with tab_absorber:
             st.error(str(e))
 
 # ---------------------------------------------------------------------
+with tab_molsieve:
+    st.header("Molecular sieve dehydration (post-amine, pre-cryogenic)")
+    st.caption(
+        "Amine removes acid gases but not water; LNG needs water down to well "
+        "under 1 ppmv before the cryogenic section, or ice/hydrates plug the MCHE. "
+        "4A molecular sieve, GPSA Engineering Data Book Ch. 20 - see "
+        "lng_design/molecular_sieve.py."
+    )
+    c1, c2 = st.columns(2)
+    with c1:
+        ms_flow = st.number_input("Gas mass flow (kg/s)", min_value=1.0, value=20.0, key="ms_flow")
+        ms_density = st.number_input("Gas density at bed conditions (kg/m3)", min_value=1.0, value=25.0, key="ms_density")
+        ms_water = st.number_input("Inlet water content (ppm wt)", min_value=1.0, value=800.0, key="ms_water")
+    with c2:
+        ms_ads_time = st.number_input("Adsorption time (h)", min_value=1.0, value=8.0, key="ms_ads")
+        ms_regen_time = st.number_input("Regeneration time (h)", min_value=0.5, value=4.0, key="ms_regen")
+        ms_cool_time = st.number_input("Cooldown time (h)", min_value=0.1, value=1.5, key="ms_cool")
+    ms_velocity = st.slider("Design velocity (m/s)", 0.10, 0.35, 0.20, 0.01, key="ms_vel")
+    ms_capacity = st.slider("Working capacity (wt%)", 5.0, 15.0, 11.0, 0.5, key="ms_cap")
+
+    if st.button("Size molecular sieve bed", type="primary"):
+        try:
+            result = size_molecular_sieve_bed(
+                ms_flow, ms_density, ms_water, adsorption_time_h=ms_ads_time,
+                regen_time_h=ms_regen_time, cooldown_time_h=ms_cool_time,
+                design_velocity_m_s=ms_velocity, working_capacity_wt_pct=ms_capacity,
+            )
+            colA, colB, colC, colD = st.columns(4)
+            colA.metric("Standard diameter", f"{result.standard_diameter_mm:,.0f} mm")
+            colB.metric("Bed height", f"{result.bed_height_m:.1f} m")
+            colC.metric("Number of beds", f"{result.n_beds}")
+            colD.metric("Regen heater duty", f"{result.regen_heater_duty_kW:,.0f} kW")
+            flowsheet.set("molecular_sieve", {
+                "Diameter": f"{result.standard_diameter_mm:,.0f} mm",
+                "Beds": f"{result.n_beds}",
+            })
+        except ValueError as e:
+            st.error(str(e))
+
+# ---------------------------------------------------------------------
 with tab_mche:
     st.header("MCHE composite-curve / MITA pinch check")
     st.caption(
@@ -269,6 +313,41 @@ with tab_mche:
             st.caption(f"Alternatives considered: {', '.join(cycle_result.alternatives_considered)}")
         except ValueError as e:
             st.error(str(e))
+
+    st.divider()
+    st.subheader("MCHE vendor comparison: APCI vs. Linde")
+    st.caption(
+        "Structured factor-by-factor comparison, not a forced single answer - the "
+        "literature doesn't reduce this to one clean threshold. See "
+        "lng_design/mche_vendor_selection.py for citations."
+    )
+    vc1, vc2 = st.columns(2)
+    with vc1:
+        vendor_capacity = st.number_input(
+            "Target train capacity for context (mtpa, optional)", min_value=0.0,
+            value=2.0, step=0.5, key="vendor_capacity",
+        )
+    with vc2:
+        vendor_modularity = st.selectbox(
+            "Preference", ["No preference", "Value modularity/flexibility", "Prefer simplicity"],
+            key="vendor_modularity",
+        )
+    modularity_arg = {"Value modularity/flexibility": True, "Prefer simplicity": False}.get(vendor_modularity)
+    vendor_result = compare_mche_vendors(
+        target_train_capacity_mtpa=vendor_capacity if vendor_capacity > 0 else None,
+        values_modularity=modularity_arg,
+    )
+    vcol1, vcol2 = st.columns(2)
+    for col, profile in [(vcol1, vendor_result.apci), (vcol2, vendor_result.linde)]:
+        with col:
+            st.markdown(f"**{profile.vendor}**")
+            st.write(f"Process: {profile.process}")
+            st.write(f"Exchanger: {profile.exchanger_technology}")
+            st.write(f"Refrigeration cycles: {profile.n_refrigeration_cycles}")
+            st.write(f"Proven capacity: {profile.proven_train_capacity_mtpa}")
+            st.caption(profile.notes)
+    for note in vendor_result.screening_notes:
+        st.info(note)
 
 # ---------------------------------------------------------------------
 with tab_vessel:
@@ -589,6 +668,70 @@ with tab_utilities:
             colB.metric("Peak flow", f"{result.peak_flow_m3_h:,.1f} m3/h")
             colC.metric("Potable share", f"{result.potable_m3_day:,.1f} m3/day")
             flowsheet.set("service_water", {"Peak flow": f"{result.peak_flow_m3_h:,.1f} m3/h"})
+
+# ---------------------------------------------------------------------
+with tab_cascade:
+    st.header("Three-loop cascade (NG / Refrigerant-LRC / PMR)")
+    st.caption(
+        "Models the Linde MFC-style cascade structure: PMR condenses at ambient and "
+        "absorbs both the NG precool duty AND the LRC loop's condensing heat - the "
+        "defining cascade link. Real gas/thermodynamic properties throughout via "
+        "CoolProp mixture flashes. See lng_design/cascade_loops.py for the physics "
+        "and the empirical validation behind the temperature ranges below."
+    )
+    st.subheader("NG duties")
+    c1, c2 = st.columns(2)
+    with c1:
+        cs_precool_duty = st.number_input("NG precool duty (kW)", min_value=1.0, value=3000.0, key="cs_precool_duty")
+    with c2:
+        cs_liq_duty = st.number_input("NG liquefaction duty (kW)", min_value=1.0, value=5000.0, key="cs_liq_duty")
+
+    st.subheader("PMR loop (condenses at ambient)")
+    c1, c2, c3 = st.columns(3)
+    with c1:
+        cs_pmr_evap_C = st.number_input("PMR T_evap (°C)", value=-40.0, key="cs_pmr_evap")
+    with c2:
+        cs_pmr_cond_C = st.number_input("PMR T_cond (°C, ambient)", value=40.0, key="cs_pmr_cond")
+    with c3:
+        cs_dmr_style = st.checkbox("DMR-style blend (colder than propane's ~-42°C floor)", key="cs_dmr")
+
+    st.subheader("Refrigerant (LRC) loop (condenses against PMR's cold duty)")
+    c1, c2, c3 = st.columns(3)
+    with c1:
+        cs_lrc_evap_C = st.number_input("LRC T_evap (°C)", value=-100.0, key="cs_lrc_evap")
+    with c2:
+        cs_mita = st.number_input("MITA between loops (K)", min_value=0.5, value=3.0, key="cs_mita")
+    with c3:
+        st.metric("LRC T_cond (°C)", f"{cs_pmr_evap_C + cs_mita:.1f}")
+
+    if st.button("Solve cascade", type="primary"):
+        lrc_blend = GasMixture({"Nitrogen": 0.05, "Methane": 0.30, "Ethane": 0.35, "Propane": 0.30})
+        dmr_blend = GasMixture({"Ethane": 0.30, "Propane": 0.70})
+        try:
+            result = three_loop_cascade(
+                cs_precool_duty, cs_liq_duty,
+                cs_pmr_evap_C + 273.15, cs_pmr_cond_C + 273.15,
+                lrc_blend, cs_lrc_evap_C + 273.15,
+                lrc_T_cond_K=cs_pmr_evap_C + 273.15 + cs_mita,
+                mita_K=cs_mita,
+                pmr_refrigerant=dmr_blend if cs_dmr_style else None,
+            )
+            colA, colB, colC = st.columns(3)
+            colA.metric("PMR power", f"{result.pmr.compressor_power_kW:,.0f} kW")
+            colB.metric("LRC power", f"{result.lrc.compressor_power_kW:,.0f} kW")
+            colC.metric("Total power", f"{result.total_compressor_power_kW:,.0f} kW")
+            st.caption(
+                f"PMR total duty (NG precool + LRC condensing): {result.pmr_total_duty_kW:,.0f} kW "
+                f"| LRC condensing duty: {result.lrc.condensing_duty_kW:,.0f} kW"
+            )
+            if cs_dmr_style:
+                st.info(
+                    f"DMR-style PMR evaporating at {cs_pmr_evap_C:.0f}°C - below pure propane's "
+                    "~-42°C atmospheric floor - using a heavier ethane/propane blend instead of "
+                    "pure propane."
+                )
+        except ValueError as e:
+            st.error(str(e))
 
 # ---------------------------------------------------------------------
 # tab_flow is rendered LAST (though it's the leftmost/first tab visually -

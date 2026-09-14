@@ -70,6 +70,57 @@ to catch an internal (non-terminal) MITA violation, which is the
 well-documented failure mode this method exists to catch in multi-stream
 cryogenic exchanger design.
 
+## Overall temperature ladder — independent published cross-check ✅
+
+A published SMR (Single Mixed Refrigerant / PRICO) process paper
+(Frontiers in Energy Research, 2022, DOI 10.3389/fenrg.2022.917656)
+reports: NG feed 32°C/50 bara, LNG exiting the main exchanger -149.3°C,
+final LNG product -158.5°C, compressor discharge held at 40°C via
+interstage cooling, 75% compressor efficiency. Every one of these
+independently matches this package's own defaults (40°C ambient
+condensing in `precool.py`/`cascade_loops.py`, 75% isentropic/polytropic
+efficiency defaults throughout, and an end-flash storage temperature
+default of -158°C in the Streamlit app) - found and cross-checked after
+the defaults were already set, not tuned to match afterward.
+
+## Molecular sieve module — a bug the test suite didn't catch, running the app did
+
+`molecular_sieve.py`'s diameter (gas-velocity-driven) and bed height
+(water-duty-driven) are computed independently. At the Streamlit app's
+original defaults (50 kg/s, 100 ppmw inlet water), this produced a
+"pancake" bed: 3,658 mm diameter, **0.2 m** tall - far too shallow for a
+mass-transfer zone to develop, a real design flaw invisible to unit tests
+built around the same untested defaults. Caught only by actually running
+the app in a browser and reading the number, not by any test written in
+advance. Fixed by adding an explicit minimum-bed-depth check (the module
+now raises rather than returning a physically dubious result) and
+changing the app's defaults to a more realistic wet-gas water content
+(800 ppmw), which gives a sane 2,286 mm × 1.4 m bed - see
+`tests/test_molecular_sieve.py::test_rejects_pancake_bed_high_flow_low_water_content`.
+
+## Cascade module — a zero-approach-temperature bug caught before shipping
+
+While writing `cascade_loops.py`'s first tests, the LRC condensing
+temperature and PMR evaporating temperature were set to the exact same
+value (both -40°C) - a zero-Kelvin approach that would need infinite
+heat-transfer area, the same mistake `mche.py`'s MITA check exists to
+catch on the main exchanger. `three_loop_cascade` now enforces a MITA
+between the two loops explicitly and raises if violated; the tests were
+corrected to use a realistic 3 K margin before this shipped, not after.
+
+Building the mixed-refrigerant cycle for this module also surfaced a
+genuine numerical/physical constraint worth recording: a light,
+methane/nitrogen-rich blend suitable for the cryogenic LRC evaporator
+(down to -100°C) has **no valid bubble point anywhere near ambient
+temperature** - CoolProp's mixture flash solver fails to converge rather
+than returning a wrong answer. A heavier blend (30/70 mol% ethane/
+propane) **does** condense at 40°C ambient while evaporating down to at
+least -60°C - independently confirming the concrete mechanism behind
+DMR's reported precool advantage over pure propane's ~-42°C atmospheric
+floor (see `process_selection.py`'s citations). Both findings came from
+running real CoolProp calculations with several candidate compositions/
+temperatures, not from asserting the result in advance.
+
 ## A note on what was *not* used
 
 Early in this project's development, a Dropbox folder that looked like it

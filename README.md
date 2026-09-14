@@ -47,6 +47,9 @@ or an open-source equation-oriented tool like
 | `lng_design/air_supply.py` | ISA/GPSA instrument-air demand aggregation | Air demand, compressor capacity, receiver volume |
 | `lng_design/nitrogen_system.py` | Vessel-volume-exchange purge + blanketing | Purge volume, N2 generator capacity, LN2 vaporizer duty |
 | `lng_design/process_selection.py` | Literature-grounded cycle screening | C3MR vs. DMR vs. AP-X recommendation + rationale |
+| `lng_design/mche_vendor_selection.py` | Literature-grounded vendor comparison | APCI vs. Linde structured comparison |
+| `lng_design/molecular_sieve.py` | GPSA Ch. 20 adsorber sizing | Bed diameter/height, number of beds, regen heater duty |
+| `lng_design/cascade_loops.py` | 3-loop cascade, real CoolProp mixture flashes | NG/LRC/PMR duties, compressor power, DMR-vs-C3 precool comparison |
 | `lng_design/flowsheet.py` | Graphviz PFD + HMB-style stream table | Interactive process flow diagram tying every module together |
 | `lng_design/optimize.py` | NSGA-II (via [pymoo](https://pymoo.org/)) | Pareto front for any of the above (e.g. power vs. exergy) |
 

@@ -205,6 +205,44 @@ water**: potable demand from a per-person-per-day figure (100-150 L/
 person/day is the typical industrial-site range) plus a general service
 allowance, converted to a peak design flow via a standard peaking factor.
 
+## Molecular sieve dehydration (`lng_design/molecular_sieve.py`)
+
+Standard two-part adsorber sizing (GPSA Engineering Data Book Ch. 20,
+"Dehydration"; Campbell, "Gas Conditioning and Processing" Vol. 2): a
+design superficial velocity sets diameter, water-removal duty divided by
+the sieve's working capacity sets adsorbent mass/bed height, and the
+relationship between adsorption time and regeneration+cooldown time
+determines whether two or three beds are needed. The two sizing paths
+(velocity-driven diameter, duty-driven volume) are computed independently
+and can disagree - see the "pancake bed" finding in
+[docs/VALIDATION.md](VALIDATION.md) for why this module validates the
+resulting bed depth rather than trusting either path alone.
+
+## APCI vs. Linde MCHE comparison (`lng_design/mche_vendor_selection.py`)
+
+A structured, factor-by-factor comparison (exchanger technology, number
+of refrigeration cycles, proven capacity track record) rather than a
+forced single recommendation - unlike `process_selection.py`'s C3MR/DMR/
+AP-X screening, the published APCI-vs-Linde comparisons don't reduce to
+one clean decision variable. Full citations in the module's docstring.
+
+## Three-loop cascade (`lng_design/cascade_loops.py`)
+
+Models the structural pattern behind Linde's MFC process: a PMR
+(pre-cooling mixed refrigerant, or pure propane by default) loop
+condensing at ambient, and a Refrigerant/LRC loop that condenses against
+the PMR loop's cold duty rather than ambient directly - the defining
+"cascade" link, where each cycle pre-cools the next one down the
+temperature ladder. Rigorous CoolProp mixture flashes throughout
+(`AbstractState` with `QT_INPUTS`/`PSmass_INPUTS`), with an enforced MITA
+between the LRC condenser and PMR evaporator (heat must actually flow
+from warmer to colder - see [docs/VALIDATION.md](VALIDATION.md) for a
+case this caught before it shipped). Also demonstrates the concrete
+mechanism behind DMR's reported precool advantage over pure propane: a
+heavier mixed-refrigerant blend (e.g. ethane/propane) can evaporate
+colder than propane's ~-42°C atmospheric-pressure floor while still
+condensing at ambient - verified empirically, not asserted.
+
 ## Optimization (`lng_design/optimize.py`)
 
 NSGA-II via [pymoo](https://pymoo.org/), matching the approach used across
