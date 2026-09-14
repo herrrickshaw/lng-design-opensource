@@ -61,6 +61,25 @@ docker build -t lng-design .   # see Dockerfile
 docker run -p 8501:8501 lng-design
 ```
 
+## Example: sizing real upcoming projects
+
+`examples/gem_upcoming_projects_sizing.py` runs published train capacities
+for seven major proposed/under-construction LNG liquefaction projects
+(Qatar North Field, Plaquemines, Rio Grande, LNG Canada, Golden Pass,
+Papua LNG, Arctic LNG 2) — sourced from the [Global Energy Monitor Global
+Gas Infrastructure Tracker](https://globalenergymonitor.org/projects/global-gas-infrastructure-tracker/)
+— through the precool and compressor modules, purely to demonstrate the
+tool at real-world scale:
+
+```bash
+python examples/gem_upcoming_projects_sizing.py
+```
+
+GGIT publishes train capacity and status, not feed composition or process
+conditions, so the script assumes a generic lean-gas feed for illustration
+— see the script's docstring and printed sources for exactly what's
+published data vs. assumption.
+
 ## Using it as a library
 
 ```python
