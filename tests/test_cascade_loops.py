@@ -118,3 +118,13 @@ def test_propane_below_its_normal_boiling_point_needs_vacuum_operation():
 
     dmr_result = mixed_refrigerant_cycle(DMR_PRECOOL_BLEND, 3000.0, 223.15, PMR_T_COND)
     assert dmr_result.compressor_power_kW > 0
+
+
+def test_single_stage_cannot_span_full_precool_to_lng_rundown_range():
+    # Found by running examples/full_train_worked_example.py: this exact
+    # blend cannot do -40C to -159C (or even -100C to -159C) in one
+    # compression stage - the isentropic P-S flash fails to converge,
+    # a real limitation this test locks in rather than lets regress
+    # silently into a wrong-but-plausible-looking number.
+    with pytest.raises(ValueError, match="did not converge"):
+        mixed_refrigerant_cycle(LRC_BLEND, 5000.0, T_evap_K=173.15 - 60, T_cond_K=236.15)

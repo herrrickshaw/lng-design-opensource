@@ -40,6 +40,19 @@ default `three_loop_cascade`'s PMR loop reuses `precool.py`'s proven
 pure-propane cycle (the simplest, most-proven baseline); pass
 `pmr_refrigerant` to instead run it through `mixed_refrigerant_cycle`
 with a heavier blend for the DMR-style comparison.
+
+**A single mixed_refrigerant_cycle call cannot span the full precool-to-
+LNG-rundown range**: found by running examples/full_train_worked_example.py
+end to end, not predicted in advance. The example's LRC_BLEND (5/30/35/30
+mol% N2/CH4/C2H6/C3H8) validates cleanly down to about -100°C, but the
+isentropic-compression step fails to converge if pushed to span the full
+-40°C-to--159°C liquefaction+subcooling range in one stage - too large a
+compression ratio/temperature lift for this blend in a single step. Real
+MFC/DMR designs use multiple refrigerant pressure levels (and, for MFC,
+a third, lighter "SRC" subcooling cycle beyond the two refrigerant loops
+this module models) for exactly this reason. Model a large span as
+multiple sequential `mixed_refrigerant_cycle` calls at different
+temperature levels rather than one call across the whole range.
 """
 from __future__ import annotations
 
@@ -113,7 +126,22 @@ def mixed_refrigerant_cycle(
     h3 = cond.hmass()
 
     comp_state = _state()
-    comp_state.update(CP.PSmass_INPUTS, P_cond, s1)
+    try:
+        comp_state.update(CP.PSmass_INPUTS, P_cond, s1)
+    except ValueError as e:
+        raise ValueError(
+            f"Isentropic compression from T_evap={T_evap_K:.1f} K to P_cond "
+            f"({P_cond/1e5:.1f} bar) did not converge to a physical state for this "
+            f"composition - found by actually running "
+            "examples/full_train_worked_example.py, not predicted in advance (see "
+            "docs/VALIDATION.md). This typically means the compression ratio/"
+            "temperature lift is too large for a single stage with this blend "
+            "(e.g. spanning the full precool-to-LNG-rundown range in one step, "
+            "rather than the multiple refrigerant pressure levels a real MFC/DMR "
+            "design would use). Try a smaller T_evap-to-T_cond span, or model "
+            "the duty as two sequential mixed_refrigerant_cycle calls at "
+            "different temperature levels instead of one."
+        ) from e
     h2s = comp_state.hmass()
     h2 = h1 + (h2s - h1) / isentropic_efficiency
 

@@ -152,6 +152,17 @@ def match_frame_for_stage(
     see docs/VALIDATION.md for the published worked example this table is
     validated against).
 
+    T_in_K/P_in_Pa must describe a SINGLE-PHASE state - safe for a real
+    process gas stream (normally well above its dew point), but NOT for a
+    refrigeration cycle's own saturated suction conditions (T_evap,
+    P_evap sit exactly on that fluid's saturation curve by definition, so
+    a plain T,P density lookup is ambiguous there and CoolProp will raise
+    rather than guess liquid vs. vapor - found by running
+    examples/full_train_worked_example.py, see docs/VALIDATION.md). For a
+    refrigerant compressor's own suction, get the vapor density directly
+    via CoolProp's quality input (Q=1) instead of calling this function
+    with the cycle's (T_evap, P_evap).
+
     Returns (matched_frame, inlet_volume_flow_m3_h).
     """
     density = gas.density(T_in_K, P_in_Pa)
