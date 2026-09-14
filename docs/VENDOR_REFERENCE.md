@@ -100,6 +100,24 @@ a citation that doesn't exist.
 
 ---
 
+## 4. Compressors / turbomachinery — tied to this package's own real-project example
+
+A category the first three passes through this document didn't cover at
+all, despite `compressor.py`/`equipment_catalog.py`'s frame table being
+central to this package's own sizing. The strongest entry below is tied
+directly to a project already named in this repo's own
+`examples/gem_upcoming_projects_sizing.py` — a genuine "same real
+project, independently confirmed equipment vendor" cross-check, the
+same pattern the coal-to-urea sibling's own `docs/VENDOR_REFERENCE.md`
+uses for Talcher Fertilizers Limited.
+
+| Vendor | Public resource (verified) | Series/ratings published | Relevance |
+|---|---|---|---|
+| **Baker Hughes** | [Centrifugal/axial compressors](https://www.bakerhughes.com/centrifugal-axial-compressors) (bakerhughes.com, own site) product-family table, plus Baker Hughes' own investor press release, ["Baker Hughes Announces Major LNG Turbomachinery Order from Qatar Petroleum for the North Field East (NFE) Project"](https://investors.bakerhughes.com/news-releases/news-release-details/baker-hughes-announces-major-lng-turbomachinery-order-qatar) (investors.bakerhughes.com) | Real product-family ranges (MCL series to 60 bar max discharge, BCL series to 1,000 bar, flow in m³/h, max speed in rpm) confirm Baker Hughes as a real, currently marketed centrifugal-compressor OEM ("installed over 5,000 centrifugal and axial compressors since 1960"), not a hypothetical. The press release confirms a REAL, quantified order for **Qatar North Field East**: 4 LNG mega-trains, 6 centrifugal compressors + 3 Frame 9E DLN gas turbine drivers per train (24 compressors / 12 turbines total), for 33 MTPA of added capacity. | **A direct match to this package's own worked example**: `examples/gem_upcoming_projects_sizing.py` already sizes "Qatar North Field East" at 8.0 MTPA/train average across T1-4 (32 MTPA total, independently sourced from the Global Energy Monitor tracker) — Baker Hughes' own press release, an entirely separate source, confirms the SAME project at 33 MTPA/4 trains with a real, named compressor count (6/train). Neither source gives individual compressor MW ratings, so this remains a train-count/project-identity cross-check, not a numeric sizing cross-check against `compressor.py`'s own computed power output — flagged honestly rather than overclaimed. |
+| **MAN Energy Solutions** | [Compressors for oil and gas](https://www.man-es.com/oil-gas/products/compressors) (man-es.com, own site) and [Tangguh LNG](https://www.turbomachinerymag.com/view/man-energy-supplies-integrally-geared-compressors-for-tangguh-lng-plant) coverage (turbomachinerymag.com, secondary source) | Real HOFIM® (High-speed Oil-Free Integrated Motor-compressor) technology confirmed as a real, currently marketed product for LNG-adjacent service; a real, named prior LNG project (Tangguh, Indonesia) confirmed via secondary industry-press coverage, not man-es.com itself. General compressor-portfolio power figures found (>50 MW pipeline compressors, an 11.5 MW/220 bar subsea unit) are for DIFFERENT (pipeline/subsea) product lines, not LNG refrigerant compressors specifically — not used as an LNG-relevant numeric cross-check. | A second, independently confirmed real compressor OEM in LNG service, reinforcing that centrifugal compression for LNG refrigerant duty is a real, multiply-sourced commercial technology `compressor.py` models — not a single-vendor or hypothetical process. |
+
+---
+
 ## Notes on what didn't make the cut
 
 A number of vendors named in the original research brief turned out, on

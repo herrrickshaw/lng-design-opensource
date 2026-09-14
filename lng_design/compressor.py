@@ -21,6 +21,16 @@ Gas power:
 
 All energy quantities in SI (J, W); head in J/kg (equivalent to m^2/s^2,
 sometimes reported as m via /g -- we keep J/kg to stay unit-unambiguous).
+
+Real, named centrifugal-compressor OEMs in LNG refrigerant service
+(docs/VENDOR_REFERENCE.md): Baker Hughes' own investor press release
+confirms a real, quantified order for "Qatar North Field East" -- 4
+mega-trains, 6 centrifugal compressors per train -- the SAME project
+`examples/gem_upcoming_projects_sizing.py` already sizes (8.0 MTPA/train
+average, independently sourced from the Global Energy Monitor tracker).
+Neither source publishes individual compressor MW ratings, so this is a
+project-identity/train-count cross-check, not a numeric validation of
+this module's own computed power output.
 """
 from __future__ import annotations
 

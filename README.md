@@ -7,7 +7,7 @@ acid-gas absorbers, and a main cryogenic heat exchanger (MCHE) composite-curve
 literature-grounded first pass before committing to a licensed process
 simulator.
 
-**[Try the app](#running-the-app)** · **[Methodology & citations](docs/METHODOLOGY.md)** · **[External validation](docs/VALIDATION.md)** · **[EOS sensitivity: HEOS vs. PR vs. SRK](docs/EOS_SENSITIVITY.md)**
+**[Try the app](#running-the-app)** · **[Methodology & citations](docs/METHODOLOGY.md)** · **[External validation](docs/VALIDATION.md)** · **[EOS sensitivity: HEOS vs. PR vs. SRK](docs/EOS_SENSITIVITY.md)** · **[Vendor reference](docs/VENDOR_REFERENCE.md)**
 
 ## What this is (and isn't)
 
@@ -143,6 +143,16 @@ No proprietary or client-specific validation data is used anywhere in this
 repository or its history — see [docs/METHODOLOGY.md](docs/METHODOLOGY.md)
 for the full citation list and [docs/VALIDATION.md](docs/VALIDATION.md)
 for external cross-checks against published sources.
+
+[docs/VENDOR_REFERENCE.md](docs/VENDOR_REFERENCE.md) goes one step
+further: real, named equipment vendors (valves, heat exchangers,
+pressure vessels, and — most directly — centrifugal-compressor OEM
+**Baker Hughes**, whose own investor press release confirms a real,
+quantified turbomachinery order for "Qatar North Field East": 4
+mega-trains, 6 compressors per train — the SAME real project this
+repo's own `examples/gem_upcoming_projects_sizing.py` already sizes at
+8.0 MTPA/train, independently sourced from the Global Energy Monitor
+tracker. Two unrelated real sources, same real project.
 
 ```bash
 pip install -e ".[dev]"
