@@ -83,6 +83,47 @@ service commonly cited in the open literature fall in the
 1,500–3,500 W/m²·K range depending on stream side and fouling allowance;
 the app defaults to 2,000 W/m²·K and lets the engineer override it.
 
+## MCHE detailed tube-side/shell-side rating (`lng_design/mche_tube_design.py`)
+
+Answers a different question than `mche.py` above: not "does an assumed
+constant U check out for a target rundown" (a **sizing** calculation) but
+"what rundown can a specific, fixed tube bundle actually deliver" (a
+**rating** calculation) — the standard distinction process engineers draw
+between the two (Kern, *Process Heat Transfer*; Sinnott & Towler,
+*Chemical Engineering Design*). Local heat transfer coefficients are
+computed from real CoolProp properties at many points along the
+exchanger's duty axis rather than one assumed number:
+
+- **Tube side, single-phase**: Dittus-Boelter (1930), Nu = 0.023 Re^0.8
+  Pr^n — reproduced in Incropera, *Fundamentals of Heat and Mass
+  Transfer*. Valid for turbulent flow (Re ≥ 10,000); raises otherwise.
+- **Tube side, condensing**: Shah (1979), M.M. Shah, "A general
+  correlation for heat transfer during film condensation inside pipes",
+  *Int. J. Heat and Mass Transfer* 22(4), 547–556. Liquid-phase reference
+  properties use a single representative pure fluid (the heaviest
+  hydrocarbon present) rather than a full multicomponent bubble-point
+  flash — see docs/VALIDATION.md for why that flash was abandoned
+  (numerically fragile and slow for a retrograde-prone gas mixture).
+  Reduced pressure uses a Kay's-rule pseudo-critical pressure (standard
+  natural-gas engineering practice, e.g. GPSA Engineering Data Book), not
+  the mixture's own true critical pressure (same fragility issue).
+- **Shell side**: a simplified laminar falling-film coefficient — the
+  standard Nusselt laminar-film-thickness relation (Incropera Ch. 10;
+  Bird, Stewart & Lightfoot, *Transport Phenomena*) combined with a
+  conduction-through-the-film approximation. This deliberately omits
+  nucleate-boiling and wave/turbulence enhancement, so it is a
+  conservative (likely low) estimate of the true coefficient — flagged
+  explicitly rather than presented as a complete design correlation.
+- **Combination**: standard cylindrical-wall series-resistance formula
+  (Kern), referenced to outer tube area.
+
+None of this reproduces any licensor's proprietary spiral-wound
+exchanger correlation — it is a generic, textbook-level rating model
+appropriate to conceptual screening, not certified detailed design. See
+`examples/mche_rundown_rating.py` for a worked cross-check against
+`mche.py`'s simple constant-U estimate, and docs/VALIDATION.md for what
+that cross-check found.
+
 ## Separator vessels (`lng_design/vessels.py`)
 
 **Diameter**: Souders-Brown gas-capacity correlation, the same functional

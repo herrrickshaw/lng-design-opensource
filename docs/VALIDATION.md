@@ -231,6 +231,52 @@ same 5 mtpa C3MR ceiling:
   size limits and real core-fabrication limits this package does not
   model, not smoothed over to make the two numbers agree.
 
+## MCHE detailed rating (`mche_tube_design.py`) — two numerical fragilities found building it, one physical finding from using it
+
+Building a local-property (rather than constant-U) MCHE model, to answer
+"what rundown can a specific tube bundle actually deliver" instead of
+"does an assumed U check out", surfaced real problems only found by
+running the calculation:
+
+1. **A full multicomponent bubble-point flash for Shah's condensation
+   correlation was both slow (~1-2 s per call) and, for this package's
+   retrograde-prone light-hydrocarbon feed composition near its own
+   pseudo-critical pressure, prone to outright failure** ("critical point
+   finding routine found 6 critical points"). Not predicted in advance -
+   found by timing and running the zone-by-zone calculation. Fixed by
+   using a single representative pure-fluid proxy (the heaviest
+   hydrocarbon present, evaluated well below *its own* critical point)
+   for the liquid-phase reference properties, and a Kay's-rule
+   pseudo-critical pressure instead of the mixture's own true critical
+   pressure - both numerically robust and fast, at the cost of some
+   compositional fidelity, flagged explicitly in the module's docstring
+   rather than presented as exact.
+2. **Repeated single-property CoolProp.PropsSI calls against a
+   string-keyed mixture (`"Methane[0.85]&..."`) were the dominant cost**,
+   not the flash math itself - each call reconstructs the mixture from
+   scratch. Rebuilding a persistent `AbstractState` once and reading
+   multiple properties (H, Q, viscosity, conductivity, cp) off a single
+   resolved state per temperature point cut a 15-zone rating from
+   several minutes (initial version, sometimes hanging outright) to
+   roughly 20-45 seconds. This is a CoolProp usage-pattern finding, not a
+   thermodynamic one, but it shaped the module's whole internal
+   structure (see `_zone_integrate`'s docstring).
+3. **Physical finding**: rating a tube bundle SIZED by `mche.py`'s simple
+   method (assumed constant U = 2,000 W/m²K, this package's own stated
+   default) against the LRC section's -40°C→-100°C duty, the detailed
+   local-property rating only reaches **-70.2°C**, 29.8 K short of the
+   assumed target. The local U this module computes averages ~316 W/m²K
+   here - well below the 1,500-3,500 W/m²K range `mche.py`'s own
+   docstring cites as typical for LNG service. The gap is attributed
+   mainly to the shell-side falling-film model's deliberate
+   conservatism (pure conduction, no nucleate-boiling/wave enhancement -
+   see `mche_tube_design.py`'s docstring), not to `mche.py`'s constant-U
+   default being simply "wrong" - both are conceptual-screening
+   simplifications with different, documented blind spots, and this
+   comparison is reported as "the two methods disagree, and here is a
+   physically grounded reason why", not as a corrected number. See
+   `examples/mche_rundown_rating.py`, runnable end to end.
+
 ## A note on what was *not* used
 
 Early in this project's development, a Dropbox folder that looked like it

@@ -65,6 +65,30 @@ class GasMixture:
     def enthalpy(self, T: float, P: float) -> float:
         return self.prop("Hmass", T, P)
 
+    def viscosity(self, T: float, P: float) -> float:
+        """Dynamic viscosity, Pa-s."""
+        return self.prop("V", T, P)
+
+    def thermal_conductivity(self, T: float, P: float) -> float:
+        """Thermal conductivity, W/m-K."""
+        return self.prop("L", T, P)
+
+    def specific_heat(self, T: float, P: float) -> float:
+        """Isobaric specific heat, J/kg-K."""
+        return self.prop("Cpmass", T, P)
+
+    def vapor_quality_molar(self, T: float, P: float) -> float | None:
+        """Molar vapor fraction (CoolProp's mixture Q is MOLAR, not mass -
+        see docs/VALIDATION.md / end_flash.py for why that distinction
+        matters). Returns None if the state is single-phase at (T, P)
+        rather than raising, since callers scanning across a phase
+        transition need to detect "not in the two-phase region" as a
+        normal outcome, not an error."""
+        try:
+            return self.prop("Q", T, P)
+        except ValueError:
+            return None
+
 
 def pure_fluid_prop(fluid: str, output: str, **state) -> float:
     """Thin wrapper for CP.PropsSI on a pure fluid, keyword state pairs.

@@ -50,6 +50,7 @@ or an open-source equation-oriented tool like
 | `lng_design/mche_vendor_selection.py` | Literature-grounded vendor comparison | APCI vs. Linde structured comparison |
 | `lng_design/molecular_sieve.py` | GPSA Ch. 20 adsorber sizing | Bed diameter/height, number of beds, regen heater duty |
 | `lng_design/cascade_loops.py` | 3-loop cascade, real CoolProp mixture flashes | NG/LRC/PMR duties, compressor power, DMR-vs-C3 precool comparison |
+| `lng_design/mche_tube_design.py` | Dittus-Boelter/Shah/falling-film local HTCs, RATING (not sizing) | Achievable NG rundown for a fixed tube bundle, area/MITA-limited |
 | `lng_design/flowsheet.py` | Graphviz PFD + HMB-style stream table | Interactive process flow diagram tying every module together |
 | `lng_design/optimize.py` | NSGA-II (via [pymoo](https://pymoo.org/)) | Pareto front for any of the above (e.g. power vs. exergy) |
 
