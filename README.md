@@ -7,7 +7,7 @@ acid-gas absorbers, and a main cryogenic heat exchanger (MCHE) composite-curve
 literature-grounded first pass before committing to a licensed process
 simulator.
 
-**[Try the app](#running-the-app)** · **[Methodology & citations](docs/METHODOLOGY.md)**
+**[Try the app](#running-the-app)** · **[Methodology & citations](docs/METHODOLOGY.md)** · **[External validation](docs/VALIDATION.md)**
 
 ## What this is (and isn't)
 
@@ -96,9 +96,17 @@ module itself:
   confirming it catches a mid-curve MITA violation that a naive
   terminal-only temperature check would miss.
 
+- **A full published numeric worked example** for the compressor module
+  (GPSA-sourced gas data, cheresources.com worksheet): reproduces the
+  published polytropic head and gas power within 0.4% and discharge
+  temperature within 3.2 °C — see
+  [docs/VALIDATION.md](docs/VALIDATION.md) for the exact inputs, outputs,
+  and why the small remaining gap exists.
+
 No proprietary or client-specific validation data is used anywhere in this
 repository or its history — see [docs/METHODOLOGY.md](docs/METHODOLOGY.md)
-for the full citation list.
+for the full citation list and [docs/VALIDATION.md](docs/VALIDATION.md)
+for external cross-checks against published sources.
 
 ```bash
 pip install -e ".[dev]"

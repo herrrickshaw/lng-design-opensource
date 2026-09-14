@@ -69,3 +69,37 @@ def test_rejects_non_physical_compression():
     n2 = GasMixture({"Nitrogen": 1.0})
     with pytest.raises(ValueError):
         size_centrifugal_stage(n2, 300.0, 3.0e5, 1.5e5, 1.0, 0.8)  # P_out < P_in
+
+
+def test_matches_published_gpsa_worked_example():
+    """External validation against a freely published worked example:
+    "Centrifugal Compressor Head and Power Calculations" (cheresources.com
+    preview PDF), whose gas property table is sourced from the GPSA
+    Engineering Data Book, 11th Ed.-SI (1998). This is independent of
+    lng_design's own docstring citations - a real published input/output
+    pair, not a self-consistency check.
+
+    Published inputs: 5/80/15 mol% ethane/propane/n-butane, P1=2.068 bara,
+    T1=40 C, P2=6.89 bara, M=136,078 kg/h, eta_poly=77%.
+    Published outputs: Z_avg=0.956, H_poly=71,971 N-m/kg, T2=99.9 C,
+    gas power=3,533.1 kW.
+
+    lng_design.compressor evaluates kappa at the mean of inlet/outlet
+    conditions rather than fixing it at the inlet value (as the published
+    method does) - the source material itself notes the polytropic head
+    equation is insensitive to kappa within its normal range of variation,
+    so a small deviation is expected. Discharge temperature is the most
+    kappa-sensitive output (it appears in the (n-1)/n exponent), hence its
+    larger tolerance below.
+    """
+    gas = GasMixture({"Ethane": 0.05, "Propane": 0.80, "n-Butane": 0.15})
+    result = size_centrifugal_stage(
+        gas, T_in_K=40 + 273.15, P_in_Pa=2.068e5, P_out_Pa=6.89e5,
+        mass_flow_kg_s=136078.0 / 3600.0, polytropic_efficiency=0.77,
+    )
+
+    assert result.Z_avg == pytest.approx(0.956, abs=0.001)
+    assert result.pressure_ratio == pytest.approx(3.33, rel=0.01)
+    assert result.polytropic_head_J_per_kg == pytest.approx(71971.0, rel=0.01)  # within 1%
+    assert result.gas_power_kW == pytest.approx(3533.1, rel=0.01)  # within 1%
+    assert (result.T_out_ideal - 273.15) == pytest.approx(99.9, abs=4.0)  # within 4 C
