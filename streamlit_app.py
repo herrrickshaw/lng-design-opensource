@@ -18,6 +18,7 @@ from lng_design.air_cooler import size_air_cooler
 from lng_design.amine_absorber import size_packed_absorber
 from lng_design.compressor import match_frame_for_stage, size_multistage
 from lng_design.exchangers import size_shell_and_tube
+from lng_design.flowsheet import FlowsheetState, build_diagram, build_stream_table
 from lng_design.mche import StreamSegment, analyze_composite_curves, classify_mche_type
 from lng_design.precool import optimal_evap_temperature, propane_cycle_power
 from lng_design.properties import GasMixture
@@ -34,10 +35,15 @@ st.caption(
     "and citations, and the disclaimer at the bottom of this page."
 )
 
-(tab_precool, tab_compressor, tab_absorber, tab_mche, tab_vessel,
+if "flowsheet" not in st.session_state:
+    st.session_state.flowsheet = FlowsheetState()
+flowsheet: FlowsheetState = st.session_state.flowsheet
+
+(tab_flow, tab_precool, tab_compressor, tab_absorber, tab_mche, tab_vessel,
  tab_exchanger, tab_aircooler, tab_water) = st.tabs([
-    "C3 Pre-cool Loop", "Compressor Train", "Amine Absorber", "MCHE / Pinch Check",
-    "Separator Vessel", "Shell & Tube Exchanger", "Air Cooler", "Cooling Water",
+    "Process Flow Diagram", "C3 Pre-cool Loop", "Compressor Train", "Amine Absorber",
+    "MCHE / Pinch Check", "Separator Vessel", "Shell & Tube Exchanger", "Air Cooler",
+    "Cooling Water",
 ])
 
 # ---------------------------------------------------------------------
@@ -67,6 +73,12 @@ with tab_precool:
             colB.metric("Compressor power", f"{result.compressor_power_kW:,.0f} kW")
             colC.metric("Refrigerant flow", f"{result.refrigerant_mass_flow_kg_s:,.1f} kg/s")
             colD.metric("COP", f"{result.cop:.2f}")
+            flowsheet.set("precool", {
+                "Duty": f"{duty_kW:,.0f} kW",
+                "T_evap": f"{result.T_evap_K - 273.15:.1f} C",
+                "Power": f"{result.compressor_power_kW:,.0f} kW",
+                "COP": f"{result.cop:.2f}",
+            })
             st.caption(
                 "For a single evaporation level, the MITA-limited boundary is the "
                 "power-optimal point (see lng_design/precool.py docstring) - the "
@@ -173,6 +185,11 @@ with tab_absorber:
             colB.metric("Theoretical stages", f"{result.n_theoretical_stages:.1f}")
             colC.metric("Packed height", f"{result.packed_height_m:.1f} m")
             colD.metric("% of flood", f"{100*result.superficial_gas_velocity_m_s/result.flooding_velocity_m_s:.0f}%")
+            flowsheet.set("absorber", {
+                "Diameter": f"{result.diameter_m:.2f} m",
+                "Stages": f"{result.n_theoretical_stages:.1f}",
+                "Height": f"{result.packed_height_m:.1f} m",
+            })
         except ValueError as e:
             st.error(str(e))
 
@@ -208,6 +225,11 @@ with tab_mche:
             colB.metric("Estimated UA", f"{result.ua_estimate_kW_per_K:.1f} kW/K")
             colC.metric("Estimated area", f"{result.area_estimate_m2:,.0f} m2")
             st.success("MITA constraint satisfied.")
+            flowsheet.set("mche", {
+                "Duty": f"{result.total_duty_kW:,.0f} kW",
+                "Min approach": f"{result.min_approach_K:.2f} K",
+                "Area": f"{result.area_estimate_m2:,.0f} m2",
+            })
 
             st.subheader("Typical commercial MCHE technology at this scale")
             lng_capacity_guess = st.number_input(
@@ -247,6 +269,10 @@ with tab_vessel:
         colB.metric("Seam-to-seam height", f"{result.seam_to_seam_height_m:.2f} m")
         colC.metric("Design velocity", f"{result.vapor_velocity_design_m_s:.3f} m/s")
         colD.metric("Liquid holdup", f"{result.liquid_holdup_volume_m3:.1f} m3")
+        flowsheet.set("vessel", {
+            "Diameter": f"{result.standard_diameter_mm:,.0f} mm",
+            "Height": f"{result.seam_to_seam_height_m:.2f} m",
+        })
 
 # ---------------------------------------------------------------------
 with tab_exchanger:
@@ -309,6 +335,10 @@ with tab_aircooler:
         colB.metric("Bay size", f"{result.bay_width_m:.1f} x {result.bay_length_m:.1f} m")
         colC.metric("Air flow", f"{result.air_volumetric_flow_m3_s:,.1f} m3/s")
         colD.metric("Total fan power", f"{result.total_fan_power_kW:,.0f} kW")
+        flowsheet.set("air_cooler", {
+            "Bays": f"{result.n_bays} x {result.bay_width_m:.1f}x{result.bay_length_m:.1f} m",
+            "Fan power": f"{result.total_fan_power_kW:,.0f} kW",
+        })
 
 # ---------------------------------------------------------------------
 with tab_water:
@@ -336,6 +366,29 @@ with tab_water:
             colD.metric("Total makeup", f"{result.total_makeup_m3_h:,.1f} m3/h")
         except ValueError as e:
             st.error(str(e))
+
+# ---------------------------------------------------------------------
+# tab_flow is rendered LAST (though it's the leftmost/first tab visually -
+# st.tabs() controls visual order independently of code order) so it
+# always reflects this run's fully up-to-date flowsheet state. Streamlit
+# reruns the whole script top-to-bottom on every interaction; rendering
+# it earlier would show state from before the triggering tab's own
+# updates ran in the same pass.
+with tab_flow:
+    st.header("Process flow diagram")
+    st.caption(
+        "A schematic, illustrative LNG train topology - NOT a drafting-standard "
+        "P&ID/PFD. Each box fills in with your latest sizing result from the "
+        "other tabs as you use them; the stream table below follows the same "
+        "structure as a process simulator's heat-and-material-balance (HMB) "
+        "stream report."
+    )
+    st.graphviz_chart(build_diagram(flowsheet), use_container_width=True)
+    st.subheader("Stream table (HMB-style)")
+    st.dataframe(pd.DataFrame(build_stream_table(flowsheet)), use_container_width=True, hide_index=True)
+    if st.button("Reset flow diagram"):
+        st.session_state.flowsheet = FlowsheetState()
+        st.rerun()
 
 st.divider()
 st.caption(
