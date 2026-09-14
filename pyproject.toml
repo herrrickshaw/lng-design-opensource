@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lng-design-opensource"
+version = "0.1.0"
+description = "Open-source conceptual sizing tools for LNG process trains (precool, compressor, amine absorber, MCHE composite curves)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = [
+    "CoolProp>=6.6",
+    "pymoo>=0.6",
+    "scipy>=1.11",
+    "numpy>=1.24",
+    "streamlit>=1.32",
+    "plotly>=5.20",
+    "pandas>=2.1",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+# Equation-oriented optimization / surrogate-modeling extension - heavier
+# install (compiled IPOPT etc.), not required for the Streamlit sizing app.
+advanced = ["pyomo>=6.7", "idaes-pse>=2.5"]
+
+[tool.setuptools.packages.find]
+include = ["lng_design*"]
