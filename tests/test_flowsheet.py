@@ -1,4 +1,7 @@
-from lng_design.flowsheet import FlowsheetState, build_diagram, build_stream_table, TOPOLOGY, NODE_TITLES
+from lng_design.flowsheet import (
+    FlowsheetState, build_diagram, build_stream_table, TOPOLOGY,
+    SIDE_TOPOLOGY, UTILITY_NODES, NODE_TITLES, NODE_STATE_KEYS,
+)
 
 
 def test_empty_state_produces_valid_dot_with_all_nodes_and_edges():
@@ -10,13 +13,26 @@ def test_empty_state_produces_valid_dot_with_all_nodes_and_edges():
         assert node_id in dot
     for src, dst, _ in TOPOLOGY:
         assert f"{src} -> {dst}" in dot
+    for src, dst, _ in SIDE_TOPOLOGY:
+        assert f"{src} -> {dst}" in dot
 
 
-def test_unsized_nodes_show_not_yet_sized():
+def test_utility_nodes_rendered_in_their_own_cluster():
     state = FlowsheetState()
     dot = build_diagram(state)
-    assert dot.count("not yet sized") == len([k for k in NODE_TITLES if k in
-                                               {"V101", "T301", "AC101", "C3LOOP", "MCHE"}])
+    assert "cluster_utilities" in dot
+    assert "Plant Utilities" in dot
+    for node_id in UTILITY_NODES:
+        assert node_id in dot
+
+
+def test_unsized_equipment_nodes_show_not_yet_sized():
+    state = FlowsheetState()
+    dot = build_diagram(state)
+    # Every node with a NODE_STATE_KEYS entry is "equipment" and should
+    # show the not-yet-sized status when the state is empty; boundary
+    # nodes (FEED, SHIP) have no state key and show no status line.
+    assert dot.count("not yet sized") == len(NODE_STATE_KEYS)
 
 
 def test_sized_node_shows_its_data_and_different_fill():
@@ -28,10 +44,10 @@ def test_sized_node_shows_its_data_and_different_fill():
     assert "not yet sized" not in dot.split("V101")[1].split("];")[0]
 
 
-def test_stream_table_has_one_row_per_topology_edge():
+def test_stream_table_has_one_row_per_process_and_side_edge():
     state = FlowsheetState()
     rows = build_stream_table(state)
-    assert len(rows) == len(TOPOLOGY)
+    assert len(rows) == len(TOPOLOGY) + len(SIDE_TOPOLOGY)
     assert all("Stream" in r and "From" in r and "To" in r for r in rows)
 
 
@@ -42,3 +58,11 @@ def test_stream_table_reflects_sized_equipment():
     v101_row = next(r for r in rows if "V-101" in r["From"] or "V-101" in r["To"])
     combined = v101_row["Upstream equipment data"] + v101_row["Downstream equipment data"]
     assert "Diameter=914 mm" in combined
+
+
+def test_side_branch_reflects_sized_refrigerant_makeup():
+    state = FlowsheetState()
+    state.set("refrigerant_makeup", {"Diameter": "1219 mm"})
+    rows = build_stream_table(state)
+    refrig_row = next(r for r in rows if "V-102" in r["To"])  # first line of the REFRIGMU title
+    assert "Diameter=1219 mm" in refrig_row["Downstream equipment data"]

@@ -7,7 +7,7 @@ acid-gas absorbers, and a main cryogenic heat exchanger (MCHE) composite-curve
 literature-grounded first pass before committing to a licensed process
 simulator.
 
-**[Try the app](#running-the-app)** · **[Methodology & citations](docs/METHODOLOGY.md)** · **[External validation](docs/VALIDATION.md)**
+**[Try the app](#running-the-app)** · **[Methodology & citations](docs/METHODOLOGY.md)** · **[External validation](docs/VALIDATION.md)** · **[EOS sensitivity: HEOS vs. PR vs. SRK](docs/EOS_SENSITIVITY.md)**
 
 ## What this is (and isn't)
 
@@ -41,6 +41,13 @@ or an open-source equation-oriented tool like
 | `lng_design/water_system.py` | CTI cooling-tower water balance | Circulation rate, evaporation, blowdown, total makeup |
 | `lng_design/loads.py` | Utility duty aggregation (HMB-stream-table style) | Plant-wide heating/cooling load by utility medium |
 | `lng_design/equipment_catalog.py` | Standard-variant catalogs + matcher | Vessel/shell/bay/frame standard sizes for every module above |
+| `lng_design/end_flash.py` | Isenthalpic 2-phase mixture flash (CoolProp) | Flash gas / LNG split, flash composition, flash temperature |
+| `lng_design/refrigerant_makeup.py` | Charge + reserve, max-fill vessel sizing | Refrigerant storage vessel diameter, length, volume |
+| `lng_design/berth.py` | Mass-balance storage + Erlang-C (M/M/c) queueing | Storage tank volume, berth utilization, expected ship wait time |
+| `lng_design/air_supply.py` | ISA/GPSA instrument-air demand aggregation | Air demand, compressor capacity, receiver volume |
+| `lng_design/nitrogen_system.py` | Vessel-volume-exchange purge + blanketing | Purge volume, N2 generator capacity, LN2 vaporizer duty |
+| `lng_design/process_selection.py` | Literature-grounded cycle screening | C3MR vs. DMR vs. AP-X recommendation + rationale |
+| `lng_design/flowsheet.py` | Graphviz PFD + HMB-style stream table | Interactive process flow diagram tying every module together |
 | `lng_design/optimize.py` | NSGA-II (via [pymoo](https://pymoo.org/)) | Pareto front for any of the above (e.g. power vs. exergy) |
 
 ## Running the app

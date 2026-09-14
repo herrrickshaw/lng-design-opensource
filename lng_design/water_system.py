@@ -74,3 +74,43 @@ def cooling_water_demand(
         drift_m3_h=drift_m3_h,
         total_makeup_m3_h=evaporation_m3_h + blowdown_m3_h + drift_m3_h,
     )
+
+
+@dataclass
+class ServiceWaterResult:
+    potable_m3_day: float
+    general_service_m3_day: float
+    total_m3_day: float
+    peak_flow_m3_h: float
+
+
+def service_water_demand(
+    site_personnel: int,
+    potable_L_per_person_day: float = 130.0,
+    general_service_m3_day: float = 20.0,
+    peak_hour_factor: float = 3.0,
+) -> ServiceWaterResult:
+    """Potable + general service (washdown, eyewash/safety showers
+    make-up, minor process utility) water demand.
+
+    potable_L_per_person_day default of 130 L/person/day is a commonly
+    used industrial-site figure (within the 100-150 L/person/day range
+    typical of general utility-system design guidance for a plant
+    workforce, as distinct from municipal residential figures which run
+    higher). general_service_m3_day is a fixed site allowance that should
+    be replaced with an actual washdown/utility-station count for
+    anything beyond a first pass. peak_hour_factor converts the average
+    daily rate to a peak hourly design flow - 2-4x average day is a
+    standard utility-system peaking range; this module defaults to a
+    mid-range 3x.
+    """
+    potable = site_personnel * potable_L_per_person_day / 1000.0
+    total_daily = potable + general_service_m3_day
+    peak_flow_m3_h = (total_daily / 24.0) * peak_hour_factor
+
+    return ServiceWaterResult(
+        potable_m3_day=potable,
+        general_service_m3_day=general_service_m3_day,
+        total_m3_day=total_daily,
+        peak_flow_m3_h=peak_flow_m3_h,
+    )

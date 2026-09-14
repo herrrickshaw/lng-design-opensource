@@ -143,6 +143,68 @@ source this package's compressor module is validated against (see
 smaller/peak-shaving scale) reflecting general, widely published LNG
 technology comparisons — not a rigorous technology-selection tool.
 
+## Liquefaction cycle screening (`lng_design/process_selection.py`)
+
+`compare_liquefaction_cycles()` screens among C3MR, DMR, and AP-X based
+on target train capacity and site ambient temperature swing, grounded in
+published comparative studies (train-capacity ceilings, and DMR's
+reported efficiency advantage across wide ambient ranges vs. C3MR's
+single-component propane precool) - full citations in the module's
+docstring. Like `classify_mche_type()`, this is an illustrative screening
+heuristic, not a techno-economic optimization; real selection also weighs
+capital cost, licensor terms, driver availability, and commercial
+factors this module doesn't model.
+
+## Post-MCHE end-flash (`lng_design/end_flash.py`)
+
+A rigorous isenthalpic (Joule-Thomson) two-phase flash of subcooled LNG
+down to storage pressure, using CoolProp's `AbstractState` interface on
+the mixture HEOS equation of state - not a shortcut correlation. Verified
+empirically (see [docs/VALIDATION.md](VALIDATION.md)) that CoolProp's
+`Q()` for a mixture is a **molar** vapor fraction; this module always
+converts explicitly to a mass basis using the flashed-phase mole
+fractions and component molecular weights, since conflating the two is
+an easy, consequential error (a ~5-10% relative difference in this
+package's own test cases).
+
+## Refrigerant storage/makeup (`lng_design/refrigerant_makeup.py`)
+
+Vessel sized to hold one full system refrigerant charge plus a reserve
+fraction for makeup losses, at a maximum liquid fill fraction (typically
+85%, consistent with the fill-limit/outage practice used broadly for
+pressurized liquefied-gas storage, e.g. NFPA 58-style requirements for
+LPG-class storage) leaving vapor space for thermal expansion.
+
+## Storage tank and berth (`lng_design/berth.py`)
+
+**Storage**: a mass-balance buffer between continuous liquefaction
+production and periodic (discrete) ship departures - required volume
+covers the average shipping interval plus a contingency allowance for
+weather/queueing delays, consistent with the commonly cited industry rule
+of thumb of roughly 1.5-2x a single cargo size (e.g. GIIGNL LNG terminal
+design guidance) without using that figure as the sizing basis itself.
+**Berth occupancy**: the Erlang C (M/M/c) queueing formula (Erlang, 1917;
+standard operations-research mathematics, e.g. Hillier & Lieberman,
+"Introduction to Operations Research") gives the probability an arriving
+ship must wait for a berth and the expected wait time, from the ship
+arrival rate (derived from annual offtake and cargo size) and mean berth
+service (turnaround) time.
+
+## Utility systems (`lng_design/air_supply.py`, `nitrogen_system.py`, `water_system.py`)
+
+**Instrument/plant air**: aggregated per-instrument demand with a
+diversity factor (ISA/GPSA-style conceptual utility-system sizing),
+compressor capacity with a design margin, receiver volume as a target
+number of minutes of average demand. **Nitrogen**: purge demand via the
+standard "vessel volume exchange" approach used throughout process-safety
+inerting practice (e.g. NFPA 69 guidance, typically 3-5 exchanges),
+continuous blanketing flow as a direct input (tank/site-specific, not
+derived from a generic correlation), and a liquid-nitrogen vaporizer duty
+computed rigorously via CoolProp's nitrogen EOS latent heat. **Service
+water**: potable demand from a per-person-per-day figure (100-150 L/
+person/day is the typical industrial-site range) plus a general service
+allowance, converted to a peak design flow via a standard peaking factor.
+
 ## Optimization (`lng_design/optimize.py`)
 
 NSGA-II via [pymoo](https://pymoo.org/), matching the approach used across
