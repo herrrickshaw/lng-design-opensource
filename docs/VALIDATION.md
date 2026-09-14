@@ -207,6 +207,30 @@ comparing its numbers against the C3MR baseline on the same basis,
 consistent with the pattern established by the C3MR full-train example
 above.
 
+## MCHE NG-throughput ceiling — quantifying the published C3MR/DMR capacity gap
+
+`process_selection.py` cites a published ~5 mtpa/train ceiling for C3MR
+vs. ~8 mtpa/train for DMR, attributed to "propane compressor and main
+heat exchanger size limits" (Technology Review of Natural Gas
+Liquefaction Processes, scialert.net). `examples/mche_debottleneck_dmr_vs_c3mr.py`
+quantifies the two physical mechanisms behind that citation using this
+package's own duty and CoolProp density calculations, calibrated to the
+same 5 mtpa C3MR ceiling:
+
+- **Duty mechanism** (DMR's colder ~-50°C precool floor leaves a smaller
+  temperature span for the MCHE to cover than C3MR's ~-40°C floor):
+  +9.2% NG throughput alone, for a fixed MCHE duty ceiling.
+- **Density/velocity mechanism** (colder NG is ~16% denser at the MCHE
+  inlet, so more mass fits within a fixed volumetric/tube-velocity
+  limit - a standard coil-wound exchanger design constraint, e.g. Kern,
+  "Process Heat Transfer"): +16.2% alone, for a fixed volumetric-flow
+  ceiling.
+- Combined (compounded): +26.8% - real, and directionally consistent
+  with the literature, but well short of the published +60% (5→8 mtpa)
+  uplift. The gap is honestly attributed to compressor casing/impeller
+  size limits and real core-fabrication limits this package does not
+  model, not smoothed over to make the two numbers agree.
+
 ## A note on what was *not* used
 
 Early in this project's development, a Dropbox folder that looked like it
