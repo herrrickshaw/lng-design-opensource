@@ -121,6 +121,47 @@ floor (see `process_selection.py`'s citations). Both findings came from
 running real CoolProp calculations with several candidate compositions/
 temperatures, not from asserting the result in advance.
 
+## Full-train integration — three more defects found only by running it end to end
+
+`examples/full_train_worked_example.py` chains every module built this
+session on one consistent feed basis. Running it (not the unit tests,
+which each passed in isolation) surfaced three real defects invisible
+until the modules were actually connected:
+
+1. **`compressor.match_frame_for_stage` crashed on a refrigerant's own
+   saturated suction state.** `(T_evap, P_evap)` sit exactly on that
+   fluid's saturation curve by definition, so a plain `(T, P)` density
+   lookup is ambiguous - CoolProp correctly raises rather than guessing
+   liquid vs. vapor. Fixed by documenting the pitfall directly in the
+   function's docstring (query vapor density via quality, `Q=1`, instead,
+   for exactly this case) rather than papering over it in the caller.
+2. **A single `mixed_refrigerant_cycle` call cannot span the full
+   precool-to-LNG-rundown range.** The example's LRC blend, validated
+   down to about -100°C, diverges (`HSU_P_flash` fails to converge to a
+   physical root) when pushed to -159°C in one compression stage - too
+   large a compression ratio/temperature lift for that blend in a single
+   step. This matches real practice: MFC/DMR designs use multiple
+   refrigerant pressure levels (and, for a true 3-loop MFC, a dedicated
+   lighter SRC subcooling cycle this package's 2-loop cascade doesn't
+   model) rather than one giant compression. Fixed with explicit error
+   handling and a regression test (`test_single_stage_cannot_span_full_
+   precool_to_lng_rundown_range`); the worked example now scopes LRC to
+   -40→-100°C and reports the -100→-159°C subcooling duty honestly as
+   needing a dedicated SRC loop, rather than forcing an unvalidated
+   number through.
+3. **The amine absorber's L/V=20 default gives an absorption factor
+   A=50** - wildly outside the classic 1.4-2.0 economic design range
+   (McCabe, Smith & Harriott) - and produced an implausible 0.7 m packed
+   height for a 3.64 m diameter column. Fixed in the worked example
+   (L/V=0.8, A=2.0) to a realistic 3.3 m / 6.6 theoretical stages; this
+   default is used elsewhere in the repo's examples and the Streamlit
+   app too and is worth revisiting there separately.
+
+None of these three were predicted by writing tests in advance - each
+module passed its own unit tests in isolation. They surfaced only when
+the modules were chained together on a shared, realistic basis, which is
+the whole reason this worked example exists.
+
 ## A note on what was *not* used
 
 Early in this project's development, a Dropbox folder that looked like it
