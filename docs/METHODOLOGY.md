@@ -83,6 +83,66 @@ service commonly cited in the open literature fall in the
 1,500–3,500 W/m²·K range depending on stream side and fouling allowance;
 the app defaults to 2,000 W/m²·K and lets the engineer override it.
 
+## Separator vessels (`lng_design/vessels.py`)
+
+**Diameter**: Souders-Brown gas-capacity correlation, the same functional
+form used for the amine absorber's diameter (GPSA Engineering Data Book
+Ch. 7, "Separators"; Campbell, *Gas Conditioning and Processing* Vol. 2).
+**Height**: liquid residence time (3-5 minutes typical for a standard
+knockout/surge drum per GPSA/Campbell) sets the liquid holdup, plus a
+vapor disengagement allowance of roughly one vessel diameter (or 1 m,
+whichever is larger) — both are widely used conceptual-design defaults,
+not a substitute for a full mechanical/process datasheet.
+
+## Shell-and-tube exchangers (`lng_design/exchangers.py`)
+
+Standard LMTD/overall-U area sizing (any heat-transfer text, e.g. Kern,
+*Process Heat Transfer*; Sinnott & Towler, *Chemical Engineering Design*).
+The shell-diameter estimate deliberately avoids reproducing a specific
+numeric tube-count-per-shell table from memory (published K1/n1
+correlations vary by source/edition and are easy to misquote); instead it
+uses a transparent, independently-checkable tube-bundle area-utilization
+fraction — see the module's docstring for the reasoning and how to
+override it with your own trusted tube-count table.
+
+## Air-cooled exchangers (`lng_design/air_cooler.py`)
+
+GPSA Engineering Data Book Ch. 9 ("Air-Cooled Exchangers") and API 661
+conventions: air mass flow from duty and a design temperature rise
+(8-20 K typical range), face area from a design face velocity
+(2.5-3.5 m/s typical), matched to standard API 661 bay widths (8-16 ft).
+Fan power uses a standard fan-power relation (volumetric flow × static
+pressure drop ÷ fan efficiency) with GPSA's typical 12-25 mm H₂O
+finned-bundle pressure-drop range and API 661's 60-70% typical axial fan
+static efficiency.
+
+## Cooling water demand (`lng_design/water_system.py`)
+
+Cooling Tower Institute practice, reproduced in GPSA Engineering Data
+Book Ch. 9: evaporation loss as a fraction of circulation is
+`0.00085 × range(°F)` (this constant already incorporates a typical
+climate correction, consistent with the commonly quoted "~1% evaporation
+per 10°F of range" rule of thumb). Blowdown follows from a target cycles
+of concentration (3-5 typical for hydrocarbon-plant cooling towers);
+drift loss is a small fixed fraction set by the drift eliminator design
+(under 0.001% for modern high-efficiency eliminators, up to ~0.02% for
+older designs).
+
+## Equipment catalog / standard-variant matching (`lng_design/equipment_catalog.py`)
+
+Every sizing function above produces a continuous number; this module
+holds the standard commercial series each gets rounded up against —
+process vessel diameters (GPSA Ch. 7 / Campbell), TEMA shell sizes (Kern;
+Sinnott & Towler), API 661 air-cooler bay widths, and a centrifugal
+compressor frame table reproduced from *Pipeline Rules of Thumb
+Handbook*, E.W. McAllister, 3rd Ed., Gulf Publishing — the same public
+source this package's compressor module is validated against (see
+[docs/VALIDATION.md](VALIDATION.md)). `classify_mche_type()` in
+`mche.py` is a deliberately coarse, illustrative screening heuristic
+(coil-wound for large base-load trains vs. parallel plate-fin cores for
+smaller/peak-shaving scale) reflecting general, widely published LNG
+technology comparisons — not a rigorous technology-selection tool.
+
 ## Optimization (`lng_design/optimize.py`)
 
 NSGA-II via [pymoo](https://pymoo.org/), matching the approach used across

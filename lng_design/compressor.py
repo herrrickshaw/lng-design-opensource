@@ -26,6 +26,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
+from .equipment_catalog import CompressorFrame, select_compressor_frame
 from .properties import GasMixture, R_UNIVERSAL
 
 
@@ -141,3 +142,19 @@ def size_multistage(
             else res.T_out_ideal
         )
     return results
+
+
+def match_frame_for_stage(
+    gas: GasMixture, T_in_K: float, P_in_Pa: float, mass_flow_kg_s: float,
+) -> tuple[CompressorFrame, float]:
+    """Match a compressor stage's inlet conditions against the standard
+    frame table in `equipment_catalog.py` (GPSA-style frame selection -
+    see docs/VALIDATION.md for the published worked example this table is
+    validated against).
+
+    Returns (matched_frame, inlet_volume_flow_m3_h).
+    """
+    density = gas.density(T_in_K, P_in_Pa)
+    inlet_vol_flow_m3_h = (mass_flow_kg_s / density) * 3600.0
+    frame = select_compressor_frame(inlet_vol_flow_m3_h)
+    return frame, inlet_vol_flow_m3_h

@@ -32,9 +32,15 @@ or an open-source equation-oriented tool like
 | Module | Method | Output |
 |---|---|---|
 | `lng_design/precool.py` | Vapor-compression cycle (propane), CoolProp EOS | Evaporator temp, compressor power, refrigerant flow, COP |
-| `lng_design/compressor.py` | Polytropic head/efficiency (GPSA Ch. 13) | Per-stage head, power, discharge temp, pressure ratio |
+| `lng_design/compressor.py` | Polytropic head/efficiency (GPSA Ch. 13) + frame matching | Per-stage head, power, discharge temp, matched standard frame |
 | `lng_design/amine_absorber.py` | Souders-Brown flooding + Kremser equation | Column diameter, theoretical stages, packed height |
-| `lng_design/mche.py` | Composite-curve / MITA pinch analysis | Minimum approach, pinch location, UA/area estimate |
+| `lng_design/mche.py` | Composite-curve / MITA pinch analysis + tech classification | Minimum approach, pinch location, UA/area, coil-wound vs. plate-fin |
+| `lng_design/vessels.py` | Souders-Brown gas capacity + residence time | Vessel diameter (standard size), seam-to-seam height |
+| `lng_design/exchangers.py` | LMTD/U-area sizing, TEMA shell matching | Required area, tube count estimate, standard shell OD |
+| `lng_design/air_cooler.py` | GPSA Ch. 9 / API 661 fin-fan sizing | Bay count/size, air flow, fan power |
+| `lng_design/water_system.py` | CTI cooling-tower water balance | Circulation rate, evaporation, blowdown, total makeup |
+| `lng_design/loads.py` | Utility duty aggregation (HMB-stream-table style) | Plant-wide heating/cooling load by utility medium |
+| `lng_design/equipment_catalog.py` | Standard-variant catalogs + matcher | Vessel/shell/bay/frame standard sizes for every module above |
 | `lng_design/optimize.py` | NSGA-II (via [pymoo](https://pymoo.org/)) | Pareto front for any of the above (e.g. power vs. exergy) |
 
 ## Running the app

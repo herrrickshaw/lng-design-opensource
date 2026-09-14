@@ -139,3 +139,37 @@ def analyze_composite_curves(
         area_estimate_m2=(ua_total * 1000.0) / overall_U_W_m2K,
         interval_report=interval_report,
     )
+
+
+def classify_mche_type(lng_capacity_mtpa_equivalent: float) -> dict:
+    """Rough, illustrative classification of which commercially available
+    MCHE technology family a given train scale is typically built with.
+
+    This reflects widely published, general LNG technology comparisons
+    (not proprietary vendor data): coil-wound (spiral-wound) exchangers
+    dominate large base-load trains, since a single core can be fabricated
+    at very large scale; brazed-aluminum plate-fin cores are common for
+    smaller/mid-scale and peak-shaving/FLNG service, since core
+    fabrication size is more constrained, and multiple cores in parallel
+    are used to reach base-load scale. The ~1.5 mtpa/train threshold below
+    is an approximate, illustrative dividing line for conceptual screening
+    only - actual technology choice depends on licensor, site, and
+    commercial factors well beyond capacity alone.
+    """
+    if lng_capacity_mtpa_equivalent < 1.5:
+        return {
+            "typical_technology": "brazed-aluminum plate-fin (parallel cores)",
+            "note": (
+                "Small/mid-scale and peak-shaving/FLNG trains commonly use "
+                "multiple parallel brazed-aluminum plate-fin cores rather "
+                "than a single large coil-wound unit."
+            ),
+        }
+    return {
+        "typical_technology": "coil-wound (spiral-wound)",
+        "note": (
+            "Large base-load trains commonly use a single coil-wound "
+            "(spiral-wound) main cryogenic heat exchanger, which scales to "
+            "much larger single-core duties than plate-fin technology."
+        ),
+    }
