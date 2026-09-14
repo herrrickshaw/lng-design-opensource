@@ -162,6 +162,51 @@ module passed its own unit tests in isolation. They surfaced only when
 the modules were chained together on a shared, realistic basis, which is
 the whole reason this worked example exists.
 
+## DMR full-train example — a single-stage compression penalty found only by comparing against C3MR
+
+`examples/full_train_dmr_worked_example.py` swaps the C3MR baseline's
+pure-propane precool for a heavier ethane/propane DMR blend reaching a
+colder -50°C floor (vs. propane's ~-42°C limit), routing the NG precool
+duty through `three_loop_cascade`'s `ng_precool_duty_kW` parameter for
+the first time (the C3MR example predates that parameter's DMR use
+case). Running it end to end, and comparing against the C3MR baseline
+recomputed inline on the same feed basis, surfaced two real findings
+neither example's own unit tests predicted:
+
+1. **The DMR blend's own PMR-loop COP (0.87) is *worse* than propane's
+   (1.30) at these conditions** - not a code bug, since
+   `mixed_refrigerant_cycle` uses exactly the same single-stage
+   isentropic-compression model as `precool.propane_cycle_power`
+   (same 0.75 default efficiency, same CoolProp-based approach). Both
+   cycles resolve a ~22-24:1 evaporator-to-condenser pressure ratio in
+   one compression step; the heavier DMR blend's real-gas behavior over
+   that ratio costs more compression work than propane's does. This
+   means DMR's *headline* total-power number (69,587 kW vs. C3MR's
+   36,549 kW for the same LRC liquefaction scope) looks worse only
+   because of this single-stage penalty on top of doing more of the
+   total temperature drop - it is not a claim that DMR precool is less
+   efficient than C3 in general. Real DMR trains recover this by
+   splitting PMR compression across multiple stages/casings (the same
+   category of limitation already documented above for the LRC loop
+   spanning too wide a range in one call) - modeling that split is out
+   of `cascade_loops.py`'s current single-stage scope.
+2. **The DMR PMR compressor's required inlet volume flow (365,072 m3/h)
+   exceeds even the largest standard frame** (Frame F, 170,000 m3/h) -
+   `equipment_catalog.select_compressor_frame` correctly raises rather
+   than returning a wrong match (this exact boundary was already covered
+   by `test_select_compressor_frame_rejects_flow_beyond_largest_frame`,
+   so this is a genuine real-scale finding, not a new code gap). The
+   example handles it by computing the number of parallel Frame F trains
+   needed (3, at ~121,691 m3/h each) rather than crashing - the same
+   "multiple parallel units" resolution `refrigerant_makeup.py`'s tests
+   already establish for an oversized single-vessel charge.
+
+Neither finding was predicted by writing tests in advance for either
+module - both surfaced only by actually running the DMR example and
+comparing its numbers against the C3MR baseline on the same basis,
+consistent with the pattern established by the C3MR full-train example
+above.
+
 ## A note on what was *not* used
 
 Early in this project's development, a Dropbox folder that looked like it
