@@ -98,3 +98,17 @@ def test_unreachable_mr_target_is_flagged_in_notes():
         mr_target={"Ethane": 0.3, "Hexane": 0.7}))
     assert not d.mr_blend.reachable
     assert any("not reachable" in n for n in d.notes)
+
+
+def test_optional_refrigerant_supply_sizes_storage_for_both_loops():
+    d = size_liquefaction_train(LiquefactionBasis(include_refrigerant_supply=True,
+                                                  refrigerant_storage_factor=2.5))
+    rs = d.refrigerant_supply
+    assert rs is not None and {"Ethane", "Propane"} <= set(rs.storage)
+    # the C3 precool charge is part of the propane demand
+    assert rs.demand.charge_kg["Propane"] > d.c3_charge_kg
+    assert any("Ethane cannot be stored at ambient" in n for n in d.notes)
+
+
+def test_refrigerant_supply_absent_by_default(base):
+    assert base.refrigerant_supply is None

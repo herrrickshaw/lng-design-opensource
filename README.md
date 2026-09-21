@@ -58,6 +58,7 @@ or an open-source equation-oriented tool like
 | `lng_design/tank_bog.py` | Tank geometry, layered-insulation heat ingress, equilibrium-vapor latent heat, unloading displacement + flash, barometric flash | Tank D/H/areas, BOG by source and mode (t/h), BOR %/day, nitrogen-rich BOG composition |
 | `lng_design/bog_compressor.py` | Polytropic head on the real cryogenic BOG, stage count from max ratio, redundancy, turndown check | Stages, shaft power per machine, discharge T, frame/machine type, turndown fraction |
 | `lng_design/fractionation.py` | Fenske-Underwood-Gilliland (Molokanov) + Kirkbride + O'Connell with CoolProp K-values, Souders-Brown hydraulics | Min/actual stages, reflux, feed tray, diameter, height, condenser/reboiler duty, condenser service |
+| `lng_design/refrigerant_supply.py` | **Entry point.** Refrigerant demand by component, bullet storage at 2.5-3x demand (ethane stored cold - it is supercritical at ambient), and an ethane/propane/butane fractionation train scaled to fill it | `RefrigerantSupplyDesign`: storage per component, feed scale, product coverage and fill time vs spec |
 | `lng_design/refrigerant_generation.py` | Spec checks, non-negative least-squares MR blending, make-up rate | Pass/fail per spec, source flows per kmol MR, make-up kmol/h |
 | `lng_design/flowsheet.py` | Graphviz PFD + HMB-style stream table | Interactive process flow diagram tying every module together |
 | `lng_design/optimize.py` | NSGA-II (via [pymoo](https://pymoo.org/)) | Pareto front for any of the above (e.g. power vs. exergy) |
@@ -129,6 +130,20 @@ a decision - the unsized subcooling loop, holding-mode turndown below the
 compressor's stable minimum, BOG that the recondenser cannot absorb at low
 send-out - come back in `.notes` instead of being raised, so a design that
 fails a check is still visible in full.
+
+## Example: refrigerant storage and supply
+
+`examples/refrigerant_supply_worked_example.py` totals the refrigerant
+demand of the propane precool loop and a mixed-refrigerant loop, sizes
+storage for each liquid component at 2.5 to 3 times that demand, and sizes a
+deethanizer / depropanizer / debutanizer train to fill it with ethane,
+propane and butane within a chosen fill time. Also available from
+`size_liquefaction_train(LiquefactionBasis(include_refrigerant_supply=True))`
+and the app's "Refrigerant Supply" tab.
+
+```bash
+python examples/refrigerant_supply_worked_example.py
+```
 
 ## Example: LPG import terminal
 

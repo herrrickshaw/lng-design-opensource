@@ -457,6 +457,31 @@ source), `bog_compressor`, `regas_terminal`'s pump and enthalpy guards,
   return fraction, arriving-cargo superheat, pump heat, barometric allowance
   and efficiencies are likewise assumed inputs of `LPGTerminalBasis`.
 
+## Refrigerant storage and supply (`lng_design/refrigerant_supply.py`)
+
+* **Demand** = the initial charge of every loop plus `makeup_years` of
+  losses at `annual_loss_fraction` (10 %/yr, an assumption), totalled by
+  component (a loop is a mole-fraction composition with either a kmol or a
+  kg charge).
+* **Storage** for each liquid component (ethane, propane, n-/iso-butane) =
+  `storage_factor` x demand (default 2.75, inside the requested 2.5-3x;
+  the 2.5 and 3.0 capacities are reported alongside), as pressurized
+  bullets at the 85 % maximum fill via `refrigerant_makeup.py`, with
+  parallel vessels added until one standard shell suffices. Liquid density
+  is CoolProp's saturated liquid at the storage temperature; design
+  pressure is 1.10 x the CoolProp vapor pressure at the design temperature
+  (hottest the contents can get). Ethane's critical temperature is 305 K,
+  so at ambient there is no liquid: the module refuses an ambient ethane
+  design and stores it cold-pressurized (default -15 C), with the design
+  temperature set by an assumed +20 K loss-of-refrigeration rise.
+  Methane and nitrogen are reported as demand but not stored here.
+* **Production**: the deethanizer/depropanizer/debutanizer train of
+  `fractionation.py`, with the NGL feed scaled so the scarcest product's
+  component rate fills its storage in `fill_days` (plus a feed margin),
+  columns re-sized at that scaled feed, each distillate checked against an
+  assumed `ProductSpec`, and the share of the available NGL that the
+  train uses reported.
+
 ## Optimization (`lng_design/optimize.py`)
 
 NSGA-II via [pymoo](https://pymoo.org/), matching the approach used across

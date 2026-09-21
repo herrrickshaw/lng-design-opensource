@@ -50,6 +50,9 @@ from .precool import PrecoolCycleResult, optimal_evap_temperature
 from .properties import GasMixture
 from .refrigerant_generation import BlendResult, MakeupResult, blend_mixed_refrigerant, makeup_rate
 from .refrigerant_makeup import RefrigerantStorageResult, size_refrigerant_storage
+from .refrigerant_supply import (
+    RefrigerantLoop, RefrigerantSupplyBasis, RefrigerantSupplyDesign, size_refrigerant_supply,
+)
 from .vessels import SeparatorSizingResult, size_vertical_separator
 
 MTPA_TO_KG_S = 1.0e9 / (365.25 * 24 * 3600)
@@ -123,6 +126,13 @@ class LiquefactionBasis:
     mr_charge_kmol: float = 8000.0
     mr_annual_loss_fraction: float = 0.10
 
+    # Optional refrigerant storage (2.5-3x total demand) + a train that makes
+    # ethane, propane and butane to fill it (refrigerant_supply.py). The C3
+    # precool charge and the LRC charge (lrc_blend x mr_charge_kmol) are the loops.
+    include_refrigerant_supply: bool = False
+    refrigerant_storage_factor: float = 2.75
+    refrigerant_fill_days: float = 60.0
+
 
 @dataclass
 class LiquefactionDesign:
@@ -151,6 +161,7 @@ class LiquefactionDesign:
     fractionation: TrainResult | None = None
     mr_blend: BlendResult | None = None
     mr_makeup: MakeupResult | None = None
+    refrigerant_supply: RefrigerantSupplyDesign | None = None
     notes: list[str] = field(default_factory=list)
 
     @property
@@ -261,6 +272,16 @@ def size_liquefaction_train(basis: LiquefactionBasis | None = None) -> Liquefact
                 notes.append(f"MR target not reachable from the available sources "
                              f"(max error {blend.max_abs_error:.3f}).")
 
+    supply = None
+    if b.include_refrigerant_supply:
+        supply = size_refrigerant_supply(RefrigerantSupplyBasis(
+            loops=[RefrigerantLoop("C3 precool", {"Propane": 1.0}, charge_kg=c3_charge),
+                   RefrigerantLoop("LRC mixed refrigerant", dict(b.lrc_blend), charge_kmol=b.mr_charge_kmol)],
+            storage_factor=b.refrigerant_storage_factor, fill_days=b.refrigerant_fill_days,
+            annual_loss_fraction=b.mr_annual_loss_fraction,
+            **({"ngl_feed_kmol_h": b.ngl_feed_kmol_h} if b.ngl_feed_kmol_h else {})))
+        notes.extend(supply.notes)
+
     return LiquefactionDesign(
         basis=b, feed_mass_flow_kg_s=m, feed_density_kg_m3=rho,
         inlet_separator=v101, absorber=t301, molecular_sieve=v201,
@@ -270,5 +291,6 @@ def size_liquefaction_train(basis: LiquefactionBasis | None = None) -> Liquefact
         cascade=cascade, mche_pinch=pinch, mche_technology=tech, end_flash=ef,
         flash_gas_compressor=fgc, storage_tank=tank, c3_charge_kg=c3_charge,
         refrigerant_storage=v102, fractionation=frac, mr_blend=blend, mr_makeup=mk,
+        refrigerant_supply=supply,
         notes=notes,
     )

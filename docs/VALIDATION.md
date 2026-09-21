@@ -413,6 +413,37 @@ figures.
   then only 35 % of the machine rating - below an assumed 60 % stable
   minimum - so the holding case needs its own smaller machine or recycle.
 
+## Refrigerant supply — checks and what it showed
+
+**Checks that pass.** Storage capacity equals `storage_factor` x demand and
+the vessels, filled to the 85 % limit at the CoolProp liquid density, hold
+exactly that mass; design pressure equals 1.10 x the CoolProp vapor
+pressure at the design temperature (recomputed independently in the test);
+demand arithmetic (charge from kmol or kg, make-up years) against hand
+calculation; every product fills within the requested time and the limiting
+one at `fill_days/1.10`; halving the fill time exactly doubles the train.
+There is **no published numeric benchmark** for this sizing (storage
+multiples and fill times are policy choices), so the results are
+consequences of the assumptions listed in the module, not validated designs.
+
+**What running it showed** (example basis: 255 t total demand, 2.75x = 520 t):
+* *Ethane is the constraint, and it cannot be stored like the others.* It
+  is 46 % of the demand, its critical temperature (32 C) rules out ambient
+  storage, and it needs 4 x 4.27 m bullets at ~30 bar design (vs. 2 for
+  propane at ~17 bar, 1 for butane at ~5 bar). The module raises for an
+  ambient ethane design instead of returning a pressure that does not exist.
+* *Ethane is the limiting product for the fill.* At a 60-day fill the
+  propane cut is made at 3.0x and the butane cut at 7.9x what its storage
+  needs, so those tanks fill in 20 and 8 days.
+* *The train is tiny.* Filling 520 t in 60 days needs 23.5 kmol/h of NGL,
+  2.6 % of the 920 kmol/h available, so the columns land on the smallest
+  standard shell (0.46 m) at ~27 m tall (H/D ~ 60). The module flags that
+  (a packed or skid column would be used in practice) rather than hiding it.
+* *Ethane slip decides the propane spec.* With 99.5 % ethane recovery at
+  the deethanizer all three cuts pass their assumed specs; at 98 % (the
+  earlier example) the propane cut fails on ethane - the spec check catches
+  it.
+
 ## A note on what was *not* used
 
 Early in this project's development, a Dropbox folder that looked like it

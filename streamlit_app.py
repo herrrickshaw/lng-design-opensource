@@ -37,6 +37,7 @@ from lng_design.process_selection import compare_liquefaction_cycles
 from lng_design.properties import GasMixture
 from lng_design.refrigerant_generation import ProductSpec, blend_mixed_refrigerant, check_product_spec
 from lng_design.refrigerant_makeup import size_refrigerant_storage
+from lng_design.refrigerant_supply import RefrigerantLoop, RefrigerantSupplyBasis, size_refrigerant_supply
 from lng_design.regasification import RegasificationBasis, size_regasification_terminal
 from lng_design.regas_terminal import heating_curve, size_recondenser, size_regas_train
 from lng_design.tank_bog import compute_bog, size_tank_geometry
@@ -60,12 +61,12 @@ flowsheet: FlowsheetState = st.session_state.flowsheet
 (tab_flow, tab_precool, tab_compressor, tab_absorber, tab_molsieve, tab_mche,
  tab_vessel, tab_exchanger, tab_aircooler, tab_water, tab_endflash, tab_refrigmu,
  tab_berth, tab_utilities, tab_cascade, tab_debottleneck, tab_mche_rating,
- tab_regas, tab_frac, tab_liq, tab_regasif, tab_lpg) = st.tabs([
+ tab_regas, tab_frac, tab_liq, tab_regasif, tab_lpg, tab_refsup) = st.tabs([
     "Process Flow Diagram", "C3 Pre-cool Loop", "Compressor Train", "Amine Absorber",
     "Molecular Sieve", "MCHE / Pinch Check", "Separator Vessel", "Shell & Tube Exchanger",
     "Air Cooler", "Cooling Water", "End Flash", "Refrigerant Makeup", "Storage & Berth",
     "Utilities", "3-Loop Cascade", "MCHE Debottleneck", "MCHE Rating",
-    "Regas & BOG", "Fractionation", "Liquefaction", "Regasification", "LPG Import",
+    "Regas & BOG", "Fractionation", "Liquefaction", "Regasification", "LPG Import", "Refrigerant Supply",
 ])
 
 # ---------------------------------------------------------------------
@@ -1414,6 +1415,79 @@ with tab_lpg:
         st.dataframe(pd.DataFrame(rows, columns=["Item", "Result"]), use_container_width=True, hide_index=True)
         for n in lp.notes:
             st.warning(n)
+
+# ---------------------------------------------------------------------
+with tab_refsup:
+    st.header("Refrigerant storage (2.5-3x demand) and ethane / propane / butane production")
+    st.caption(
+        "lng_design/refrigerant_supply.py. Demand = every loop's charge plus make-up; each liquid component is "
+        "stored at the chosen multiple of demand as pressurized bullets, and a deethanizer / depropanizer / "
+        "debutanizer train is scaled so the scarcest product fills its storage in the fill time. Ethane cannot "
+        "be stored at ambient (critical temperature 32 C) so it is stored cold. Loss rate, fill time and the "
+        "refrigerant-grade specs are assumptions."
+    )
+    c1, c2, c3 = st.columns(3)
+    rf_c3 = c1.number_input("C3 precool charge (kg propane)", 1000.0, 500000.0, 16765.0, 1000.0, key="rf_c3")
+    rf_mr = c2.number_input("Mixed-refrigerant charge (kmol)", 500.0, 100000.0, 8000.0, 500.0, key="rf_mr")
+    rf_fac = c3.slider("Storage factor (x total demand)", 2.5, 3.0, 2.75, 0.05, key="rf_fac")
+    c1, c2, c3 = st.columns(3)
+    rf_loss = c1.number_input("Annual loss fraction", 0.0, 0.5, 0.10, 0.01, key="rf_loss")
+    rf_fill = c2.number_input("Fill time (days)", 5.0, 365.0, 60.0, 5.0, key="rf_fill")
+    rf_avail = c3.number_input("NGL available (kmol/h, 0 = unknown)", 0.0, 20000.0, 920.0, 10.0, key="rf_avail")
+    st.subheader("Mixed-refrigerant composition (mole fraction)")
+    rf_comp = _comp_editor({"Nitrogen": 0.05, "Methane": 0.38, "Ethane": 0.44, "Propane": 0.10, "n-Butane": 0.03}, "rf_comp")
+
+    if st.button("Size refrigerant storage and supply", type="primary", key="rf_go"):
+        try:
+            d = size_refrigerant_supply(RefrigerantSupplyBasis(
+                loops=[RefrigerantLoop("C3 precool", {"Propane": 1.0}, charge_kg=rf_c3),
+                       RefrigerantLoop("Mixed refrigerant", {k: v for k, v in rf_comp.items() if v > 0},
+                                       charge_kmol=rf_mr)],
+                storage_factor=rf_fac, annual_loss_fraction=rf_loss, fill_days=rf_fill,
+                ngl_available_kmol_h=rf_avail if rf_avail > 0 else None))
+            st.session_state["ref_supply"] = d
+            flowsheet.set("refrigerant_makeup", {
+                "Storage": f"{d.total_storage_m3:,.0f} m3",
+                "Capacity": f"{d.total_capacity_kg / 1000:,.0f} t ({rf_fac:.2f}x demand)"})
+            for key, col in zip(("deethanizer", "depropanizer", "debutanizer"), d.train.columns):
+                flowsheet.set(key, {"Trays": f"{col.N_real}",
+                                    "D x H": f"{col.diameter_m:.2f} x {col.height_m:.1f} m",
+                                    "Qc/Qr": f"{col.condenser_duty_kW:,.0f}/{col.reboiler_duty_kW:,.0f} kW"})
+        except Exception as e:
+            st.error(str(e))
+
+    d = st.session_state.get("ref_supply")
+    if d is not None:
+        a, b, c, e = st.columns(4)
+        a.metric("Total refrigerant demand", f"{d.demand.total_kg / 1000:,.0f} t")
+        b.metric("Storage capacity", f"{d.total_capacity_kg / 1000:,.0f} t")
+        c.metric("Storage volume", f"{d.total_storage_m3:,.0f} m3")
+        e.metric("Train feed", f"{sum(d.scaled_feed_kmol_h.values()):,.1f} kmol/h")
+        st.subheader("Demand and storage by component")
+        rows = []
+        for comp, kg in d.demand.by_component_kg.items():
+            s = d.storage.get(comp)
+            rows.append({
+                "Component": comp, "Demand (t)": round(kg / 1000, 1),
+                "Capacity (t)": round(s.capacity_kg / 1000, 1) if s else "not stored",
+                "2.5-3x range (t)": f"{s.capacity_range_kg[0] / 1000:,.0f}-{s.capacity_range_kg[1] / 1000:,.0f}" if s else "-",
+                "Vessels": f"{s.n_vessels} x {s.vessel.standard_diameter_mm:,.0f} mm x {s.vessel.vessel_length_m:.1f} m" if s else "-",
+                "Design": (f"{s.design_pressure_Pa / 1e5:.1f} bar at {s.design_T_K - 273.15:.0f} C"
+                           + (" (refrigerated)" if s.needs_refrigeration else "")) if s else "-"})
+        st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
+        st.subheader("Fractionation: products vs storage fill")
+        st.dataframe(pd.DataFrame([{
+            "Product": k, "Produced (kg/h)": round(p.component_kg_h, 1), "Required (kg/h)": round(p.required_kg_h, 1),
+            "Coverage": f"{p.coverage:.2f}x", "Fill time (d)": round(d.fill_days_achieved[k], 1),
+            "Spec": "PASS" if p.spec.passed else "FAIL: " + "; ".join(p.spec.violations)}
+            for k, p in d.production.items()]), use_container_width=True, hide_index=True)
+        st.dataframe(pd.DataFrame([{
+            "Column": c.name, "Trays": c.N_real, "D (m)": round(c.diameter_m, 2), "H (m)": round(c.height_m, 1),
+            "Qc (kW)": round(c.condenser_duty_kW), "Qr (kW)": round(c.reboiler_duty_kW),
+            "Condenser": c.condenser_service} for c in d.train.columns]),
+            use_container_width=True, hide_index=True)
+        for n in d.notes:
+            st.info(n)
 
 # ---------------------------------------------------------------------
 # tab_flow is rendered LAST (though it's the leftmost/first tab visually -
