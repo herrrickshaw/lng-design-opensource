@@ -1164,6 +1164,10 @@ with tab_liq:
         "Also fractionate the NGL (deethanizer / depropanizer) and blend make-up mixed refrigerant",
         value=False, key="lq_frac")
 
+    lq_sup = st.checkbox(
+        "Also size refrigerant storage (2.75x demand) and the ethane/propane/butane supply train",
+        value=False, key="lq_sup")
+
     if st.button("Size liquefaction train", type="primary", key="lq_go"):
         try:
             kw = {}
@@ -1178,7 +1182,8 @@ with tab_liq:
             d = size_liquefaction_train(LiquefactionBasis(
                 capacity_mtpa=lq_mtpa, feed_composition=lq_feed, feed_T_K=lq_T + 273.15,
                 feed_P_Pa=lq_P * 1e5, ambient_T_K=lq_amb + 273.15,
-                inlet_water_ppm_wt=lq_water, **kw))
+                inlet_water_ppm_wt=lq_water,
+                include_refrigerant_supply=lq_sup, **kw))
             st.session_state["liq_design"] = d
 
             fs = flowsheet.set
@@ -1198,6 +1203,9 @@ with tab_liq:
             fs("storage_tank", {"Volume": f"{d.storage_tank.required_volume_m3:,.0f} m3"})
             fs("refrigerant_makeup", {"Vessel": f"{d.refrigerant_storage.standard_diameter_mm:,.0f} mm x "
                                                 f"{d.refrigerant_storage.vessel_length_m:.1f} m"})
+            if d.refrigerant_supply:
+                for key, data in d.refrigerant_supply.flowsheet_state().items():
+                    fs(key, data)
             if d.fractionation:
                 for key, c in zip(("deethanizer", "depropanizer", "debutanizer"), d.fractionation.columns):
                     fs(key, {"Trays": f"{c.N_real}", "D x H": f"{c.diameter_m:.2f} x {c.height_m:.1f} m",
@@ -1446,9 +1454,8 @@ with tab_refsup:
                 storage_factor=rf_fac, annual_loss_fraction=rf_loss, fill_days=rf_fill,
                 ngl_available_kmol_h=rf_avail if rf_avail > 0 else None))
             st.session_state["ref_supply"] = d
-            flowsheet.set("refrigerant_makeup", {
-                "Storage": f"{d.total_storage_m3:,.0f} m3",
-                "Capacity": f"{d.total_capacity_kg / 1000:,.0f} t ({rf_fac:.2f}x demand)"})
+            for key, data in d.flowsheet_state().items():
+                flowsheet.set(key, data)
             for key, col in zip(("deethanizer", "depropanizer", "debutanizer"), d.train.columns):
                 flowsheet.set(key, {"Trays": f"{col.N_real}",
                                     "D x H": f"{col.diameter_m:.2f} x {col.height_m:.1f} m",

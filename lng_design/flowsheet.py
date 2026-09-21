@@ -13,8 +13,9 @@ Three further groups hang off that train, each in its own dashed cluster:
 the regasification terminal (tank BOG generation -> BOG compressor ->
 recondenser -> send-out pumps/vaporizers -> pipeline) and NGL
 fractionation with refrigerant generation (deethanizer -> depropanizer
--> debutanizer, their ethane/propane distillates blended into make-up
-mixed refrigerant that feeds the refrigerant storage vessel), and the LPG
+-> debutanizer, their ethane/propane/butane distillates held in
+refrigerant storage and blended into make-up mixed refrigerant that feeds
+the refrigerant makeup vessel), and the LPG
 import terminal (carrier -> refrigerated tank -> pump -> heater -> delivery,
 with the BOG compress-condense-return loop back into the tank).
 """
@@ -55,8 +56,15 @@ SIDE_TOPOLOGY = [
     ("DEPROP", "DEBUT", "C4+ bottoms"),
     ("DEBUT", "CONDENSATE", "C5+ bottoms"),
     ("DEBUT", "BUTPROD", "Butane distillate"),
-    ("DEETH", "MRBLEND", "Ethane distillate"),
-    ("DEPROP", "MRBLEND", "Propane distillate"),
+    # Distillates go to refrigerant storage first (sized at 2.5-3x demand by
+    # refrigerant_supply.py), and the stores feed the MR blend / C3 loop.
+    ("DEETH", "REFETH", "Ethane distillate"),
+    ("DEPROP", "REFPROP", "Propane distillate"),
+    ("DEBUT", "REFBUT", "Butane distillate (refrigerant)"),
+    ("REFETH", "MRBLEND", "Ethane"),
+    ("REFPROP", "MRBLEND", "Propane"),
+    ("REFBUT", "MRBLEND", "Butane"),
+    ("REFPROP", "C3LOOP", "Propane make-up"),
     ("MRBLEND", "REFRIGMU", "Make-up MR"),
     # LPG import terminal: ship -> refrigerated tank -> pump -> heater ->
     # delivery, with the BOG compress-condense-return loop back to the tank.
@@ -78,7 +86,8 @@ UTILITY_NODES = ["AIRSYS", "N2SYS", "WATERSYS"]
 CLUSTERS = {
     "cluster_regas": ("Regas Terminal", ["BOGGEN", "BOGCOMP", "RECOND", "REGAS", "PIPELINE"]),
     "cluster_frac": ("NGL Fractionation & Refrigerant Generation",
-                     ["DEETH", "DEPROP", "DEBUT", "MRBLEND", "CONDENSATE", "BUTPROD"]),
+                     ["DEETH", "DEPROP", "DEBUT", "REFETH", "REFPROP", "REFBUT", "MRBLEND",
+                      "CONDENSATE", "BUTPROD"]),
     "cluster_lpg": ("LPG Import Terminal",
                     ["LPGSHIP", "LPGTANK", "LPGCOMP", "LPGCOND", "LPGPUMP", "LPGHEAT", "LPGDELIV"]),
 }
@@ -105,6 +114,9 @@ NODE_TITLES = {
     "DEETH": "C-701\nDeethanizer",
     "DEPROP": "C-702\nDepropanizer",
     "DEBUT": "C-703\nDebutanizer",
+    "REFETH": "V-711\nEthane Storage",
+    "REFPROP": "V-712\nPropane Storage",
+    "REFBUT": "V-713\nButane Storage",
     "MRBLEND": "M-704\nMR Blend / Make-up",
     "CONDENSATE": "C5+ Condensate",
     "BUTPROD": "Butane Product",
@@ -139,6 +151,9 @@ NODE_STATE_KEYS = {
     "DEETH": "deethanizer",
     "DEPROP": "depropanizer",
     "DEBUT": "debutanizer",
+    "REFETH": "ref_storage_ethane",
+    "REFPROP": "ref_storage_propane",
+    "REFBUT": "ref_storage_butane",
     "MRBLEND": "mr_blend",
     "LPGTANK": "lpg_tank",
     "LPGCOMP": "lpg_bog_compressor",

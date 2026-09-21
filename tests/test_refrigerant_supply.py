@@ -160,3 +160,21 @@ def test_wrong_number_of_columns_rejected():
     from lng_design.refrigerant_supply import default_column_specs
     with pytest.raises(ValueError, match="deethanizer"):
         size_refrigerant_supply(RefrigerantSupplyBasis(loops=[C3, MR], column_specs=default_column_specs()[:2]))
+
+
+def test_flowsheet_state_for_each_storage_node(design):
+    fs = design.flowsheet_state()
+    assert set(fs) == {"ref_storage_ethane", "ref_storage_propane", "ref_storage_butane", "refrigerant_makeup"}
+    assert fs["ref_storage_ethane"]["Note"] == "refrigerated"
+    assert "Note" not in fs["ref_storage_propane"]
+    assert fs["ref_storage_ethane"]["Capacity"] == f"{design.storage['Ethane'].capacity_kg / 1000:,.1f} t"
+    assert fs["ref_storage_butane"]["Vessels"].startswith("1 x")
+    assert "2.75x demand" in fs["refrigerant_makeup"]["Capacity"]
+
+
+def test_flowsheet_state_marks_a_component_with_no_demand():
+    d = size_refrigerant_supply(RefrigerantSupplyBasis(loops=[C3]))          # propane only
+    fs = d.flowsheet_state()
+    assert fs["ref_storage_ethane"] == {"Storage": "none (no demand)"}
+    assert fs["ref_storage_butane"] == {"Storage": "none (no demand)"}
+    assert "Capacity" in fs["ref_storage_propane"]

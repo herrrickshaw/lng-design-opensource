@@ -254,6 +254,32 @@ class RefrigerantSupplyDesign:
     def total_capacity_kg(self) -> float:
         return sum(s.capacity_kg for s in self.storage.values())
 
+    def flowsheet_state(self) -> dict[str, dict[str, str]]:
+        """Display strings for the flowsheet's refrigerant-storage nodes
+        (`ref_storage_ethane|propane|butane`) and the makeup vessel. Butane
+        is n- plus iso-butane; a component with no demand shows "none"."""
+        def one(comps: tuple[str, ...]) -> dict[str, str]:
+            ss = [self.storage[c] for c in comps if c in self.storage]
+            if not ss:
+                return {"Storage": "none (no demand)"}
+            cap = sum(x.capacity_kg for x in ss)
+            n = sum(x.n_vessels for x in ss)
+            v = ss[0].vessel
+            out = {"Capacity": f"{cap / 1000:,.1f} t",
+                   "Vessels": f"{n} x {v.standard_diameter_mm:,.0f} mm x {v.vessel_length_m:.1f} m",
+                   "Design": f"{max(x.design_pressure_Pa for x in ss) / 1e5:.1f} bar"}
+            if any(x.needs_refrigeration for x in ss):
+                out["Note"] = "refrigerated"
+            return out
+        f = self.basis.storage_factor
+        return {
+            "ref_storage_ethane": one(("Ethane",)),
+            "ref_storage_propane": one(("Propane",)),
+            "ref_storage_butane": one(BUTANES),
+            "refrigerant_makeup": {"Storage": f"{self.total_storage_m3:,.0f} m3",
+                                   "Capacity": f"{self.total_capacity_kg / 1000:,.0f} t ({f:.2f}x demand)"},
+        }
+
 
 def size_refrigerant_supply(basis: RefrigerantSupplyBasis) -> RefrigerantSupplyDesign:
     b = basis

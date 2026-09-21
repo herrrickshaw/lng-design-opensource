@@ -72,8 +72,10 @@ def test_regas_and_fractionation_groups_are_wired_in_and_clustered():
     dot = build_diagram(FlowsheetState())
     for edge in [("TANK", "BOGGEN"), ("BOGGEN", "BOGCOMP"), ("BOGCOMP", "RECOND"),
                  ("RECOND", "REGAS"), ("REGAS", "PIPELINE"), ("V101", "DEETH"),
-                 ("DEETH", "DEPROP"), ("DEPROP", "DEBUT"), ("DEETH", "MRBLEND"),
-                 ("DEPROP", "MRBLEND"), ("MRBLEND", "REFRIGMU")]:
+                 ("DEETH", "DEPROP"), ("DEPROP", "DEBUT"), ("DEETH", "REFETH"),
+                 ("DEPROP", "REFPROP"), ("DEBUT", "REFBUT"), ("REFETH", "MRBLEND"),
+                 ("REFPROP", "MRBLEND"), ("REFBUT", "MRBLEND"), ("REFPROP", "C3LOOP"),
+                 ("MRBLEND", "REFRIGMU")]:
         assert f"{edge[0]} -> {edge[1]}" in dot
     for cid, (label, members) in CLUSTERS.items():
         assert f"subgraph {cid}" in dot and label in dot
@@ -126,3 +128,25 @@ def test_lpg_nodes_show_sizing_and_boundaries_have_none():
     rows = build_stream_table(state)
     r = next(r for r in rows if r["Description"] == "Pressurized LPG")
     assert "Duty=3,218 kW" in r["Downstream equipment data"]
+
+
+def test_refrigerant_storage_nodes_sit_between_columns_and_the_mr_blend():
+    from lng_design.flowsheet import SIDE_TOPOLOGY as S
+    edges = {(a, b) for a, b, _ in S}
+    for col, store in (("DEETH", "REFETH"), ("DEPROP", "REFPROP"), ("DEBUT", "REFBUT")):
+        assert (col, store) in edges and (store, "MRBLEND") in edges
+        assert (col, "MRBLEND") not in edges          # no bypass around storage
+    assert ("REFBUT", "BUTPROD") not in edges and ("DEBUT", "BUTPROD") in edges
+    block = build_diagram(FlowsheetState()).split("subgraph cluster_frac")[1].split("  }")[0]
+    for n in ("REFETH", "REFPROP", "REFBUT"):
+        assert n in block
+
+
+def test_refrigerant_storage_nodes_show_state_and_appear_in_the_stream_table():
+    state = FlowsheetState()
+    state.set("ref_storage_ethane", {"Capacity": "320.2 t", "Vessels": "4 x 4,267 mm x 15.2 m"})
+    dot = build_diagram(state)
+    assert "Capacity: 320.2 t" in dot and "Ethane Storage" in dot
+    rows = build_stream_table(state)
+    r = next(r for r in rows if r["Description"] == "Ethane distillate")
+    assert "Capacity=320.2 t" in r["Downstream equipment data"]
