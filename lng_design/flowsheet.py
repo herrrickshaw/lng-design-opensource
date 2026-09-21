@@ -54,7 +54,7 @@ SIDE_TOPOLOGY = [
     ("DEETH", "DEPROP", "C3+ bottoms"),
     ("DEPROP", "DEBUT", "C4+ bottoms"),
     ("DEBUT", "CONDENSATE", "C5+ bottoms"),
-    ("DEBUT", "LPG", "Butane distillate"),
+    ("DEBUT", "BUTPROD", "Butane distillate"),
     ("DEETH", "MRBLEND", "Ethane distillate"),
     ("DEPROP", "MRBLEND", "Propane distillate"),
     ("MRBLEND", "REFRIGMU", "Make-up MR"),
@@ -78,7 +78,7 @@ UTILITY_NODES = ["AIRSYS", "N2SYS", "WATERSYS"]
 CLUSTERS = {
     "cluster_regas": ("Regas Terminal", ["BOGGEN", "BOGCOMP", "RECOND", "REGAS", "PIPELINE"]),
     "cluster_frac": ("NGL Fractionation & Refrigerant Generation",
-                     ["DEETH", "DEPROP", "DEBUT", "MRBLEND", "CONDENSATE", "LPG"]),
+                     ["DEETH", "DEPROP", "DEBUT", "MRBLEND", "CONDENSATE", "BUTPROD"]),
     "cluster_lpg": ("LPG Import Terminal",
                     ["LPGSHIP", "LPGTANK", "LPGCOMP", "LPGCOND", "LPGPUMP", "LPGHEAT", "LPGDELIV"]),
 }
@@ -107,7 +107,7 @@ NODE_TITLES = {
     "DEBUT": "C-703\nDebutanizer",
     "MRBLEND": "M-704\nMR Blend / Make-up",
     "CONDENSATE": "C5+ Condensate",
-    "LPG": "Butane Product",
+    "BUTPROD": "Butane Product",
     "LPGSHIP": "LPG Carrier",
     "LPGTANK": "TK-801\nRefrigerated LPG Tank",
     "LPGCOMP": "K-802\nBOG Re-liquefaction\nCompressor",
