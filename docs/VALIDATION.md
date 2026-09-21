@@ -277,6 +277,106 @@ running the calculation:
    physically grounded reason why", not as a corrected number. See
    `examples/mche_rundown_rating.py`, runnable end to end.
 
+## Regas / BOG / fractionation modules — what was checked, and what running them exposed
+
+**Independent checks that pass** (all in `tests/`): the Fenske and Underwood
+equations against their closed forms (binary Underwood reduces exactly to
+`R_min = [x_D/x_F - a(1-x_D)/(1-x_F)]/(a-1)`); the Gilliland limits
+(`R -> R_min` gives infinite stages, `R -> inf` gives `N_min`); BOG latent
+heat for a pure-methane LNG against CoolProp's pure-fluid `h_fg`
+(within 0.2 %); the deethanizer condenser duty (distillate 99.5 % ethane)
+against `V x h_fg(ethane)` from the pure-fluid route (within 3 %); pump
+hydraulic power against the incompressible `m dP / rho` (within 4 %);
+vaporizer duty against a pure-methane enthalpy difference (within 8 %);
+methane LHV against the NIST value (50.0 MJ/kg); the recondenser enthalpy
+balance re-evaluated independently after the solver returns; and the
+cold-suction BOG compressor power ratio against the suction-temperature
+ratio (within 10 %).
+
+**FUG against exact stage stepping.** For an ideal binary (constant
+alpha, constant molar overflow, saturated-liquid feed) the exact stage
+count is obtainable by McCabe-Thiele stepping, coded independently in the
+test. Four cases, FUG (Molokanov) vs. stepping: 23.7 vs 22, 18.8 vs 18,
+36.5 vs 37, 18.6 vs 17 stages, i.e. -1 % to +9 %, conservative on
+average. The test bound is 15 %. This validates the shortcut chain on the
+ideal case only; the CoolProp-driven multicomponent behavior has **no
+external numeric benchmark** here (no published full worked NGL
+fractionation case with all inputs was found), so treat those stage counts
+as +/-10-15 % and confirm in a rigorous simulator.
+
+**Defects and surprises found by building and running it**
+
+* *CoolProp's mixture PS flash fails at pipeline pressure.* The first pump
+  implementation used `PSmass_INPUTS` for the isentropic outlet; for the
+  5-component LNG at 85 bar it raised "the (T,p) flash is misclassifying
+  the phase" for some efficiencies and not others. The pump now solves the
+  outlet temperature by root-finding on `PT_INPUTS` liquid states, which
+  was more robust but still hit the flake in the next bullet
+  (`test_pump_warming_falls_with_efficiency` is the regression).
+* *CoolProp's mixture PT flash misfires along the 85 bar LNG isobar, found
+  only by using the app.* The Streamlit send-out tab plotted a heating
+  curve running to -6,000 MW: at T = 136.435 K the flash returned a "gas"
+  at h = -40,000 kJ/kg (correct: ~71 kJ/kg). A scan (0.7 K steps, 110-283 K)
+  found 3 bad points of 248 with automatic phase detection; at 125 K it
+  returned h = -291,916 kJ/kg where the right answer is 34 kJ/kg. The unit
+  test's point spacing missed all of them. Nudging the temperature by up to
+  0.1 K did not always escape the bad window, so the fix is different in
+  kind: above 1.3 x the largest component critical pressure the state is
+  imposed as supercritical (`specify_phase`), which skips the failing
+  stability analysis. It also silently corrupted a result: an earlier run
+  of the worked example reported an HP pump of 4,320 kW shaft (+5.1 K) and
+  111.7 MW vaporizer duty; the correct values are 3,488 kW (+3.5 K) and
+  112.5 MW - a 24 % pump-power error that raised no exception and that
+  every existing test passed. Same scan with the imposed phase: 0 bad of 248,
+  identical values wherever automatic detection was right, and ~100x faster
+  (0.3 s for 400 heating-curve points). A monotone-enthalpy guard with a
+  nudge sequence remains as a fallback below that pressure
+  (`test_heating_curve_survives_coolprop_flake_at_136p435K`). The mixture
+  PS flash the first pump version used (previous bullet) is the same
+  family of failure. Lower-pressure flashes elsewhere (tank bubble points,
+  fractionation) were not seen to misfire, but nothing here proves they
+  cannot - re-scan if you change composition or pressure range.
+* *Gilliland divided by zero at exactly `R = R_min`.* Caught by the
+  limit test; it now returns infinity, and `size_column` rejects
+  `reflux_factor <= 1`.
+* *A test of my own used an invalid arrival state.* The cold-arrival
+  case passed `arriving_P = tank pressure`, which `flash_end_gas`
+  correctly rejects (it needs a let-down). `compute_bog` now validates that
+  the arrival pressure exceeds tank pressure with an explanatory error.
+* *The default insulation stack gives a static BOR of 0.074 %/day,
+  about 50 % above the commonly quoted ~0.05 %/day vendor figure.* The
+  layer thicknesses were not tuned to hit 0.05: a bare 1-D estimate with
+  a 10 % bridge allowance and 1.0/0.6/0.5 m wall/roof/floor insulation is
+  conservative, and `test_default_stack_static_bor_...` only asserts the
+  0.03-0.12 band. A contractor's actual build-up replaces it.
+* *The barometric term dominates.* At a 100 Pa/h fall, a 2 x 160,000 m3
+  terminal's holding-mode BOG rises from 6.8 to 19.6 t/h (the barometric
+  term alone is 2.9x the static heat-leak term), and 300 Pa/h makes it 8.6x. That is why `barometric_fall_Pa_per_h`
+  is an explicit input with a docstring warning rather than a hidden 0.
+  It also sets whether the BOG compressors can turn down to holding mode:
+  in the worked example the holding BOG is 66 % of one machine's rating
+  with a 100 Pa/h allowance but only 23 % without it.
+* *Cold BOG compression pays back 2x.* Same duty on +25 C gas needs 2.0x
+  the shaft power (4,213 vs 2,097 kW per machine in the example).
+* *The recondenser is send-out-limited.* At full send-out it absorbs
+  88 t/h of BOG against a 54 t/h design case, but at 25 % send-out only
+  22 t/h, leaving ~32 t/h that needs the direct-to-pipeline HP BOG route
+  (5 stages, 312 C discharge without intercooling in the example).
+* *Physics the shortcut correctly refused to hide.* The deethanizer's
+  ethane distillate cannot be condensed with air or cooling water at any
+  pressure (ethane's 305 K critical temperature is below the 318 K
+  clearance), so it needs refrigeration - the module reports that instead
+  of a pressure. The depropanizer at 16 bar was marginal (needs 16.006 bar
+  for a 45 C condenser); the example uses 17 bar.
+* *Columns interact.* With 98 % ethane recovery at the deethanizer, 2 %
+  of the ethane goes to the depropanizer and ends up in the propane
+  distillate at 2.1 mol %, failing an (assumed) 2 mol % ethane limit for
+  propane refrigerant. The spec check in the example fails for exactly
+  that reason - the fix is upstream (higher deethanizer recovery), not in
+  the depropanizer.
+
+Runnable end to end: `examples/regas_bog_fractionation_worked_example.py`.
+
 ## A note on what was *not* used
 
 Early in this project's development, a Dropbox folder that looked like it

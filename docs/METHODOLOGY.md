@@ -284,6 +284,129 @@ heavier mixed-refrigerant blend (e.g. ethane/propane) can evaporate
 colder than propane's ~-42°C atmospheric-pressure floor while still
 condensing at ambient - verified empirically, not asserted.
 
+## Regasification send-out train (`lng_design/regas_terminal.py`)
+
+Tank -> in-tank (LP) pump -> HP send-out pump -> vaporizer. All
+thermodynamics are CoolProp HEOS mixture calculations.
+
+* **Pumps**: isentropic enthalpy rise at constant entropy, divided by
+  hydraulic efficiency; the outlet temperature carries the losses. The
+  outlet state is found by root-finding on (T, P) states with the phase
+  imposed above the critical pressure, because CoolProp's automatic phase
+  detection for mixtures misfires at 85 bar (see [VALIDATION.md](VALIDATION.md)).
+* **Vaporizer duty**: h(T_out, P) - h(T_in, P) on the mixture. At pipeline
+  pressure there is no latent heat - the LNG passes through its
+  pseudo-critical region - so a "latent + sensible" shortcut does not
+  apply; `heating_curve` returns the cumulative-duty profile.
+* **ORV** (open-rack vaporizer): seawater flow = Q / (cp_sw * dT_sw), with
+  cp_sw = 3.99 kJ/kg-K (Sharqawy, Lienhard & Zubair, "Thermophysical
+  properties of seawater: a review of existing correlations and data",
+  *Desalination and Water Treatment* 16, 2010). Unit count is
+  capacity-based: published ORV/SuperORV ratings are ~150-200 t/h per unit
+  with 5,000-10,000 t/h of seawater, and warm (>= ~5 C) seawater is
+  required (*Thermal performance analysis and the operation method with
+  low temperature seawater of super open rack vaporizer for liquefied
+  natural gas*, and *Thermal performance calculation and analysis of heat
+  transfer tube in super open rack vaporizer*, both Applied Thermal
+  Engineering, ScienceDirect). Below the limit the module flags the ORV
+  unusable and points to the SCV. Vaporizer *area* is not computed (needs
+  a vendor panel/tube coefficient).
+* **SCV** (submerged-combustion vaporizer): fuel = Q / (eta * LHV). LHV
+  from NIST/CRC standard enthalpies of combustion minus water
+  vaporization (methane: 50.0 MJ/kg, tested). Efficiency (0.98) and
+  100 t/h/unit are **assumptions**, not cited values.
+* **BOG recondenser**: enthalpy balance BOG + subcooled LNG -> liquid
+  2 K below its bubble point, solved for the LNG/BOG mass ratio by
+  root-finding with the outlet composition recomputed from the mixed
+  flows at every trial (BOG is nitrogen-rich, so the mixture is not LNG
+  composition). Reports the maximum BOG a given send-out flow can absorb
+  and the excess that needs a direct-to-pipeline (HP BOG) compressor.
+
+## Storage tank and boil-off gas (`lng_design/tank_bog.py`)
+
+* **Geometry**: cylindrical inner tank at an assumed liquid height/
+  diameter ratio (default 0.40); gives wall/roof/floor areas.
+* **Static heat ingress**: 1-D steady conduction, U from explicit series
+  layers (thickness / conductivity), Q = sum(U A dT) with a 10 %
+  allowance for thermal bridges. Layer thicknesses/conductivities are
+  illustrative screening values (perlite/glass wool/foam glass mean-
+  temperature conductivities of ~0.04-0.05 W/m-K), not a vendor build-up.
+* **BOG latent heat is the boil-off's, not the bulk liquid's**: LNG boils
+  off preferentially light, so the energy per kg of BOG is
+  h_V(y) - h_L(x) with y the equilibrium vapor composition from CoolProp.
+  A 1 mol% N2 LNG gives a ~24 mol% N2 BOG (tested), and that
+  composition is what the BOG compressor is sized on.
+* **Pump heat**: electrical input minus useful hydraulic work (both
+  motor and hydraulic losses are inside the LNG for a submerged pump).
+* **Unloading**: displaced vapor = rho_vapor x volumetric receipt rate x
+  (1 - fraction returned to the ship); plus the isenthalpic flash of the
+  arriving cargo as it lets down to tank pressure (reuses
+  `end_flash.flash_end_gas`).
+* **Barometric pressure fall**: sensible heat released as the inventory
+  cools to the lower saturation temperature, m cp (dT_sat/dP) dP/dt / h_fg,
+  plus vapor-space expansion. Off by default because it is a site input,
+  but not small: 100 Pa/h roughly triples the static BOG for a
+  2 x 160,000 m3 terminal (example output).
+* The commonly quoted ~0.05 %/day full-tank vendor BOR is reported as an
+  *output* to compare against, never used as an input.
+
+## BOG compressor (`lng_design/bog_compressor.py`)
+
+The polytropic-head method of `compressor.py` (GPSA Ch. 13) applied to
+the real BOG composition at cryogenic suction. Stage count from a maximum
+pressure ratio per stage (default 2.5, an assumption); design flow =
+design BOG x margin over `n_operating` + `n_spare` machines; dew-point
+guard on the suction temperature; frame match from
+`equipment_catalog.COMPRESSOR_FRAMES`, with small flows pointed to
+positive-displacement machines and `turndown_check` comparing holding-mode
+BOG to the machine's stable minimum (60 % assumed). Power scales with
+suction temperature, so cold compression takes roughly half the power of
+warmed gas (tested against T_in / T_in' within 10 %).
+
+## NGL fractionation columns (`lng_design/fractionation.py`)
+
+Fenske-Underwood-Gilliland shortcut with CoolProp K-values:
+
+* **Fenske** (1932) minimum stages and non-key distribution;
+  **Underwood** (1948) minimum reflux (root between the key
+  volatilities; adjacent keys enforced); **Gilliland** (1940) in the
+  **Molokanov, Korablina, Shevchuk & Arutyunov** (1972, *Int. Chem. Eng.*
+  12, 209) closed form; **Kirkbride** (1944) feed stage; **O'Connell**
+  (1946) overall tray efficiency.
+* Relative volatilities alpha_i = K_i / K_HK with K = y/x from a CoolProp
+  bubble-point flash at the actual column-end composition and pressure,
+  averaged geometrically between top and bottom; the pressure profile
+  (P_bottom = P_top + N_real dP_tray) and tray count are iterated to
+  convergence together.
+* Feed condition q from CoolProp enthalpies; in a train, each column's
+  bottoms (bubble liquid) is let down isenthalpically into the next.
+* Diameter: Souders-Brown flooding, K_SB by tray spacing (approximate
+  read-off of the Souders-Brown/Fair chart, +/-20 %), Fair's
+  (sigma/20)^0.2 surface-tension correction, an empirical derate at high
+  liquid/vapor flow parameter, 80 % of flood, 12 % downcomer area,
+  evaluated at top and bottom (larger governs). Height from tray spacing
+  plus end allowances and a 5 min bottoms holdup.
+* Condenser duty from CoolProp latent heat at the distillate composition;
+  reboiler duty from the overall enthalpy balance. The condenser service
+  (cooling water/air vs. refrigerated) is decided against a cooling-medium
+  temperature, and the top pressure that would make it water/air-coolable
+  is reported - or a note that none exists (ethane above its critical
+  temperature).
+
+Limits: constant relative volatility and constant molar overflow;
+Gilliland is a curve fit; no azeotropes, side draws or vendor tray
+ratings. Treat stage counts as +/-10-15 %.
+
+## Refrigerant generation (`lng_design/refrigerant_generation.py`)
+
+Product-spec checks on distillate compositions against user-supplied
+per-component limits (no universal refrigerant-grade number exists - the
+worked example's limits are assumptions), non-negative least-squares
+blending of source streams (nitrogen, fuel gas, ethane and propane
+distillates) into a target mixed-refrigerant composition with a
+reachability flag, and make-up rate from inventory x annual loss
+fraction (the loss fraction is a plant input).
+
 ## Optimization (`lng_design/optimize.py`)
 
 NSGA-II via [pymoo](https://pymoo.org/), matching the approach used across

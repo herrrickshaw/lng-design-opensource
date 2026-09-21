@@ -18,10 +18,12 @@ from lng_design.air_cooler import size_air_cooler
 from lng_design.air_supply import size_instrument_air_system
 from lng_design.amine_absorber import size_packed_absorber
 from lng_design.berth import berth_queueing_analysis, size_storage_tank
+from lng_design.bog_compressor import size_bog_compressor, turndown_check
 from lng_design.cascade_loops import three_loop_cascade
 from lng_design.compressor import match_frame_for_stage, size_centrifugal_stage, size_multistage
 from lng_design.end_flash import flash_end_gas
 from lng_design.exchangers import size_shell_and_tube
+from lng_design.fractionation import ColumnSpec, size_fractionation_train
 from lng_design.flowsheet import FlowsheetState, build_diagram, build_stream_table
 from lng_design.mche import StreamSegment, analyze_composite_curves, classify_mche_type
 from lng_design.mche_tube_design import TubeBundleGeometry, rate_mche_bundle
@@ -31,7 +33,10 @@ from lng_design.nitrogen_system import size_nitrogen_supply, size_purge
 from lng_design.precool import optimal_evap_temperature, propane_cycle_power
 from lng_design.process_selection import compare_liquefaction_cycles
 from lng_design.properties import GasMixture
+from lng_design.refrigerant_generation import ProductSpec, blend_mixed_refrigerant, check_product_spec
 from lng_design.refrigerant_makeup import size_refrigerant_storage
+from lng_design.regas_terminal import heating_curve, size_recondenser, size_regas_train
+from lng_design.tank_bog import compute_bog, size_tank_geometry
 from lng_design.vessels import size_vertical_separator
 from lng_design.water_system import cooling_water_demand, service_water_demand
 
@@ -51,11 +56,13 @@ flowsheet: FlowsheetState = st.session_state.flowsheet
 
 (tab_flow, tab_precool, tab_compressor, tab_absorber, tab_molsieve, tab_mche,
  tab_vessel, tab_exchanger, tab_aircooler, tab_water, tab_endflash, tab_refrigmu,
- tab_berth, tab_utilities, tab_cascade, tab_debottleneck, tab_mche_rating) = st.tabs([
+ tab_berth, tab_utilities, tab_cascade, tab_debottleneck, tab_mche_rating,
+ tab_regas, tab_frac) = st.tabs([
     "Process Flow Diagram", "C3 Pre-cool Loop", "Compressor Train", "Amine Absorber",
     "Molecular Sieve", "MCHE / Pinch Check", "Separator Vessel", "Shell & Tube Exchanger",
     "Air Cooler", "Cooling Water", "End Flash", "Refrigerant Makeup", "Storage & Berth",
     "Utilities", "3-Loop Cascade", "MCHE Debottleneck", "MCHE Rating",
+    "Regas & BOG", "Fractionation",
 ])
 
 # ---------------------------------------------------------------------
@@ -879,6 +886,229 @@ with tab_mche_rating:
                 )
         except ValueError as e:
             st.error(str(e))
+
+# ---------------------------------------------------------------------
+def _comp_editor(defaults: dict[str, float], key: str) -> dict[str, float]:
+    cols = st.columns(len(defaults))
+    vals = {n: c.number_input(f"{n}", 0.0, 1.0, v, 0.005, key=f"{key}_{n}", format="%.3f")
+            for (n, v), c in zip(defaults.items(), cols)}
+    tot = sum(vals.values())
+    if abs(tot - 1.0) > 1e-6:
+        st.warning(f"Mole fractions sum to {tot:.4f}; they must sum to 1.")
+    return vals
+
+
+with tab_regas:
+    st.header("Regasification terminal: tank BOG, BOG compressor, send-out train")
+    st.caption(
+        "CoolProp mixture thermodynamics throughout. BOG is computed by source "
+        "(heat ingress, pump heat, unloading displacement + flash, barometric fall) "
+        "on the equilibrium vapor composition. See lng_design/tank_bog.py, "
+        "bog_compressor.py, regas_terminal.py."
+    )
+    lng_x = _comp_editor({"Methane": 0.92, "Ethane": 0.05, "Propane": 0.015,
+                          "n-Butane": 0.005, "Nitrogen": 0.01}, "rg")
+    r_tank, r_comp, r_send = st.tabs(["Tank & BOG", "BOG Compressor", "Send-out Train"])
+
+    with r_tank:
+        c1, c2, c3 = st.columns(3)
+        with c1:
+            t_vol = st.number_input("Net volume per tank (m3)", 10000.0, 300000.0, 160000.0, 10000.0, key="rg_vol")
+            t_n = st.number_input("Number of tanks", 1, 8, 2, key="rg_n")
+            t_hd = st.number_input("Liquid height / diameter", 0.2, 1.0, 0.40, 0.05, key="rg_hd")
+        with c2:
+            t_p = st.number_input("Tank pressure (bara)", 1.02, 1.5, 1.15, 0.01, key="rg_p")
+            t_fill = st.number_input("Fill fraction", 0.1, 1.0, 0.90, 0.05, key="rg_fill")
+            t_pump = st.number_input("Pump heat into LNG, total (kW)", 0.0, 2000.0, 250.0, 25.0, key="rg_pump")
+        with c3:
+            t_baro = st.number_input("Barometric fall (Pa/h)", 0.0, 1000.0, 100.0, 25.0, key="rg_baro")
+            t_unl = st.number_input("Unloading rate (m3/h, 0 = holding)", 0.0, 20000.0, 12000.0, 1000.0, key="rg_unl")
+            t_ret = st.number_input("Vapor return to ship (fraction)", 0.0, 1.0, 0.40, 0.05, key="rg_ret")
+        t_warm = st.number_input("Arriving LNG warmer than tank saturation (K, 0 = no flash)", 0.0, 5.0, 0.5, 0.1, key="rg_warm")
+        if st.button("Compute BOG", type="primary", key="rg_go"):
+            try:
+                geom = size_tank_geometry(t_vol, t_hd)
+                from lng_design.tank_bog import tank_liquid_state
+                st0 = tank_liquid_state(lng_x, t_p * 1e5)
+                kw = dict(n_tanks=int(t_n), fill_fraction=t_fill, pump_heat_total_kW=t_pump,
+                          barometric_fall_Pa_per_h=t_baro, unloading_rate_m3_h=t_unl,
+                          vapor_return_fraction=t_ret)
+                if t_warm > 0 and t_unl > 0:
+                    kw.update(arriving_T_K=st0.temperature_K + t_warm, arriving_P_Pa=3.0e5)
+                res = compute_bog(lng_x, t_p * 1e5, geom, **kw)
+                st.session_state["rg_bog"] = res
+                a, b, c, d = st.columns(4)
+                a.metric("Tank D x liquid H", f"{geom.inner_diameter_m:.1f} x {geom.liquid_height_m:.1f} m")
+                b.metric("Static BOR", f"{res.boil_off_rate_static_percent_per_day:.3f} %/d")
+                c.metric(f"Design BOG ({res.design_mode})", f"{res.design_bog_kg_s * 3.6:.1f} t/h")
+                d.metric("BOG nitrogen", f"{res.bog_composition.get('Nitrogen', 0) * 100:.1f} mol%")
+                df = pd.DataFrame({
+                    "Source": ["Static heat ingress", "Pump heat", "Barometric fall",
+                               "Vapor displacement", "Arrival flash"],
+                    "BOG (t/h)": [res.static_bog_kg_s * 3.6, res.pump_bog_kg_s * 3.6,
+                                  res.barometric_bog_kg_s * 3.6, res.displacement_bog_kg_s * 3.6,
+                                  res.flash_bog_kg_s * 3.6]})
+                st.plotly_chart(go.Figure(go.Bar(x=df["Source"], y=df["BOG (t/h)"])).update_layout(
+                    yaxis_title="BOG (t/h)", height=300, margin=dict(t=20)), use_container_width=True)
+                st.caption(f"Latent heat of the boil-off {res.liquid_state.latent_heat_J_kg/1e3:.0f} kJ/kg, "
+                           f"BOG MW {res.liquid_state.bog_molecular_weight_g_mol:.1f} g/mol; "
+                           "the ~0.05 %/d vendor figure is an output to compare against, not an input.")
+            except Exception as e:
+                st.error(str(e))
+
+    with r_comp:
+        bog = st.session_state.get("rg_bog")
+        if bog is None:
+            st.info("Compute BOG on the Tank & BOG tab first - the compressor is sized on its design flow and composition.")
+        else:
+            c1, c2, c3 = st.columns(3)
+            with c1:
+                cp_suc = st.number_input("Suction pressure (bara)", 1.0, 1.5, 1.10, 0.01, key="bc_ps")
+                cp_dis = st.number_input("Discharge pressure (bara)", 2.0, 100.0, 9.0, 0.5, key="bc_pd")
+            with c2:
+                cp_T = st.number_input("Suction temperature (K)", 120.0, 320.0, 143.15, 5.0, key="bc_T")
+                cp_marg = st.number_input("Capacity margin", 0.0, 0.5, 0.10, 0.05, key="bc_m")
+            with c3:
+                cp_op = st.number_input("Operating machines", 1, 4, 2, key="bc_op")
+                cp_sp = st.number_input("Spare machines", 0, 2, 1, key="bc_sp")
+            if st.button("Size BOG compressors", type="primary", key="bc_go"):
+                try:
+                    r = size_bog_compressor(bog.bog_composition, bog.design_bog_kg_s, cp_suc * 1e5,
+                                            cp_dis * 1e5, cp_T, cp_marg, int(cp_op), int(cp_sp))
+                    a, b, c, d = st.columns(4)
+                    a.metric("Stages", f"{r.n_stages} @ PR {r.stage_pressure_ratio:.2f}")
+                    b.metric("Shaft power / machine", f"{r.shaft_power_kW_per_machine:,.0f} kW")
+                    c.metric("Discharge T", f"{r.discharge_T_K - 273.15:.0f} C")
+                    d.metric("Inlet flow / machine", f"{r.inlet_volume_flow_per_machine_m3_h:,.0f} m3/h")
+                    st.write(r.machine_note)
+                    frac, ok = turndown_check(bog.holding_bog_kg_s, r.flow_per_machine_kg_s)
+                    (st.success if ok else st.warning)(
+                        f"Holding-mode BOG is {frac*100:.0f}% of one machine's rating "
+                        f"({'within' if ok else 'BELOW'} an assumed 60% stable turndown).")
+                except ValueError as e:
+                    st.error(str(e))
+
+    with r_send:
+        c1, c2, c3 = st.columns(3)
+        with c1:
+            so_mtpa = st.number_input("Send-out (mtpa)", 0.5, 30.0, 5.0, 0.5, key="so_m")
+            so_p = st.number_input("Send-out pressure (bara)", 10.0, 150.0, 85.0, 5.0, key="so_p")
+        with c2:
+            so_T = st.number_input("Send-out temperature (C)", -10.0, 30.0, 5.0, 1.0, key="so_T")
+            so_sw = st.number_input("Seawater inlet (C)", 0.0, 35.0, 20.0, 1.0, key="so_sw")
+        with c3:
+            so_lp = st.number_input("LP pump discharge (bara)", 5.0, 20.0, 10.0, 1.0, key="so_lp")
+            so_dT = st.number_input("Allowed seawater drop (K)", 1.0, 10.0, 5.0, 0.5, key="so_dT")
+        if st.button("Size send-out train", type="primary", key="so_go"):
+            try:
+                with st.spinner("Solving pump, vaporizer and recondenser states..."):
+                    from lng_design.tank_bog import tank_liquid_state
+                    st0 = tank_liquid_state(lng_x, 1.15e5)
+                    m = so_mtpa * 1e9 / (365.25 * 24 * 3600)
+                    r = size_regas_train(lng_x, m, 1.15e5, st0.temperature_K, so_lp * 1e5, so_p * 1e5,
+                                         so_T + 273.15, so_sw, seawater_dT_K=so_dT)
+                    a, b, c, d = st.columns(4)
+                    a.metric("Pump shaft (LP+HP)", f"{r.total_pump_shaft_kW:,.0f} kW")
+                    b.metric("Vaporizer duty", f"{r.duty_kW/1000:,.1f} MW ({r.duty_kJ_per_kg:,.0f} kJ/kg)")
+                    c.metric("ORV units", f"{r.orv.n_operating} + {r.orv.n_spare}")
+                    d.metric("SCV fuel gas", f"{r.scv.fuel_fraction_of_sendout*100:.2f}% of send-out")
+                    st.write(f"Seawater {r.orv.seawater_flow_t_h:,.0f} t/h, {so_sw:.0f} -> {r.orv.seawater_outlet_C:.0f} C. "
+                             + r.orv.note)
+                    T, Q = heating_curve(lng_x, so_p * 1e5, r.hp_pump.outlet_T_K, so_T + 273.15, m, n_points=60)
+                    st.plotly_chart(go.Figure(go.Scatter(x=Q / 1000.0, y=T - 273.15)).update_layout(
+                        xaxis_title="Cumulative duty (MW)", yaxis_title="LNG/gas temperature (C)",
+                        height=300, margin=dict(t=20)), use_container_width=True)
+                    bg = st.session_state.get("rg_bog")
+                    if bg is not None:
+                        rc = size_recondenser(lng_x, r.lp_pump.outlet_T_K, bg.bog_composition, 240.0,
+                                              bg.design_bog_kg_s, so_lp * 1e5 - 1e5, m)
+                        st.write(f"Recondenser: {rc.lng_to_bog_mass_ratio:.1f} kg LNG per kg BOG; can absorb "
+                                 f"{rc.max_recondensable_bog_kg_s*3.6:,.0f} t/h vs design BOG "
+                                 f"{bg.design_bog_kg_s*3.6:.1f} t/h; excess {rc.excess_bog_kg_s*3.6:.1f} t/h.")
+            except Exception as e:
+                st.error(str(e))
+
+# ---------------------------------------------------------------------
+with tab_frac:
+    st.header("NGL fractionation: distillate columns and refrigerant generation")
+    st.caption(
+        "Fenske-Underwood-Gilliland shortcut with CoolProp K-values (lng_design/fractionation.py). "
+        "Stage counts are +/-10-15% - confirm in a rigorous simulator."
+    )
+    f_col, f_ref = st.tabs(["Column train", "Refrigerant blend"])
+    with f_col:
+        st.subheader("NGL feed (kmol/h)")
+        ngl_defaults = {"Ethane": 320.0, "Propane": 300.0, "Isobutane": 60.0, "n-Butane": 100.0,
+                        "Isopentane": 50.0, "Pentane": 50.0, "Hexane": 40.0}
+        cols = st.columns(len(ngl_defaults))
+        ngl_feed = {n: c.number_input(n, 0.0, 5000.0, v, 10.0, key=f"fr_{n}")
+                    for (n, v), c in zip(ngl_defaults.items(), cols)}
+        st.subheader("Columns (top pressure bara, key recoveries)")
+        defaults = [("deethanizer", "Ethane", "Propane", 26.0, 0.98, 0.995),
+                    ("depropanizer", "Propane", "Isobutane", 17.0, 0.985, 0.98),
+                    ("debutanizer", "n-Butane", "Isopentane", 6.0, 0.98, 0.98)]
+        specs = []
+        for i, (nm, lk, hk, p, rl, rh) in enumerate(defaults):
+            a, b, c, d, e = st.columns([2, 1, 1, 1, 1])
+            a.markdown(f"**{nm}**  ({lk} / {hk})")
+            pp = b.number_input("P top", 1.0, 40.0, p, 0.5, key=f"fp_{i}")
+            r1 = c.number_input("LK rec.", 0.6, 0.999, rl, 0.005, key=f"fl_{i}", format="%.3f")
+            r2 = d.number_input("HK rec.", 0.6, 0.999, rh, 0.005, key=f"fh_{i}", format="%.3f")
+            rf = e.number_input("R/Rmin", 1.05, 2.0, 1.2, 0.05, key=f"fr_rf_{i}")
+            specs.append(ColumnSpec(nm, lk, hk, pp * 1e5, r1, r2, reflux_factor=rf))
+        if st.button("Size fractionation train", type="primary", key="fr_go"):
+            try:
+                tr = size_fractionation_train({k: v for k, v in ngl_feed.items() if v > 0}, specs)
+                st.session_state["frac_train"] = tr
+                st.dataframe(pd.DataFrame([{
+                    "Column": c.name, "N min": round(c.N_min, 1), "R min": round(c.R_min, 2),
+                    "R": round(c.R, 2), "Theor. stages": round(c.N_theoretical, 1),
+                    "Trays": c.N_real, "Feed tray": c.feed_tray_from_top,
+                    "Eo": round(c.tray_efficiency, 2), "D (m)": round(c.diameter_m, 2),
+                    "H (m)": round(c.height_m, 1), "T top (K)": round(c.T_top_K, 1),
+                    "Qc (kW)": round(c.condenser_duty_kW), "Qr (kW)": round(c.reboiler_duty_kW),
+                    "Condenser": c.condenser_service} for c in tr.columns]),
+                    use_container_width=True, hide_index=True)
+                for c in tr.columns:
+                    for n in c.notes:
+                        st.info(f"{c.name}: {n}")
+                st.caption(f"Train mole balance error {tr.mass_balance_error:.1e}")
+                for c in tr.columns:
+                    st.write(f"**{c.name} distillate:** " + ", ".join(
+                        f"{k} {v*100:.2f}%" for k, v in c.distillate_mole_fractions.items() if v > 5e-4))
+            except Exception as e:
+                st.error(str(e))
+
+    with f_ref:
+        tr = st.session_state.get("frac_train")
+        if tr is None:
+            st.info("Size the column train first - its ethane and propane distillates are the blend sources.")
+        else:
+            st.subheader("Target mixed refrigerant (mole fraction)")
+            mr = _comp_editor({"Nitrogen": 0.05, "Methane": 0.40, "Ethane": 0.45, "Propane": 0.10}, "mr")
+            st.subheader("Propane-refrigerant spec (assumed - use your licensor's)")
+            a, b = st.columns(2)
+            s_c3 = a.number_input("Min propane", 0.5, 1.0, 0.95, 0.01, key="sp_c3")
+            s_c2 = b.number_input("Max ethane", 0.0, 0.2, 0.02, 0.005, key="sp_c2", format="%.3f")
+            if st.button("Check specs and blend", type="primary", key="mr_go"):
+                try:
+                    dp = tr.columns[1].distillate_mole_fractions
+                    chk = check_product_spec(dp, ProductSpec(
+                        "propane refrigerant", {"Propane": s_c3}, {"Ethane": s_c2}))
+                    (st.success if chk.passed else st.error)(
+                        f"Propane distillate: {'PASS' if chk.passed else 'FAIL'}. " + "; ".join(chk.violations))
+                    src = {"nitrogen": {"Nitrogen": 1.0}, "methane": {"Methane": 1.0},
+                           "ethane distillate": tr.columns[0].distillate_mole_fractions,
+                           "propane distillate": dp}
+                    bl = blend_mixed_refrigerant(mr, src)
+                    st.dataframe(pd.DataFrame({"Source": list(bl.source_kmol_per_kmol_mr),
+                                               "kmol / kmol MR": [round(v, 4) for v in bl.source_kmol_per_kmol_mr.values()]}),
+                                 hide_index=True)
+                    (st.success if bl.reachable else st.warning)(
+                        f"Max composition error {bl.max_abs_error:.4f} "
+                        f"({'reachable' if bl.reachable else 'target NOT reachable from these sources'})")
+                except Exception as e:
+                    st.error(str(e))
 
 # ---------------------------------------------------------------------
 # tab_flow is rendered LAST (though it's the leftmost/first tab visually -

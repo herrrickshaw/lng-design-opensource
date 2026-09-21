@@ -51,6 +51,11 @@ or an open-source equation-oriented tool like
 | `lng_design/molecular_sieve.py` | GPSA Ch. 20 adsorber sizing | Bed diameter/height, number of beds, regen heater duty |
 | `lng_design/cascade_loops.py` | 3-loop cascade, real CoolProp mixture flashes | NG/LRC/PMR duties, compressor power, DMR-vs-C3 precool comparison |
 | `lng_design/mche_tube_design.py` | Dittus-Boelter/Shah/falling-film local HTCs, RATING (not sizing) | Achievable NG rundown for a fixed tube bundle, area/MITA-limited |
+| `lng_design/regas_terminal.py` | CoolProp pump/vaporizer duties, ORV seawater balance, SCV fuel, BOG recondenser enthalpy balance | LP/HP pump power, vaporizer duty, seawater flow, unit counts, fuel gas, LNG/BOG ratio |
+| `lng_design/tank_bog.py` | Tank geometry, layered-insulation heat ingress, equilibrium-vapor latent heat, unloading displacement + flash, barometric flash | Tank D/H/areas, BOG by source and mode (t/h), BOR %/day, nitrogen-rich BOG composition |
+| `lng_design/bog_compressor.py` | Polytropic head on the real cryogenic BOG, stage count from max ratio, redundancy, turndown check | Stages, shaft power per machine, discharge T, frame/machine type, turndown fraction |
+| `lng_design/fractionation.py` | Fenske-Underwood-Gilliland (Molokanov) + Kirkbride + O'Connell with CoolProp K-values, Souders-Brown hydraulics | Min/actual stages, reflux, feed tray, diameter, height, condenser/reboiler duty, condenser service |
+| `lng_design/refrigerant_generation.py` | Spec checks, non-negative least-squares MR blending, make-up rate | Pass/fail per spec, source flows per kmol MR, make-up kmol/h |
 | `lng_design/flowsheet.py` | Graphviz PFD + HMB-style stream table | Interactive process flow diagram tying every module together |
 | `lng_design/optimize.py` | NSGA-II (via [pymoo](https://pymoo.org/)) | Pareto front for any of the above (e.g. power vs. exergy) |
 
@@ -96,6 +101,25 @@ GGIT publishes train capacity and status, not feed composition or process
 conditions, so the script assumes a generic lean-gas feed for illustration
 — see the script's docstring and printed sources for exactly what's
 published data vs. assumption.
+
+## Example: regas terminal, BOG and refrigerant generation
+
+`examples/regas_bog_fractionation_worked_example.py` runs a 5 mtpa
+terminal on one consistent basis: 2 x 160,000 m3 tanks and their BOG by
+source (heat ingress, pump heat, vapor displacement, arrival flash,
+barometric fall), the BOG compressors, the recondenser and send-out train
+(pumps, ORV/SCV), then a deethanizer/depropanizer/debutanizer train whose
+ethane and propane distillates are checked against refrigerant specs and
+blended into a mixed refrigerant with its make-up rate:
+
+```bash
+python examples/regas_bog_fractionation_worked_example.py
+```
+
+[docs/VALIDATION.md](docs/VALIDATION.md) records what was independently
+checked and what running it exposed (a CoolProp flash failure at 85 bar,
+the barometric BOG term tripling static BOG, a propane spec failure caused
+by upstream ethane slip).
 
 ## Using it as a library
 
