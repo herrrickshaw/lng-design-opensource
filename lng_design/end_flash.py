@@ -40,7 +40,7 @@ import CoolProp.CoolProp as CP
 # molar vapor quality to a mass basis.
 _MW_G_MOL = {
     "Methane": 16.043, "Ethane": 30.070, "Propane": 44.097,
-    "n-Butane": 58.123, "i-Butane": 58.123, "Nitrogen": 28.013,
+    "n-Butane": 58.123, "i-Butane": 58.123, "Isobutane": 58.123, "Nitrogen": 28.013,
 }
 
 

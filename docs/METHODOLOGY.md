@@ -427,6 +427,36 @@ recondenser cannot absorb at turndown. Its defaults reproduce
 `examples/regas_bog_fractionation_worked_example.py`
 (`tests/test_regasification.py`).
 
+## LPG import terminal (`lng_design/lpg_terminal.py`)
+
+Reuses `tank_bog` (geometry, layered-insulation heat ingress, BOG by
+source), `bog_compressor`, `regas_terminal`'s pump and enthalpy guards,
+`end_flash` and `berth`; the LPG-specific parts are:
+
+* **Storage** (`size_import_storage`): net volume = (one cargo + contingency
+  days x daily send-out) / (1 - heel fraction). A mass balance, not a
+  code-based tank design; contingency (5 d) and heel (10 %) are assumptions.
+* **BOG re-liquefaction** (`size_bog_reliquefaction`): compress the BOG to
+  the bubble-point pressure of its own composition at the condensing
+  temperature (CoolProp), condense, optionally sub-cool by refrigeration,
+  and let down isenthalpically to tank pressure. The flash fraction f (from
+  `end_flash.flash_end_gas`) returns to the BOG, so steady-state compressor
+  flow is BOG/(1-f). For pure propane this is a propane refrigeration
+  cycle with the tank as evaporator, and the tests check the compressed
+  flow against `precool.propane_cycle_power` (agrees within 1 %). Rejected
+  heat = compressor gas power + tank heat load.
+* **Send-out**: cryogenic pump to delivery pressure, then a sensible-heat
+  heater (CoolProp enthalpies) with a warm-water flow at a chosen
+  temperature drop. Product colder than 0 C flags the seawater ice risk and
+  the need for a glycol-water intermediate loop.
+* **Berth**: Erlang-C via `berth.py`, service time = cargo / unloading rate
+  + overhead (12 h assumed).
+* Default insulation stacks (0.30 m wall/roof/floor) are thinner than the
+  LNG defaults because the ambient-to-liquid difference is ~80 K, not
+  ~195 K; they are assumptions, not vendor build-ups. Unloading rate, vapor
+  return fraction, arriving-cargo superheat, pump heat, barometric allowance
+  and efficiencies are likewise assumed inputs of `LPGTerminalBasis`.
+
 ## Optimization (`lng_design/optimize.py`)
 
 NSGA-II via [pymoo](https://pymoo.org/), matching the approach used across

@@ -377,6 +377,42 @@ as +/-10-15 % and confirm in a rigorous simulator.
 
 Runnable end to end: `examples/regas_bog_fractionation_worked_example.py`.
 
+## LPG import terminal — one independent check, one gap, three surprises
+
+**Independent check that passes.** For pure propane the compress-condense-
+return loop is exactly a propane refrigeration cycle whose evaporator is the
+tank. `precool.propane_cycle_power` (a separate module: single-stage,
+isentropic) gives 4.1045 kg/s of refrigerant for the same heat load and
+45 C condensing; `size_bog_reliquefaction` (flash fraction from an
+isenthalpic CoolProp flash, flow = BOG/(1-f)) gives 4.104 kg/s, and the
+condensing pressures agree within 1 %. Compressor power differs by +11 %
+(762 vs 684 kW), the expected direction: three polytropic stages at 0.78
+without inter-cooling vs. one isentropic stage at 0.75. Also tested: propane
+vapor pressure (13.7 bar at 40 C) and the normal boiling points of propane
+(-42 C) and n-butane (-0.5 C) against textbook values.
+
+**Gap.** No published numeric LPG-terminal case was found, so the tank
+boil-off rate (0.06 %/day for the default 0.30 m insulation) is an
+unvalidated consequence of assumed insulation, and the storage volume is a
+mass-balance heuristic. Treat both as placeholders for a contractor's
+figures.
+
+**What running it showed**
+* *`flash_end_gas` did not know isobutane.* Its molecular-weight table had
+  `i-Butane` but CoolProp's name is `Isobutane`; an LPG with isobutane raised
+  a KeyError from inside the flash. Added the alias.
+* *The flash penalty dominates re-liquefaction.* Condensing at 45 C and
+  letting down to the -39 C tank flashes 51 % of the liquid, so the
+  compressors handle 2.04x the BOG (48 vs 24 t/h). Sub-cooling the liquid to
+  10 C cuts the flash to 28 % and compressor power by 32 % for an 879 kW
+  sub-cooler - a trade the module now reports instead of leaving implicit.
+* *Design BOG is not the heat leak.* Of 23.6 t/h at design, static heat
+  ingress is 1.7 t/h; arrival flash (10.7), the barometric allowance (6.7)
+  and vapor displacement (3.9) dominate, and vapor return to the ship is
+  the biggest lever (`test_vapor_return_reduces_...`). Holding-mode BOG is
+  then only 35 % of the machine rating - below an assumed 60 % stable
+  minimum - so the holding case needs its own smaller machine or recycle.
+
 ## A note on what was *not* used
 
 Early in this project's development, a Dropbox folder that looked like it

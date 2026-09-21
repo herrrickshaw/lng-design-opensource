@@ -53,6 +53,7 @@ or an open-source equation-oriented tool like
 | `lng_design/mche_tube_design.py` | Dittus-Boelter/Shah/falling-film local HTCs, RATING (not sizing) | Achievable NG rundown for a fixed tube bundle, area/MITA-limited |
 | `lng_design/liquefaction.py` | **Entry point.** Chains inlet separator, amine, sieve, trim cooler, C3 precool, LRC/MCHE pinch, end-flash, storage, refrigerant storage - and optional NGL fractionation + make-up MR - on one basis | `LiquefactionDesign`: every vessel/exchanger/loop result, total compression power, disclosed scope notes |
 | `lng_design/regasification.py` | **Entry point.** Chains tank BOG, BOG compressors, send-out pumps/ORV/SCV, recondenser at full and turndown send-out, HP BOG route | `RegasificationDesign`: BOG by mode, machine counts and power, vaporizer duty, recondenser limits, decision notes |
+| `lng_design/lpg_terminal.py` | **Entry point.** Fully-refrigerated LPG import: storage mass balance, tank BOG, compress-condense-return re-liquefaction (flash penalty, optional sub-cooling), berth queueing, liquid send-out pump + heater | `LPGTerminalDesign`: tanks, BOG by source, flash fraction / recycle factor, compressor power, heater duty, disclosed notes |
 | `lng_design/regas_terminal.py` | CoolProp pump/vaporizer duties, ORV seawater balance, SCV fuel, BOG recondenser enthalpy balance | LP/HP pump power, vaporizer duty, seawater flow, unit counts, fuel gas, LNG/BOG ratio |
 | `lng_design/tank_bog.py` | Tank geometry, layered-insulation heat ingress, equilibrium-vapor latent heat, unloading displacement + flash, barometric flash | Tank D/H/areas, BOG by source and mode (t/h), BOR %/day, nitrogen-rich BOG composition |
 | `lng_design/bog_compressor.py` | Polytropic head on the real cryogenic BOG, stage count from max ratio, redundancy, turndown check | Stages, shaft power per machine, discharge T, frame/machine type, turndown fraction |
@@ -128,6 +129,21 @@ a decision - the unsized subcooling loop, holding-mode turndown below the
 compressor's stable minimum, BOG that the recondenser cannot absorb at low
 send-out - come back in `.notes` instead of being raised, so a design that
 fails a check is still visible in full.
+
+## Example: LPG import terminal
+
+`examples/lpg_import_terminal_worked_example.py` sizes a 1 mtpa
+fully-refrigerated propane/butane import terminal
+(`lng_design/lpg_terminal.py`): storage, BOG by source, the BOG
+re-liquefaction loop, berth, and the liquid send-out pump and heater. The
+point of the example is what differs from LNG: condensed BOG let down to
+the -40 C tank flashes about half its mass (so the compressors handle ~2x
+the BOG, and refrigerated sub-cooling to 10 C cuts their power by about a
+third), and the send-out is a warmed liquid rather than a vaporized gas.
+
+```bash
+python examples/lpg_import_terminal_worked_example.py
+```
 
 ## Example: regas terminal, BOG and refrigerant generation
 
