@@ -9,12 +9,14 @@ cooling -> C3 precool -> MCHE liquefaction -> end-flash -> storage ->
 berth), matching the equipment modules in this package; a real project's
 actual configuration will differ.
 
-Two further groups hang off that train, each in its own dashed cluster:
+Three further groups hang off that train, each in its own dashed cluster:
 the regasification terminal (tank BOG generation -> BOG compressor ->
 recondenser -> send-out pumps/vaporizers -> pipeline) and NGL
 fractionation with refrigerant generation (deethanizer -> depropanizer
 -> debutanizer, their ethane/propane distillates blended into make-up
-mixed refrigerant that feeds the refrigerant storage vessel).
+mixed refrigerant that feeds the refrigerant storage vessel), and the LPG
+import terminal (carrier -> refrigerated tank -> pump -> heater -> delivery,
+with the BOG compress-condense-return loop back into the tank).
 """
 from __future__ import annotations
 
@@ -56,6 +58,15 @@ SIDE_TOPOLOGY = [
     ("DEETH", "MRBLEND", "Ethane distillate"),
     ("DEPROP", "MRBLEND", "Propane distillate"),
     ("MRBLEND", "REFRIGMU", "Make-up MR"),
+    # LPG import terminal: ship -> refrigerated tank -> pump -> heater ->
+    # delivery, with the BOG compress-condense-return loop back to the tank.
+    ("LPGSHIP", "LPGTANK", "Refrigerated LPG"),
+    ("LPGTANK", "LPGCOMP", "BOG"),
+    ("LPGCOMP", "LPGCOND", "Compressed BOG"),
+    ("LPGCOND", "LPGTANK", "Condensed LPG (let down)"),
+    ("LPGTANK", "LPGPUMP", "Cold LPG"),
+    ("LPGPUMP", "LPGHEAT", "Pressurized LPG"),
+    ("LPGHEAT", "LPGDELIV", "Warm LPG delivery"),
 ]
 
 # Standalone plant utility systems - not connected to the process stream
@@ -68,6 +79,8 @@ CLUSTERS = {
     "cluster_regas": ("Regas Terminal", ["BOGGEN", "BOGCOMP", "RECOND", "REGAS", "PIPELINE"]),
     "cluster_frac": ("NGL Fractionation & Refrigerant Generation",
                      ["DEETH", "DEPROP", "DEBUT", "MRBLEND", "CONDENSATE", "LPG"]),
+    "cluster_lpg": ("LPG Import Terminal",
+                    ["LPGSHIP", "LPGTANK", "LPGCOMP", "LPGCOND", "LPGPUMP", "LPGHEAT", "LPGDELIV"]),
 }
 
 NODE_TITLES = {
@@ -95,6 +108,13 @@ NODE_TITLES = {
     "MRBLEND": "M-704\nMR Blend / Make-up",
     "CONDENSATE": "C5+ Condensate",
     "LPG": "Butane LPG",
+    "LPGSHIP": "LPG Carrier",
+    "LPGTANK": "TK-801\nRefrigerated LPG Tank",
+    "LPGCOMP": "K-802\nBOG Re-liquefaction\nCompressor",
+    "LPGCOND": "E-803\nBOG Condenser",
+    "LPGPUMP": "P-804\nLPG Send-out Pump",
+    "LPGHEAT": "E-805\nLPG Send-out Heater",
+    "LPGDELIV": "LPG Delivery\n(bullets / pipeline / truck)",
     "AIRSYS": "Instrument/Plant\nAir System",
     "N2SYS": "Nitrogen\nSupply System",
     "WATERSYS": "Service/Potable\nWater System",
@@ -120,6 +140,11 @@ NODE_STATE_KEYS = {
     "DEPROP": "depropanizer",
     "DEBUT": "debutanizer",
     "MRBLEND": "mr_blend",
+    "LPGTANK": "lpg_tank",
+    "LPGCOMP": "lpg_bog_compressor",
+    "LPGCOND": "lpg_condenser",
+    "LPGPUMP": "lpg_pump",
+    "LPGHEAT": "lpg_heater",
     "AIRSYS": "air_supply",
     "N2SYS": "nitrogen",
     "WATERSYS": "service_water",

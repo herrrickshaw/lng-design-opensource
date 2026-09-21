@@ -1364,6 +1364,19 @@ with tab_lpg:
                 subcool_to_K=(lp_subT + 273.15) if lp_sub else None,
                 delivery_pressure_Pa=lp_dP * 1e5, delivery_T_K=lp_dT + 273.15))
             st.session_state["lpg_design"] = lp
+            rl0 = lp.reliquefaction
+            fs = flowsheet.set
+            fs("lpg_tank", {"Volume": f"{lp.storage.n_tanks} x {lp.storage.per_tank_m3:,.0f} m3",
+                            "Temp": f"{lp.tank_state.temperature_K - 273.15:.1f} C",
+                            "Design BOG": f"{lp.bog_design.design_bog_kg_s * 3.6:.1f} t/h"})
+            fs("lpg_bog_compressor", {"Power": f"{rl0.compressor.shaft_power_kW_per_machine:,.0f} kW each",
+                                      "Stages": f"{rl0.compressor.n_stages}",
+                                      "Recycle": f"{rl0.recycle_factor:.2f}x"})
+            fs("lpg_condenser", {"Condense": f"{rl0.condensing_T_K - 273.15:.0f} C / {rl0.condensing_P_Pa / 1e5:.1f} bar",
+                                 "Rejection": f"{rl0.total_heat_rejection_kW:,.0f} kW"})
+            fs("lpg_pump", {"Power": f"{lp.pump.shaft_kW:,.0f} kW"})
+            fs("lpg_heater", {"Duty": f"{lp.heater.duty_kW:,.0f} kW",
+                              "Out": f"{lp.heater.outlet_T_K - 273.15:.0f} C"})
         except Exception as e:
             st.error(str(e))
 
@@ -1416,8 +1429,8 @@ with tab_flow:
         "P&ID/PFD. Each box fills in with your latest sizing result from the "
         "other tabs as you use them; the stream table below follows the same "
         "structure as a process simulator's heat-and-material-balance (HMB) "
-        "stream report. The regas terminal and NGL fractionation / refrigerant "
-        "generation groups sit in dashed clusters; the diagram is wide, so hover "
+        "stream report. The regas terminal, NGL fractionation / refrigerant "
+        "generation and LPG import groups sit in dashed clusters; the diagram is wide, so hover "
         "it and use the fullscreen button to read the boxes."
     )
     st.graphviz_chart(build_diagram(flowsheet), use_container_width=True)

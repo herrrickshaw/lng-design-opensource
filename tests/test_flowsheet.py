@@ -102,3 +102,27 @@ def test_new_equipment_nodes_reflect_sizing_and_stream_table_rows():
 def test_stream_ids_stay_unique():
     ids = [r["Stream"] for r in build_stream_table(FlowsheetState())]
     assert len(ids) == len(set(ids))
+
+
+def test_lpg_terminal_is_wired_in_with_its_return_loop_and_cluster():
+    dot = build_diagram(FlowsheetState())
+    for edge in [("LPGSHIP", "LPGTANK"), ("LPGTANK", "LPGCOMP"), ("LPGCOMP", "LPGCOND"),
+                 ("LPGCOND", "LPGTANK"), ("LPGTANK", "LPGPUMP"), ("LPGPUMP", "LPGHEAT"),
+                 ("LPGHEAT", "LPGDELIV")]:
+        assert f"{edge[0]} -> {edge[1]}" in dot
+    assert "subgraph cluster_lpg" in dot and "LPG Import Terminal" in dot
+    block = dot.split("subgraph cluster_lpg")[1].split("  }")[0]
+    for m in CLUSTERS["cluster_lpg"][1]:
+        assert m in block
+
+
+def test_lpg_nodes_show_sizing_and_boundaries_have_none():
+    state = FlowsheetState()
+    state.set("lpg_tank", {"Volume": "59,747 m3 x 2"})
+    state.set("lpg_heater", {"Duty": "3,218 kW"})
+    dot = build_diagram(state)
+    assert "Volume: 59,747 m3 x 2" in dot and "Duty: 3,218 kW" in dot
+    assert "LPGSHIP" not in NODE_STATE_KEYS and "LPGDELIV" not in NODE_STATE_KEYS
+    rows = build_stream_table(state)
+    r = next(r for r in rows if r["Description"] == "Pressurized LPG")
+    assert "Duty=3,218 kW" in r["Downstream equipment data"]
