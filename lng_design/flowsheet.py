@@ -8,6 +8,13 @@ illustrative LNG train (inlet separation -> amine sweetening -> trim
 cooling -> C3 precool -> MCHE liquefaction -> end-flash -> storage ->
 berth), matching the equipment modules in this package; a real project's
 actual configuration will differ.
+
+Two further groups hang off that train, each in its own dashed cluster:
+the regasification terminal (tank BOG generation -> BOG compressor ->
+recondenser -> send-out pumps/vaporizers -> pipeline) and NGL
+fractionation with refrigerant generation (deethanizer -> depropanizer
+-> debutanizer, their ethane/propane distillates blended into make-up
+mixed refrigerant that feeds the refrigerant storage vessel).
 """
 from __future__ import annotations
 
@@ -32,11 +39,36 @@ TOPOLOGY = [
 SIDE_TOPOLOGY = [
     ("C3LOOP", "REFRIGMU", "Makeup/topping"),
     ("ENDFLASH", "FUELGAS", "Flash/BOG gas"),
+    # Regasification terminal: tank BOG -> compressor -> recondenser, and
+    # LP-pumped LNG -> recondenser -> send-out pumps + vaporizers -> pipeline.
+    ("TANK", "BOGGEN", "Heat leak / displacement"),
+    ("BOGGEN", "BOGCOMP", "Boil-off gas"),
+    ("BOGCOMP", "RECOND", "Compressed BOG"),
+    ("TANK", "RECOND", "LP-pumped LNG"),
+    ("RECOND", "REGAS", "Send-out LNG"),
+    ("REGAS", "PIPELINE", "Send-out gas"),
+    # NGL fractionation and refrigerant generation.
+    ("V101", "DEETH", "NGL liquids"),
+    ("DEETH", "DEPROP", "C3+ bottoms"),
+    ("DEPROP", "DEBUT", "C4+ bottoms"),
+    ("DEBUT", "CONDENSATE", "C5+ bottoms"),
+    ("DEBUT", "LPG", "Butane distillate"),
+    ("DEETH", "MRBLEND", "Ethane distillate"),
+    ("DEPROP", "MRBLEND", "Propane distillate"),
+    ("MRBLEND", "REFRIGMU", "Make-up MR"),
 ]
 
 # Standalone plant utility systems - not connected to the process stream
 # topology at all, rendered in their own cluster.
 UTILITY_NODES = ["AIRSYS", "N2SYS", "WATERSYS"]
+
+# Dashed clusters for the two groups added around the main train:
+# cluster id -> (label, member nodes). Utilities keep their own cluster.
+CLUSTERS = {
+    "cluster_regas": ("Regas Terminal", ["BOGGEN", "BOGCOMP", "RECOND", "REGAS", "PIPELINE"]),
+    "cluster_frac": ("NGL Fractionation & Refrigerant Generation",
+                     ["DEETH", "DEPROP", "DEBUT", "MRBLEND", "CONDENSATE", "LPG"]),
+}
 
 NODE_TITLES = {
     "FEED": "Feed Gas",
@@ -52,6 +84,17 @@ NODE_TITLES = {
     "SHIP": "LNG Carrier",
     "REFRIGMU": "V-102\nRefrigerant Makeup",
     "FUELGAS": "K-401\nFlash Gas Compressor",
+    "BOGGEN": "TK-501\nBOG Generation",
+    "BOGCOMP": "K-502\nBOG Compressor",
+    "RECOND": "V-503\nBOG Recondenser",
+    "REGAS": "P-601 / E-601\nSend-out Pumps + Vaporizers",
+    "PIPELINE": "Sales Gas\nPipeline",
+    "DEETH": "C-701\nDeethanizer",
+    "DEPROP": "C-702\nDepropanizer",
+    "DEBUT": "C-703\nDebutanizer",
+    "MRBLEND": "M-704\nMR Blend / Make-up",
+    "CONDENSATE": "C5+ Condensate",
+    "LPG": "Butane LPG",
     "AIRSYS": "Instrument/Plant\nAir System",
     "N2SYS": "Nitrogen\nSupply System",
     "WATERSYS": "Service/Potable\nWater System",
@@ -69,6 +112,14 @@ NODE_STATE_KEYS = {
     "BERTH": "berth",
     "REFRIGMU": "refrigerant_makeup",
     "FUELGAS": "flash_compressor",
+    "BOGGEN": "tank_bog",
+    "BOGCOMP": "bog_compressor",
+    "RECOND": "recondenser",
+    "REGAS": "regas_train",
+    "DEETH": "deethanizer",
+    "DEPROP": "depropanizer",
+    "DEBUT": "debutanizer",
+    "MRBLEND": "mr_blend",
     "AIRSYS": "air_supply",
     "N2SYS": "nitrogen",
     "WATERSYS": "service_water",
@@ -123,14 +174,27 @@ def build_diagram(state: FlowsheetState) -> str:
     process_nodes = {n for edge in TOPOLOGY for n in (edge[0], edge[1])}
     side_only_nodes = {n for edge in SIDE_TOPOLOGY for n in (edge[0], edge[1])} - process_nodes
 
-    for node_id in list(process_nodes) + list(side_only_nodes):
+    clustered = {n for _, members in CLUSTERS.values() for n in members}
+
+    def _decl(node_id: str, indent: str) -> str:
         label = _node_label(node_id, state).replace('"', "'")
-        lines.append(f'  {node_id} [label="{label}", fillcolor="{_node_fill(node_id, state)}"];')
+        return f'{indent}{node_id} [label="{label}", fillcolor="{_node_fill(node_id, state)}"];'
+
+    for node_id in list(process_nodes) + list(side_only_nodes):
+        if node_id not in clustered:
+            lines.append(_decl(node_id, "  "))
 
     for src, dst, stream_label in TOPOLOGY:
         lines.append(f'  {src} -> {dst} [label="{stream_label}"];')
     for src, dst, stream_label in SIDE_TOPOLOGY:
         lines.append(f'  {src} -> {dst} [label="{stream_label}", style=dashed];')
+
+    for cid, (clabel, members) in CLUSTERS.items():
+        lines.append(f'  subgraph {cid} {{')
+        lines.append(f'    label="{clabel}"; style=dashed; fontname="Helvetica"; fontsize=10;')
+        for node_id in members:
+            lines.append(_decl(node_id, "    "))
+        lines.append("  }")
 
     lines.append('  subgraph cluster_utilities {')
     lines.append('    label="Plant Utilities"; style=dashed; fontname="Helvetica"; fontsize=10;')

@@ -937,6 +937,10 @@ with tab_regas:
                     kw.update(arriving_T_K=st0.temperature_K + t_warm, arriving_P_Pa=3.0e5)
                 res = compute_bog(lng_x, t_p * 1e5, geom, **kw)
                 st.session_state["rg_bog"] = res
+                flowsheet.set("tank_bog", {
+                    "Design BOG": f"{res.design_bog_kg_s * 3.6:.1f} t/h ({res.design_mode})",
+                    "Static BOR": f"{res.boil_off_rate_static_percent_per_day:.3f} %/d",
+                })
                 a, b, c, d = st.columns(4)
                 a.metric("Tank D x liquid H", f"{geom.inner_diameter_m:.1f} x {geom.liquid_height_m:.1f} m")
                 b.metric("Static BOR", f"{res.boil_off_rate_static_percent_per_day:.3f} %/d")
@@ -981,6 +985,11 @@ with tab_regas:
                     c.metric("Discharge T", f"{r.discharge_T_K - 273.15:.0f} C")
                     d.metric("Inlet flow / machine", f"{r.inlet_volume_flow_per_machine_m3_h:,.0f} m3/h")
                     st.write(r.machine_note)
+                    flowsheet.set("bog_compressor", {
+                        "Machines": f"{r.n_operating}+{r.n_spare}",
+                        "Power": f"{r.shaft_power_kW_per_machine:,.0f} kW each",
+                        "Stages": f"{r.n_stages}",
+                    })
                     frac, ok = turndown_check(bog.holding_bog_kg_s, r.flow_per_machine_kg_s)
                     (st.success if ok else st.warning)(
                         f"Holding-mode BOG is {frac*100:.0f}% of one machine's rating "
@@ -1012,8 +1021,13 @@ with tab_regas:
                     b.metric("Vaporizer duty", f"{r.duty_kW/1000:,.1f} MW ({r.duty_kJ_per_kg:,.0f} kJ/kg)")
                     c.metric("ORV units", f"{r.orv.n_operating} + {r.orv.n_spare}")
                     d.metric("SCV fuel gas", f"{r.scv.fuel_fraction_of_sendout*100:.2f}% of send-out")
+                    flowsheet.set("regas_train", {
+                        "Duty": f"{r.duty_kW / 1000:,.1f} MW",
+                        "Pumps": f"{r.total_pump_shaft_kW:,.0f} kW",
+                        "ORV": f"{r.orv.n_operating}+{r.orv.n_spare}",
+                    })
                     st.write(f"Seawater {r.orv.seawater_flow_t_h:,.0f} t/h, {so_sw:.0f} -> {r.orv.seawater_outlet_C:.0f} C. "
-                             + r.orv.note)
+                         + r.orv.note)
                     T, Q = heating_curve(lng_x, so_p * 1e5, r.hp_pump.outlet_T_K, so_T + 273.15, m, n_points=60)
                     st.plotly_chart(go.Figure(go.Scatter(x=Q / 1000.0, y=T - 273.15)).update_layout(
                         xaxis_title="Cumulative duty (MW)", yaxis_title="LNG/gas temperature (C)",
@@ -1022,9 +1036,13 @@ with tab_regas:
                     if bg is not None:
                         rc = size_recondenser(lng_x, r.lp_pump.outlet_T_K, bg.bog_composition, 240.0,
                                               bg.design_bog_kg_s, so_lp * 1e5 - 1e5, m)
+                        flowsheet.set("recondenser", {
+                            "LNG/BOG": f"{rc.lng_to_bog_mass_ratio:.1f} kg/kg",
+                            "Max BOG": f"{rc.max_recondensable_bog_kg_s * 3.6:,.0f} t/h",
+                        })
                         st.write(f"Recondenser: {rc.lng_to_bog_mass_ratio:.1f} kg LNG per kg BOG; can absorb "
-                                 f"{rc.max_recondensable_bog_kg_s*3.6:,.0f} t/h vs design BOG "
-                                 f"{bg.design_bog_kg_s*3.6:.1f} t/h; excess {rc.excess_bog_kg_s*3.6:.1f} t/h.")
+                             f"{rc.max_recondensable_bog_kg_s*3.6:,.0f} t/h vs design BOG "
+                             f"{bg.design_bog_kg_s*3.6:.1f} t/h; excess {rc.excess_bog_kg_s*3.6:.1f} t/h.")
             except Exception as e:
                 st.error(str(e))
 
@@ -1060,6 +1078,12 @@ with tab_frac:
             try:
                 tr = size_fractionation_train({k: v for k, v in ngl_feed.items() if v > 0}, specs)
                 st.session_state["frac_train"] = tr
+                for key, c in zip(("deethanizer", "depropanizer", "debutanizer"), tr.columns):
+                    flowsheet.set(key, {
+                        "Trays": f"{c.N_real}",
+                        "D x H": f"{c.diameter_m:.2f} x {c.height_m:.1f} m",
+                        "Qc/Qr": f"{c.condenser_duty_kW:,.0f}/{c.reboiler_duty_kW:,.0f} kW",
+                    })
                 st.dataframe(pd.DataFrame([{
                     "Column": c.name, "N min": round(c.N_min, 1), "R min": round(c.R_min, 2),
                     "R": round(c.R, 2), "Theor. stages": round(c.N_theoretical, 1),
@@ -1104,6 +1128,10 @@ with tab_frac:
                     st.dataframe(pd.DataFrame({"Source": list(bl.source_kmol_per_kmol_mr),
                                                "kmol / kmol MR": [round(v, 4) for v in bl.source_kmol_per_kmol_mr.values()]}),
                                  hide_index=True)
+                    flowsheet.set("mr_blend", {
+                        "Propane spec": "PASS" if chk.passed else "FAIL",
+                        "Blend error": f"{bl.max_abs_error:.4f}",
+                    })
                     (st.success if bl.reachable else st.warning)(
                         f"Max composition error {bl.max_abs_error:.4f} "
                         f"({'reachable' if bl.reachable else 'target NOT reachable from these sources'})")
@@ -1124,7 +1152,9 @@ with tab_flow:
         "P&ID/PFD. Each box fills in with your latest sizing result from the "
         "other tabs as you use them; the stream table below follows the same "
         "structure as a process simulator's heat-and-material-balance (HMB) "
-        "stream report."
+        "stream report. The regas terminal and NGL fractionation / refrigerant "
+        "generation groups sit in dashed clusters; the diagram is wide, so hover "
+        "it and use the fullscreen button to read the boxes."
     )
     st.graphviz_chart(build_diagram(flowsheet), use_container_width=True)
     st.subheader("Stream table (HMB-style)")

@@ -407,6 +407,26 @@ distillates) into a target mixed-refrigerant composition with a
 reachability flag, and make-up rate from inventory x annual loss
 fraction (the loss fraction is a plant input).
 
+## Design entry points (`lng_design/liquefaction.py`, `lng_design/regasification.py`)
+
+Composition only - no new physics. `size_liquefaction_train` runs the
+modules in process order on one feed basis (inlet separator, amine
+absorber, molecular sieve, trim cooler, propane precool, LRC loop and
+MCHE pinch check for the -40 to -100 C section, end-flash and flash-gas
+compressor, storage, refrigerant storage), optionally followed by the NGL
+fractionation train and the mixed-refrigerant blend. Its defaults
+reproduce `examples/full_train_worked_example.py` to the last printed digit
+(pinned in `tests/test_liquefaction.py`); duties are `cp x dT` with
+overridable illustrative specific heats, and the -100 to -159 C subcooling
+duty is reported but its loop is not sized.
+`size_regasification_terminal` runs tank BOG (holding and unloading), the
+BOG compressors with a turndown check, the send-out train, and the
+recondenser at full send-out and at a turndown send-out (default 25 %),
+adding the direct-to-pipeline HP BOG compressor for whatever BOG the
+recondenser cannot absorb at turndown. Its defaults reproduce
+`examples/regas_bog_fractionation_worked_example.py`
+(`tests/test_regasification.py`).
+
 ## Optimization (`lng_design/optimize.py`)
 
 NSGA-II via [pymoo](https://pymoo.org/), matching the approach used across

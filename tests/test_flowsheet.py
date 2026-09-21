@@ -1,6 +1,6 @@
 from lng_design.flowsheet import (
     FlowsheetState, build_diagram, build_stream_table, TOPOLOGY,
-    SIDE_TOPOLOGY, UTILITY_NODES, NODE_TITLES, NODE_STATE_KEYS,
+    SIDE_TOPOLOGY, UTILITY_NODES, NODE_TITLES, NODE_STATE_KEYS, CLUSTERS,
 )
 
 
@@ -66,3 +66,39 @@ def test_side_branch_reflects_sized_refrigerant_makeup():
     rows = build_stream_table(state)
     refrig_row = next(r for r in rows if "V-102" in r["To"])  # first line of the REFRIGMU title
     assert "Diameter=1219 mm" in refrig_row["Downstream equipment data"]
+
+
+def test_regas_and_fractionation_groups_are_wired_in_and_clustered():
+    dot = build_diagram(FlowsheetState())
+    for edge in [("TANK", "BOGGEN"), ("BOGGEN", "BOGCOMP"), ("BOGCOMP", "RECOND"),
+                 ("RECOND", "REGAS"), ("REGAS", "PIPELINE"), ("V101", "DEETH"),
+                 ("DEETH", "DEPROP"), ("DEPROP", "DEBUT"), ("DEETH", "MRBLEND"),
+                 ("DEPROP", "MRBLEND"), ("MRBLEND", "REFRIGMU")]:
+        assert f"{edge[0]} -> {edge[1]}" in dot
+    for cid, (label, members) in CLUSTERS.items():
+        assert f"subgraph {cid}" in dot and label in dot
+        block = dot.split(f"subgraph {cid}")[1].split("  }")[0]
+        for m in members:
+            assert m in block                     # declared inside its cluster
+    # every node is declared exactly once
+    for node_id in NODE_TITLES:
+        assert dot.count(f"  {node_id} [label=") == 1
+
+
+def test_new_equipment_nodes_reflect_sizing_and_stream_table_rows():
+    state = FlowsheetState()
+    state.set("deethanizer", {"Trays": "35"})
+    state.set("bog_compressor", {"Power": "2,097 kW"})
+    dot = build_diagram(state)
+    assert "Trays: 35" in dot and "Power: 2,097 kW" in dot
+    rows = build_stream_table(state)
+    assert len(rows) == len(TOPOLOGY) + len(SIDE_TOPOLOGY)
+    r = next(r for r in rows if r["Description"] == "C3+ bottoms")
+    assert "Trays=35" in r["Upstream equipment data"]
+    r = next(r for r in rows if r["Description"] == "Compressed BOG")
+    assert "Power=2,097 kW" in r["Upstream equipment data"]
+
+
+def test_stream_ids_stay_unique():
+    ids = [r["Stream"] for r in build_stream_table(FlowsheetState())]
+    assert len(ids) == len(set(ids))
