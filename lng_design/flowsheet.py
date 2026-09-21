@@ -107,7 +107,7 @@ NODE_TITLES = {
     "DEBUT": "C-703\nDebutanizer",
     "MRBLEND": "M-704\nMR Blend / Make-up",
     "CONDENSATE": "C5+ Condensate",
-    "LPG": "Butane LPG",
+    "LPG": "Butane Product",
     "LPGSHIP": "LPG Carrier",
     "LPGTANK": "TK-801\nRefrigerated LPG Tank",
     "LPGCOMP": "K-802\nBOG Re-liquefaction\nCompressor",
