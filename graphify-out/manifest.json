@@ -1,0 +1,368 @@
+{
+  ".claude/launch.json": {
+    "mtime": 1789384851.873697,
+    "seen": 1789968754.0905,
+    "ast_hash": "b5ad0bc85d7c4e8f117ea515d68fcd34",
+    "semantic_hash": ""
+  },
+  "examples/full_train_dmr_worked_example.py": {
+    "mtime": 1789382861.452626,
+    "seen": 1789968754.090514,
+    "ast_hash": "57c14c5fdaa4fa3d14024cbdf1a34f27",
+    "semantic_hash": ""
+  },
+  "examples/full_train_worked_example.py": {
+    "mtime": 1789381702.570177,
+    "seen": 1789968754.090521,
+    "ast_hash": "e5c5308c563b515a79d2e1dfcf3bcc43",
+    "semantic_hash": ""
+  },
+  "examples/gem_upcoming_projects_sizing.py": {
+    "mtime": 1789377867.716946,
+    "seen": 1789968754.0905259,
+    "ast_hash": "e95ad9042eee115c4099df26f9b88df6",
+    "semantic_hash": ""
+  },
+  "examples/mche_debottleneck_dmr_vs_c3mr.py": {
+    "mtime": 1789383166.890196,
+    "seen": 1789968754.090531,
+    "ast_hash": "f416669c4e3287f5e2f3bbd250533b2f",
+    "semantic_hash": ""
+  },
+  "examples/mche_rundown_rating.py": {
+    "mtime": 1789384739.171495,
+    "seen": 1789968754.0905359,
+    "ast_hash": "18eea47125fe67f590a35df63255d2a6",
+    "semantic_hash": ""
+  },
+  "lng_design/__init__.py": {
+    "mtime": 1789376761.784586,
+    "seen": 1789968754.0905411,
+    "ast_hash": "40fafdc8ebd01df61b59afc8526e9c31",
+    "semantic_hash": ""
+  },
+  "lng_design/air_cooler.py": {
+    "mtime": 1789378409.478025,
+    "seen": 1789968754.090545,
+    "ast_hash": "e50ca4659c61b3abda046c38eefc84bc",
+    "semantic_hash": ""
+  },
+  "lng_design/air_supply.py": {
+    "mtime": 1789379294.082286,
+    "seen": 1789968754.090549,
+    "ast_hash": "4f6f8ecab1fed3ea75bb478b73788057",
+    "semantic_hash": ""
+  },
+  "lng_design/amine_absorber.py": {
+    "mtime": 1789376814.730004,
+    "seen": 1789968754.090553,
+    "ast_hash": "5e25986e72bd143602b317b29ddbc20c",
+    "semantic_hash": ""
+  },
+  "lng_design/berth.py": {
+    "mtime": 1789379271.382239,
+    "seen": 1789968754.0905569,
+    "ast_hash": "b85dbf53dee4722a21f5aee260376b63",
+    "semantic_hash": ""
+  },
+  "lng_design/cascade_loops.py": {
+    "mtime": 1789381545.432595,
+    "seen": 1789968754.090562,
+    "ast_hash": "cf95729cb735893a1dcb53ea30109fdd",
+    "semantic_hash": ""
+  },
+  "lng_design/compressor.py": {
+    "mtime": 1789381457.0829,
+    "seen": 1789968754.090566,
+    "ast_hash": "8db84900cbc9884de93d609ec985eca8",
+    "semantic_hash": ""
+  },
+  "lng_design/end_flash.py": {
+    "mtime": 1789379224.997186,
+    "seen": 1789968754.090571,
+    "ast_hash": "45cc6c2be3a51e6bf2c30f4f43cd74f7",
+    "semantic_hash": ""
+  },
+  "lng_design/equipment_catalog.py": {
+    "mtime": 1789378355.928737,
+    "seen": 1789968754.0905752,
+    "ast_hash": "a1eea73f7805f3af40f36ee572eaf63d",
+    "semantic_hash": ""
+  },
+  "lng_design/exchangers.py": {
+    "mtime": 1789378388.724908,
+    "seen": 1789968754.090579,
+    "ast_hash": "91603a8757704d850347425655931ef7",
+    "semantic_hash": ""
+  },
+  "lng_design/flowsheet.py": {
+    "mtime": 1789380623.784258,
+    "seen": 1789968754.090583,
+    "ast_hash": "b4d58782af7bb8f420a07cad93767f2f",
+    "semantic_hash": ""
+  },
+  "lng_design/loads.py": {
+    "mtime": 1789378449.309196,
+    "seen": 1789968754.090587,
+    "ast_hash": "89b7a3baa599acd1322dbe341584c084",
+    "semantic_hash": ""
+  },
+  "lng_design/mche.py": {
+    "mtime": 1789378483.035689,
+    "seen": 1789968754.090591,
+    "ast_hash": "519277da03f8a9000c4be38d8483bf51",
+    "semantic_hash": ""
+  },
+  "lng_design/mche_tube_design.py": {
+    "mtime": 1789384431.919895,
+    "seen": 1789968754.090595,
+    "ast_hash": "be7eec51be5af92e22861de4053269e9",
+    "semantic_hash": ""
+  },
+  "lng_design/mche_vendor_selection.py": {
+    "mtime": 1789380039.430009,
+    "seen": 1789968754.0906,
+    "ast_hash": "293a08137a600cdca258d3a310081091",
+    "semantic_hash": ""
+  },
+  "lng_design/molecular_sieve.py": {
+    "mtime": 1789380807.902162,
+    "seen": 1789968754.090604,
+    "ast_hash": "64ab829efd93c11428790e7f25505c30",
+    "semantic_hash": ""
+  },
+  "lng_design/nitrogen_system.py": {
+    "mtime": 1789379307.544468,
+    "seen": 1789968754.0906088,
+    "ast_hash": "ae3ff9da17037042818f508f7bb989de",
+    "semantic_hash": ""
+  },
+  "lng_design/optimize.py": {
+    "mtime": 1789376887.45284,
+    "seen": 1789968754.090614,
+    "ast_hash": "6d05ccc2b907168110c6ca222e8d613d",
+    "semantic_hash": ""
+  },
+  "lng_design/precool.py": {
+    "mtime": 1789376878.083577,
+    "seen": 1789968754.0906188,
+    "ast_hash": "cbef8ccff9dec6c2cc0b8b779c0f8b5a",
+    "semantic_hash": ""
+  },
+  "lng_design/process_selection.py": {
+    "mtime": 1789379911.900527,
+    "seen": 1789968754.090623,
+    "ast_hash": "2bb6d71e719f171e3c41c05cb84d5753",
+    "semantic_hash": ""
+  },
+  "lng_design/properties.py": {
+    "mtime": 1789383689.750159,
+    "seen": 1789968754.090627,
+    "ast_hash": "f4701f4e9aa61b404e7c0ea7ff24b2a2",
+    "semantic_hash": ""
+  },
+  "lng_design/refrigerant_makeup.py": {
+    "mtime": 1789379244.375823,
+    "seen": 1789968754.090632,
+    "ast_hash": "59431d2f07bc79b619eb5ebd71a42565",
+    "semantic_hash": ""
+  },
+  "lng_design/vessels.py": {
+    "mtime": 1789378371.427718,
+    "seen": 1789968754.090636,
+    "ast_hash": "6c6a74e0685735527ea9312d42685e21",
+    "semantic_hash": ""
+  },
+  "lng_design/water_system.py": {
+    "mtime": 1789379329.552144,
+    "seen": 1789968754.0906398,
+    "ast_hash": "4a6db19986c9b5a0cd8335f0c6568082",
+    "semantic_hash": ""
+  },
+  "pyproject.toml": {
+    "mtime": 1789376961.564955,
+    "seen": 1789968754.090644,
+    "ast_hash": "0f1d815bc1cfe9c4c83540f0b52f7119",
+    "semantic_hash": ""
+  },
+  "streamlit_app.py": {
+    "mtime": 1789384837.843842,
+    "seen": 1789968754.0906491,
+    "ast_hash": "32c8f4930c41379b5832ee1442e3545e",
+    "semantic_hash": ""
+  },
+  "tests/test_air_cooler.py": {
+    "mtime": 1789378505.297969,
+    "seen": 1789968754.090653,
+    "ast_hash": "0b8b7cd4ff1b135b93894ee38662b3fe",
+    "semantic_hash": ""
+  },
+  "tests/test_air_supply.py": {
+    "mtime": 1789379374.673142,
+    "seen": 1789968754.090657,
+    "ast_hash": "db67658d7e6b3d436dbcb4c0d64bfc6f",
+    "semantic_hash": ""
+  },
+  "tests/test_amine_absorber.py": {
+    "mtime": 1789376929.638497,
+    "seen": 1789968754.090661,
+    "ast_hash": "97af9130857e50c98e487e55886522fe",
+    "semantic_hash": ""
+  },
+  "tests/test_berth.py": {
+    "mtime": 1789379369.544485,
+    "seen": 1789968754.0906649,
+    "ast_hash": "de9ead1b5e366f6158147599d590b234",
+    "semantic_hash": ""
+  },
+  "tests/test_cascade_loops.py": {
+    "mtime": 1789381553.408341,
+    "seen": 1789968754.0906692,
+    "ast_hash": "461d4486af6992a38b4f832406777744",
+    "semantic_hash": ""
+  },
+  "tests/test_compressor.py": {
+    "mtime": 1789377530.126185,
+    "seen": 1789968754.090673,
+    "ast_hash": "c12a371728829c7eba9768edb1fb89d7",
+    "semantic_hash": ""
+  },
+  "tests/test_end_flash.py": {
+    "mtime": 1789379349.886155,
+    "seen": 1789968754.090678,
+    "ast_hash": "6427b51508ab12d6700d562d00ba3aab",
+    "semantic_hash": ""
+  },
+  "tests/test_equipment_catalog.py": {
+    "mtime": 1789378525.603758,
+    "seen": 1789968754.090682,
+    "ast_hash": "8d7536d5539d78829ded1d00eb775785",
+    "semantic_hash": ""
+  },
+  "tests/test_exchangers.py": {
+    "mtime": 1789378541.423944,
+    "seen": 1789968754.0906858,
+    "ast_hash": "52dca0c72a73a77449fb13c87545f8ef",
+    "semantic_hash": ""
+  },
+  "tests/test_flowsheet.py": {
+    "mtime": 1789379574.199012,
+    "seen": 1789968754.090688,
+    "ast_hash": "d0f53d9b53b63e61f8883e2f560e24b0",
+    "semantic_hash": ""
+  },
+  "tests/test_loads.py": {
+    "mtime": 1789378517.384128,
+    "seen": 1789968754.0906901,
+    "ast_hash": "fc96342911bdcc112f4fc615b846afb1",
+    "semantic_hash": ""
+  },
+  "tests/test_mche.py": {
+    "mtime": 1789376946.544032,
+    "seen": 1789968754.0906932,
+    "ast_hash": "1917527783ec0ace5a4f269e44c8a068",
+    "semantic_hash": ""
+  },
+  "tests/test_mche_tube_design.py": {
+    "mtime": 1789384622.595452,
+    "seen": 1789968754.090695,
+    "ast_hash": "1c09aff80014c4e4bcb380b05eb6aa27",
+    "semantic_hash": ""
+  },
+  "tests/test_mche_vendor_selection.py": {
+    "mtime": 1789380382.433437,
+    "seen": 1789968754.090697,
+    "ast_hash": "18e0c947fd8fca498351bf9546db4491",
+    "semantic_hash": ""
+  },
+  "tests/test_molecular_sieve.py": {
+    "mtime": 1789380852.563179,
+    "seen": 1789968754.090699,
+    "ast_hash": "e2f6c3a8ca66065c5f88b583a368e3c6",
+    "semantic_hash": ""
+  },
+  "tests/test_nitrogen_system.py": {
+    "mtime": 1789379381.596006,
+    "seen": 1789968754.090701,
+    "ast_hash": "e10df4d12b540576481451cab8c12945",
+    "semantic_hash": ""
+  },
+  "tests/test_precool.py": {
+    "mtime": 1789377158.888185,
+    "seen": 1789968754.090703,
+    "ast_hash": "f9d806bb4771eeae62035cc174850d41",
+    "semantic_hash": ""
+  },
+  "tests/test_process_selection.py": {
+    "mtime": 1789379716.506167,
+    "seen": 1789968754.090705,
+    "ast_hash": "e89c7363c5212a879544c7115e57ff22",
+    "semantic_hash": ""
+  },
+  "tests/test_properties.py": {
+    "mtime": 1789376907.772225,
+    "seen": 1789968754.0907068,
+    "ast_hash": "be7ea5e3bb0b6a3293057657507f898a",
+    "semantic_hash": ""
+  },
+  "tests/test_refrigerant_makeup.py": {
+    "mtime": 1789379499.305391,
+    "seen": 1789968754.09071,
+    "ast_hash": "2568de68b3a97d19bd1cd2c9deda4cfb",
+    "semantic_hash": ""
+  },
+  "tests/test_vessels.py": {
+    "mtime": 1789378490.362347,
+    "seen": 1789968754.090712,
+    "ast_hash": "485b3335b938a84152da870f5c4f75ef",
+    "semantic_hash": ""
+  },
+  "tests/test_water_system.py": {
+    "mtime": 1789379389.732782,
+    "seen": 1789968754.090713,
+    "ast_hash": "3cf3944ce6a58c50243b8f9b729ae10e",
+    "semantic_hash": ""
+  },
+  ".github/workflows/tests.yml": {
+    "mtime": 1789377213.701487,
+    "seen": 1789968754.090715,
+    "ast_hash": "176704eb46db27f6260006d1973b0bea",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1789385036.407556,
+    "seen": 1789968754.090718,
+    "ast_hash": "1c8a9a364af45909321af2fcdd58967a",
+    "semantic_hash": ""
+  },
+  "docs/EOS_SENSITIVITY.md": {
+    "mtime": 1789379826.724485,
+    "seen": 1789968754.09072,
+    "ast_hash": "e29cb4f38ca1aacf2a7affc18ba6a905",
+    "semantic_hash": ""
+  },
+  "docs/METHODOLOGY.md": {
+    "mtime": 1789385016.257947,
+    "seen": 1789968754.090722,
+    "ast_hash": "067c101248bf877be9e4d5f1c9dd31cf",
+    "semantic_hash": ""
+  },
+  "docs/VALIDATION.md": {
+    "mtime": 1789385029.412271,
+    "seen": 1789968754.090724,
+    "ast_hash": "521a51582005c27492d78e4c6256efeb",
+    "semantic_hash": ""
+  },
+  "docs/VENDOR_REFERENCE.md": {
+    "mtime": 1789388770.878067,
+    "seen": 1789968754.090726,
+    "ast_hash": "96e251c753d2cea950681cadb407cfca",
+    "semantic_hash": ""
+  },
+  "requirements.txt": {
+    "mtime": 1789376964.53995,
+    "seen": 1789968754.090728,
+    "ast_hash": "743d0508dbbfeeac0ead6903e5cfc5aa",
+    "semantic_hash": ""
+  }
+}
