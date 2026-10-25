@@ -122,6 +122,11 @@ def _pr_enthalpy_kJ_kg(comp, T_K, P_Pa):
     return a.hmass() / 1000.0
 
 
+@pytest.mark.xfail(strict=True, reason=(
+    "CONFIRMED, NOT FIXED: default lumped cp (2.4 / 2.9 kJ/kg-K) understates the feed's "
+    "enthalpy change (LRC 11.0 vs 25.9 MW). Computing duties from enthalpy moves the "
+    "regression-pinned 2 mtpa worked example from 36.9 to 75.2 MW, so it needs the "
+    "owner's decision; see results JSON."))
 def test_cooling_duties_match_feed_enthalpy_change():
     """Duty = m x [h(T_warm) - h(T_cold)] at feed pressure. Independent check with a
     Peng-Robinson enthalpy: at 50 bar the default feed releases ~222 kJ/kg from
