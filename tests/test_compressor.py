@@ -103,3 +103,15 @@ def test_matches_published_gpsa_worked_example():
     assert result.polytropic_head_J_per_kg == pytest.approx(71971.0, rel=0.01)  # within 1%
     assert result.gas_power_kW == pytest.approx(3533.1, rel=0.01)  # within 1%
     assert (result.T_out_ideal - 273.15) == pytest.approx(99.9, abs=4.0)  # within 4 C
+
+
+def test_polytropic_head_close_to_ideal_gas_hand_calc():
+    """Methane 300 K, 1 -> 2 bar, eta_p 0.78, near-ideal gas:
+    cp0 = 35.7 J/mol-K -> k = 35.7/(35.7-8.314) = 1.3036; (n-1)/n = 0.3036/(1.3036 x 0.78) = 0.29858
+    head = Z R/M T n/(n-1) (2^0.29858 - 1) = 0.998 x 518.26 x 300 x 3.3492 x 0.23005 = 119.55 kJ/kg
+    (the code averages k and Z over inlet/outlet, so allow 3 %)."""
+    from lng_design.compressor import size_centrifugal_stage
+    from lng_design.properties import GasMixture
+    r = size_centrifugal_stage(GasMixture({"Methane": 1.0}), 300.0, 1e5, 2e5, mass_flow_kg_s=1.0)
+    assert r.polytropic_head_J_per_kg == pytest.approx(119_550.0, rel=0.03)
+    assert r.gas_power_kW == pytest.approx(r.polytropic_head_J_per_kg / 0.78 / 1000.0)

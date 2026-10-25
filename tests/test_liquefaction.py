@@ -112,3 +112,25 @@ def test_optional_refrigerant_supply_sizes_storage_for_both_loops():
 
 def test_refrigerant_supply_absent_by_default(base):
     assert base.refrigerant_supply is None
+
+
+def _pr_enthalpy_kJ_kg(comp, T_K, P_Pa):
+    import CoolProp.CoolProp as CP
+    a = CP.AbstractState("PR", "&".join(comp))
+    a.set_mole_fractions(list(comp.values()))
+    a.update(CP.PT_INPUTS, P_Pa, T_K)
+    return a.hmass() / 1000.0
+
+
+def test_cooling_duties_match_feed_enthalpy_change():
+    """Duty = m x [h(T_warm) - h(T_cold)] at feed pressure. Independent check with a
+    Peng-Robinson enthalpy: at 50 bar the default feed releases ~222 kJ/kg from
+    40 to -40 C and ~406 kJ/kg from -40 to -100 C (it condenses in that span), so a
+    single 'average cp' of 2.9 kJ/kg-K (174 kJ/kg) understates the LRC duty ~57 %."""
+    b = LiquefactionBasis()
+    d = size_liquefaction_train(b)
+    m = d.feed_mass_flow_kg_s
+    h = lambda C: _pr_enthalpy_kJ_kg(b.feed_composition, C + 273.15, b.feed_P_Pa)
+    assert d.precool_duty_kW == pytest.approx(m * (h(b.precool_from_C) - h(b.precool_to_C)), rel=0.05)
+    assert d.lrc_duty_kW == pytest.approx(m * (h(b.precool_to_C) - h(b.lrc_floor_C)), rel=0.05)
+    assert d.subcooling_duty_kW == pytest.approx(m * (h(b.lrc_floor_C) - h(b.end_C)), rel=0.05)
