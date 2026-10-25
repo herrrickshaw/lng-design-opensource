@@ -49,7 +49,24 @@ class GasMixture:
         output: any CoolProp output key, e.g. 'H' (J/kg), 'S' (J/kg-K),
         'D' (kg/m3), 'Z' (compressibility factor), 'Cpmass', 'Cvmass'.
         """
-        return CP.PropsSI(output, "T", T, "P", P, self._heos_string())
+        if output == "Q" or P < self._dense_pressure_Pa():
+            return CP.PropsSI(output, "T", T, "P", P, self._heos_string())
+        # Above every component's critical pressure (x1.3, the same rule
+        # regas_terminal._dense_pressure_Pa validates) the mixture is a single
+        # dense phase. CoolProp's unconstrained HEOS (T, P) mixture flash can
+        # silently return a spurious root there (e.g. 152 kg/m3 instead of
+        # ~426 for LNG at 90 bar / 150 K), so impose the phase.
+        AS = CP.AbstractState("HEOS", "&".join(self.composition))
+        AS.set_mole_fractions(list(self.composition.values()))
+        AS.specify_phase(CP.iphase_supercritical)
+        AS.update(CP.PT_INPUTS, P, T)
+        value = AS.keyed_output(CP.get_parameter_index(output))
+        if value != value:  # NaN: some transport models do not evaluate in imposed-phase mode
+            return CP.PropsSI(output, "T", T, "P", P, self._heos_string())
+        return value
+
+    def _dense_pressure_Pa(self) -> float:
+        return 1.3 * max(CP.PropsSI("Pcrit", name) for name in self.composition)
 
     def cp_over_cv(self, T: float, P: float) -> float:
         cp = self.prop("Cpmass", T, P)
