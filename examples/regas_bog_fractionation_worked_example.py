@@ -48,7 +48,7 @@ hold = compute_bog(LNG, P_TANK, geom, **common)
 st = hold.liquid_state
 print(f"Tank liquid: {st.temperature_K - 273.15:.1f} C, rho {st.liquid_density_kg_m3:.0f} kg/m3; "
       f"BOG latent heat {st.latent_heat_J_kg / 1e3:.0f} kJ/kg, BOG MW {st.bog_molecular_weight_g_mol:.1f}")
-print(f"BOG composition (mol%): "
+print("BOG composition (mol%): "
       + ", ".join(f"{k} {v * 100:.1f}" for k, v in st.bog_mole_fractions.items() if v > 5e-4)
       + f"   <- N2 is {st.bog_mole_fractions['Nitrogen'] / LNG['Nitrogen']:.0f}x its LNG level")
 print(f"Static heat ingress (both tanks): {hold.heat_ingress_kW:,.0f} kW -> "

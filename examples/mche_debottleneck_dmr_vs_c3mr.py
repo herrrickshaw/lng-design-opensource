@@ -64,7 +64,7 @@ print("=" * 78)
 
 c3mr_span_K = C3MR_PRECOOL_FLOOR_K - LNG_RUNDOWN_K
 dmr_span_K = DMR_PRECOOL_FLOOR_K - LNG_RUNDOWN_K
-print(f"\nMCHE temperature span to cover:")
+print("\nMCHE temperature span to cover:")
 print(f"  C3MR ({C3MR_PRECOOL_FLOOR_K-273.15:.0f} C floor -> {LNG_RUNDOWN_K-273.15:.0f} C): {c3mr_span_K:.1f} K")
 print(f"  DMR  ({DMR_PRECOOL_FLOOR_K-273.15:.0f} C floor -> {LNG_RUNDOWN_K-273.15:.0f} C): {dmr_span_K:.1f} K")
 print(f"  DMR's span is {100.0*(1 - dmr_span_K/c3mr_span_K):.1f}% smaller than C3MR's.")

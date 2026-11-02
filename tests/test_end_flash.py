@@ -1,4 +1,3 @@
-import CoolProp.CoolProp as CP
 import pytest
 
 from lng_design.end_flash import flash_end_gas

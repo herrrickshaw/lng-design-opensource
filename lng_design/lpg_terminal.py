@@ -50,7 +50,6 @@ the design ambient temperature gives the number that decides it.
 """
 from __future__ import annotations
 
-import math
 from dataclasses import dataclass, field
 
 import CoolProp.CoolProp as CP
