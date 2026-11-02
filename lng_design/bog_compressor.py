@@ -66,7 +66,11 @@ class BOGCompressorResult:
     bog_molecular_weight_g_mol: float
 
 
+_DEW_POINT_MARGIN_K = 1.0  # minimum superheat of the suction gas above its dew point
+
+
 def _clean(comp: dict[str, float]) -> dict[str, float]:
+    """Drop species below 1e-10 mole fraction and renormalise to sum 1."""
     kept = {k: v for k, v in comp.items() if v > 1e-10}
     tot = sum(kept.values())
     return {k: v / tot for k, v in kept.items()}
@@ -109,11 +113,11 @@ def size_bog_compressor(
         s.set_mole_fractions(list(gas.composition.values()))
         s.update(CP.PQ_INPUTS, suction_P_Pa, 1.0)
         dew = s.T()
-    except Exception:  # dew point is a guard, not the result
+    except ValueError:  # dew point is a guard, not the result (CoolProp raises ValueError)
         pass
-    if dew is not None and suction_T_K <= dew + 1.0:
+    if dew is not None and suction_T_K <= dew + _DEW_POINT_MARGIN_K:
         raise ValueError(
-            f"Suction T {suction_T_K:.1f} K is within 1 K of the BOG dew point "
+            f"Suction T {suction_T_K:.1f} K is within {_DEW_POINT_MARGIN_K:g} K of the BOG dew point "
             f"({dew:.1f} K) at {suction_P_Pa/1e5:.2f} bar - liquid carry-over risk."
         )
 

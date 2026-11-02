@@ -117,8 +117,8 @@ def _bubble(comp: dict[str, float], P: float) -> _Bubble:
     try:
         mu = s.viscosity() * 1000.0
         if not math.isfinite(mu):
-            raise ValueError
-    except Exception:
+            raise ValueError("non-finite mixture viscosity")
+    except ValueError:  # CoolProp raises ValueError when it has no mixture viscosity
         mu = _mixture_viscosity_cP(names, x, s.T())
     return _Bubble(
         T=s.T(), K={n: yi / xi for n, xi, yi in zip(names, x, y)},
@@ -287,6 +287,10 @@ _MW = {
 }
 
 
+_SIGMA_T_CRIT_FRACTION = 0.98   # evaluate sigma at min(T, 0.98 Tc): CoolProp has no sigma at/above Tc
+_SIGMA_FALLBACK_N_PER_M = 0.010  # N/m, used when a pure component has no surface-tension model
+
+
 def _surface_tension(comp: dict[str, float], T: float) -> float:
     """Mole-fraction-weighted pure-component surface tension, N/m (CoolProp
     has no mixture surface tension - approximation, adequate because the
@@ -294,9 +298,9 @@ def _surface_tension(comp: dict[str, float], T: float) -> float:
     tot = 0.0
     for n, x in comp.items():
         try:
-            tot += x * CP.PropsSI("I", "T", min(T, CP.PropsSI("Tcrit", n) * 0.98), "Q", 0, n)
-        except Exception:
-            tot += x * 0.010
+            tot += x * CP.PropsSI("I", "T", min(T, CP.PropsSI("Tcrit", n) * _SIGMA_T_CRIT_FRACTION), "Q", 0, n)
+        except ValueError:
+            tot += x * _SIGMA_FALLBACK_N_PER_M
     return tot
 
 
@@ -433,7 +437,7 @@ def size_column(
     if top_bub.T < t_needed:
         try:
             sp = _state(x_d); sp.update(CP.QT_INPUTS, 0.0, t_needed); p_cw = sp.p()
-        except Exception:
+        except ValueError:
             notes.append(
                 f"No bubble point at {t_needed:.0f} K for the distillate (above its critical "
                 "temperature): a water/air-cooled total condenser is not possible at any pressure."
