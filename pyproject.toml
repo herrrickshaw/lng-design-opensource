@@ -20,10 +20,22 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["pytest>=8.0"]
+dev = ["pytest>=8.0", "ruff>=0.5"]
 # Equation-oriented optimization / surrogate-modeling extension - heavier
 # install (compiled IPOPT etc.), not required for the Streamlit sizing app.
 advanced = ["pyomo>=6.7", "idaes-pse>=2.5"]
 
 [tool.setuptools.packages.find]
 include = ["lng_design*"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "BLE", "E722"]
+ignore = ["E501", "E701", "E702", "E741"]
+
+[tool.ruff.lint.per-file-ignores]
+# UI boundary: any sizing failure is shown to the user via st.error rather than crashing the page.
+"lng_design/ui/*.py" = ["BLE001"]
