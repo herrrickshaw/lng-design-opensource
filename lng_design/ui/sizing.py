@@ -212,14 +212,8 @@ def render_molsieve(flowsheet: FlowsheetState) -> None:
             st.error(str(e))
 
 
-def render_mche(flowsheet: FlowsheetState) -> None:
-    """Render the 'mche' tab."""
-    st.header("MCHE composite-curve / MITA pinch check")
-    st.caption(
-        "Simplified 2-composite pinch analysis (Linnhoff pinch technology). "
-        "Checks the minimum approach across the WHOLE curve, not just terminal "
-        "temperatures - an internal pinch can hide even when terminals look fine."
-    )
+def _mche_pinch_check(flowsheet: FlowsheetState) -> None:
+    """Composite-curve inputs, the pinch check, and the cycle screening it unlocks."""
     c1, c2 = st.columns(2)
     with c1:
         st.subheader("Hot stream (gas being cooled)")
@@ -282,7 +276,9 @@ def render_mche(flowsheet: FlowsheetState) -> None:
         except ValueError as e:
             st.error(str(e))
 
-    st.divider()
+
+def _mche_vendor_comparison() -> None:
+    """APCI vs. Linde factor-by-factor comparison."""
     st.subheader("MCHE vendor comparison: APCI vs. Linde")
     st.caption(
         "Structured factor-by-factor comparison, not a forced single answer - the "
@@ -316,6 +312,19 @@ def render_mche(flowsheet: FlowsheetState) -> None:
             st.caption(profile.notes)
     for note in vendor_result.screening_notes:
         st.info(note)
+
+
+def render_mche(flowsheet: FlowsheetState) -> None:
+    """Render the 'mche' tab."""
+    st.header("MCHE composite-curve / MITA pinch check")
+    st.caption(
+        "Simplified 2-composite pinch analysis (Linnhoff pinch technology). "
+        "Checks the minimum approach across the WHOLE curve, not just terminal "
+        "temperatures - an internal pinch can hide even when terminals look fine."
+    )
+    _mche_pinch_check(flowsheet)
+    st.divider()
+    _mche_vendor_comparison()
 
 
 def render_vessel(flowsheet: FlowsheetState) -> None:
