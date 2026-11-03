@@ -1,0 +1,6832 @@
+{
+ "col_debut_feedh": {
+  "N_min": 11.398659261068989,
+  "N_real": 49,
+  "N_theoretical": 32.118692837367746,
+  "P_bottom_Pa": 634300.0,
+  "P_top_Pa": 600000.0,
+  "R": 0.28776095292039755,
+  "R_min": 0.23980079410033128,
+  "T_bottom_K": 379.87514014948687,
+  "T_top_K": 251.35444511130683,
+  "alpha_lk_hk": 1.9795227903139145,
+  "bottoms_bubble_h_J_mol": 12487.500991445166,
+  "bottoms_kg_h": 10706.556559969715,
+  "bottoms_kmol_h": {
+   "Ethane": 1.7621459846850485e-11,
+   "Hexane": 39.99999991468968,
+   "Isobutane": 0.02987706274794988,
+   "Isopentane": 49.0,
+   "Pentane": 49.98120219366467,
+   "Propane": 6.4523655964876525e-06,
+   "n-Butane": 2.0
+  },
+  "condenser_duty_kW": 5148.321195992253,
+  "condenser_service": "refrigerated (propane/ethylene-class refrigerant)",
+  "diameter_bottom_m": 2.808027069797869,
+  "diameter_m": 2.896,
+  "diameter_top_m": 1.61425358586921,
+  "distillate_kg_h": 32106.703440030284,
+  "distillate_kmol_h": {
+   "Ethane": 319.9999999999824,
+   "Hexane": 8.531031983680993e-08,
+   "Isobutane": 59.97012293725205,
+   "Isopentane": 1.0,
+   "Pentane": 0.018797806335328255,
+   "Propane": 299.9999935476344,
+   "n-Butane": 98.0
+  },
+  "feed_tray_from_top": 30,
+  "flooding_governs": "bottom",
+  "height_m": 31.75181835187613,
+  "min_pressure_for_cooling_water_Pa": 2692413.708019287,
+  "name": "debutanizer",
+  "notes": [],
+  "q": 1.5939115279387122,
+  "reboiler_duty_kW": 9307.83882919553,
+  "theta": 1.035060090531387,
+  "tray_efficiency": 0.6420265360084235
+ },
+ "col_deeth": {
+  "N_min": 11.566653084379748,
+  "N_real": 35,
+  "N_theoretical": 26.426908909617996,
+  "P_bottom_Pa": 2624500.0,
+  "P_top_Pa": 2600000.0,
+  "R": 2.0381213922286325,
+  "R_min": 1.6984344935238607,
+  "T_bottom_K": 374.5810676301564,
+  "T_top_K": 276.9523891607462,
+  "alpha_lk_hk": 2.2124576778060585,
+  "bottoms_bubble_h_J_mol": 20895.538283938284,
+  "bottoms_kg_h": 33317.13049978495,
+  "bottoms_kmol_h": {
+   "Ethane": 6.399999999999977,
+   "Hexane": 39.999999999998224,
+   "Isobutane": 59.999554963737836,
+   "Isopentane": 49.999999592344224,
+   "Pentane": 49.999999985836354,
+   "Propane": 298.5,
+   "n-Butane": 99.99989499960506
+  },
+  "condenser_duty_kW": 2322.588934983618,
+  "condenser_service": "refrigerated (propane/ethylene-class refrigerant)",
+  "diameter_bottom_m": 1.8868155496945347,
+  "diameter_m": 1.981,
+  "diameter_top_m": 1.3589134656517456,
+  "distillate_kg_h": 9496.129500215047,
+  "distillate_kmol_h": {
+   "Ethane": 313.6,
+   "Hexane": 1.7762403776846487e-12,
+   "Isobutane": 0.0004450362621631054,
+   "Isopentane": 4.0765577600050797e-07,
+   "Pentane": 1.4163644468075485e-08,
+   "Propane": 1.5,
+   "n-Butane": 0.00010500039493424879
+  },
+  "feed_tray_from_top": 21,
+  "flooding_governs": "bottom",
+  "height_m": 25.17555833017064,
+  "min_pressure_for_cooling_water_Pa": null,
+  "name": "deethanizer",
+  "notes": [
+   "No bubble point at 318 K for the distillate (above its critical temperature): a water/air-cooled total condenser is not possible at any pressure."
+  ],
+  "q": 1.0,
+  "reboiler_duty_kW": 3176.046352561156,
+  "theta": 1.4000410008561583,
+  "tray_efficiency": 0.7323453149009918
+ },
+ "col_deprop_feedT": {
+  "N_min": 12.447977491599692,
+  "N_real": 43,
+  "N_theoretical": 30.642940636580185,
+  "P_bottom_Pa": 1730100.0,
+  "P_top_Pa": 1700000.0,
+  "R": 0.9113697312308721,
+  "R_min": 0.7594747760257268,
+  "T_bottom_K": 396.1332344723113,
+  "T_top_K": 283.2760228635254,
+  "alpha_lk_hk": 1.9132687565121582,
+  "bottoms_bubble_h_J_mol": 23956.340765326986,
+  "bottoms_kg_h": 20081.772475419355,
+  "bottoms_kmol_h": {
+   "Ethane": 0.0001362585164201846,
+   "Hexane": 39.99999999975213,
+   "Isobutane": 58.8,
+   "Isopentane": 49.99982511237753,
+   "Pentane": 49.99999312158494,
+   "Propane": 4.5,
+   "n-Butane": 99.85087818190276
+  },
+  "condenser_duty_kW": 4287.320911052316,
+  "condenser_service": "refrigerated (propane/ethylene-class refrigerant)",
+  "diameter_bottom_m": 2.2690989392615464,
+  "diameter_m": 2.286,
+  "diameter_top_m": 1.4991041240752898,
+  "distillate_kg_h": 22731.487524580643,
+  "distillate_kmol_h": {
+   "Ethane": 319.9998637414836,
+   "Hexane": 2.478726103320422e-10,
+   "Isobutane": 1.2000000000000028,
+   "Isopentane": 0.00017488762246829466,
+   "Pentane": 6.8784150586464524e-06,
+   "Propane": 295.5,
+   "n-Butane": 0.14912181809723543
+  },
+  "feed_tray_from_top": 25,
+  "flooding_governs": "bottom",
+  "height_m": 28.779673451388557,
+  "min_pressure_for_cooling_water_Pa": 3441023.687846763,
+  "name": "depropanizer",
+  "notes": [],
+  "q": 1.024434008642887,
+  "reboiler_duty_kW": 5426.757562584018,
+  "theta": 1.0795435154276465,
+  "tray_efficiency": 0.7017191125305433
+ },
+ "col_lowP_fixedEo": {
+  "N_min": 6.1157961216629575,
+  "N_real": 22,
+  "N_theoretical": 16.039640319840693,
+  "P_bottom_Pa": 815400.0,
+  "P_top_Pa": 800000.0,
+  "R": 0.7717895958560621,
+  "R_min": 0.6431579965467185,
+  "T_bottom_K": 312.66844266890985,
+  "T_top_K": 234.3169278021934,
+  "alpha_lk_hk": 4.005659172343425,
+  "bottoms_bubble_h_J_mol": 11173.310298192397,
+  "bottoms_kg_h": 33250.904774200535,
+  "bottoms_kmol_h": {
+   "Ethane": 6.399999999999977,
+   "Hexane": 39.99999999996241,
+   "Isobutane": 59.99845007363258,
+   "Isopentane": 49.99999713180515,
+   "Pentane": 49.999999878664696,
+   "Propane": 297.0,
+   "n-Butane": 99.99962280454598
+  },
+  "condenser_duty_kW": 1932.522305293292,
+  "condenser_service": "refrigerated (propane/ethylene-class refrigerant)",
+  "diameter_bottom_m": 1.5013195592893753,
+  "diameter_m": 1.524,
+  "diameter_top_m": 1.0368488424593254,
+  "distillate_kg_h": 9562.355225799469,
+  "distillate_kmol_h": {
+   "Ethane": 313.6,
+   "Hexane": 3.758572288320188e-11,
+   "Isobutane": 0.001549926367420683,
+   "Isopentane": 2.8681948498915473e-06,
+   "Pentane": 1.2133530776882073e-07,
+   "Propane": 3.0,
+   "n-Butane": 0.00037719545401459185
+  },
+  "feed_tray_from_top": 12,
+  "flooding_governs": "bottom",
+  "height_m": 18.138682295500377,
+  "min_pressure_for_cooling_water_Pa": null,
+  "name": "lowP",
+  "notes": [
+   "No bubble point at 318 K for the distillate (above its critical temperature): a water/air-cooled total condenser is not possible at any pressure."
+  ],
+  "q": 1.0,
+  "reboiler_duty_kW": 2669.1684306229504,
+  "theta": 1.6134815739382597,
+  "tray_efficiency": 0.7
+ },
+ "liq_default": {
+  "absorber": {
+   "absorption_factor": 2.0,
+   "cross_section_area_m2": 10.429714380661816,
+   "diameter_m": 3.644108229697854,
+   "flooding_velocity_m_s": 0.19108357370993823,
+   "n_theoretical_stages": 6.622051819456376,
+   "packed_height_m": 3.311025909728188,
+   "superficial_gas_velocity_m_s": 0.14331268028245367
+  },
+  "basis": {
+   "ambient_T_K": 313.15,
+   "amine_density_kg_m3": 1010.0,
+   "amine_equilibrium_slope": 0.4,
+   "amine_liquid_to_gas": 0.8,
+   "c3_holdup_s": 300.0,
+   "c3_liquid_density_kg_m3": 500.0,
+   "capacity_mtpa": 2.0,
+   "cargo_size_m3": 170000.0,
+   "co2_in_mole_frac": 0.02,
+   "co2_out_mole_frac": 0.0005,
+   "condensate_density_kg_m3": 550.0,
+   "condensate_flow_m3_s": 0.015,
+   "contingency_days": 1.5,
+   "design_ambient_C_air_cooler": 35.0,
+   "end_C": -159.0,
+   "end_flash_inlet_P_Pa": 450000.0,
+   "end_flash_inlet_T_K": 113.15,
+   "feed_P_Pa": 5000000.0,
+   "feed_T_K": 298.15,
+   "feed_composition": {
+    "Ethane": 0.08,
+    "Methane": 0.85,
+    "Nitrogen": 0.03,
+    "Propane": 0.04
+   },
+   "flash_gas_discharge_P_Pa": 500000.0,
+   "fractionation_specs": null,
+   "include_refrigerant_supply": false,
+   "inlet_water_ppm_wt": 700.0,
+   "liquefaction_cp_kJ_kg_K": 2.9,
+   "lng_composition": null,
+   "lng_density_kg_m3": 450.0,
+   "lrc_T_cond_K": 236.15,
+   "lrc_T_evap_K": 173.15,
+   "lrc_blend": {
+    "Ethane": 0.35,
+    "Methane": 0.3,
+    "Nitrogen": 0.05,
+    "Propane": 0.3
+   },
+   "lrc_floor_C": -100.0,
+   "mche_U_W_m2K": 2500.0,
+   "mche_min_approach_K": 3.0,
+   "mr_annual_loss_fraction": 0.1,
+   "mr_charge_kmol": 8000.0,
+   "mr_target": null,
+   "ngl_feed_kmol_h": null,
+   "precool_cp_kJ_kg_K": 2.4,
+   "precool_from_C": 40.0,
+   "precool_to_C": -40.0,
+   "refrigerant_fill_days": 60.0,
+   "refrigerant_storage_factor": 2.75,
+   "shipping_interval_days": 4.0,
+   "storage_P_Pa": 110000.0,
+   "trim_cooler_cp_kJ_kg_K": 2.3,
+   "trim_cooler_dT_K": 20.0
+  },
+  "c3_charge_kg": 16765.43509297865,
+  "cascade": {
+   "lrc": {
+    "P_cond_Pa": 5355608.420532413,
+    "P_evap_Pa": 9089.772732560374,
+    "T_cond_K": 236.15,
+    "T_evap_K": 173.15,
+    "compressor_power_kW": 27218.54463579641,
+    "condensing_duty_kW": 38245.99919507848,
+    "refrigerant_mass_flow_kg_s": 37.610199823526315
+   },
+   "pmr": {
+    "P_cond_Pa": 1369420.3848039038,
+    "P_evap_Pa": 111121.16425719768,
+    "T_cond_K": 313.15,
+    "T_evap_K": 233.14999999999998,
+    "compressor_power_kW": 27389.537056773417,
+    "cop": 1.3963726044657725,
+    "refrigerant_mass_flow_kg_s": 172.80030801383322
+   },
+   "pmr_total_duty_kW": 38245.99919507848,
+   "total_compressor_power_kW": 54608.08169256983
+  },
+  "end_flash": {
+   "flash_temperature_K": 108.43122866767641,
+   "liquid_composition_mole_frac": {
+    "Ethane": 0.08350636792053026,
+    "Methane": 0.859902316825239,
+    "Nitrogen": 0.014836513952641435,
+    "Propane": 0.04175480130158936
+   },
+   "liquid_mass_flow_kg_s": 60.44213346003151,
+   "vapor_composition_mole_frac": {
+    "Ethane": 7.436640656604465e-05,
+    "Methane": 0.6242824015511591,
+    "Nitrogen": 0.37564291520128085,
+    "Propane": 3.1684099410629054e-07
+   },
+   "vapor_mass_flow_kg_s": 2.934042168026387,
+   "vapor_mass_fraction": 0.04629566456085475,
+   "vapor_mole_fraction": 0.04202665472364799
+  },
+  "feed_density_kg_m3": 42.40030638391382,
+  "feed_mass_flow_kg_s": 63.3761756280579,
+  "flash_gas_compressor": {
+   "P_in": 110000.0,
+   "T_in": 108.43122866767641,
+   "T_out_ideal": 186.4231859416751,
+   "Z_avg": 0.9691471486672323,
+   "gas_power_kW": 322.55323504447637,
+   "k_avg": 1.392851001640787,
+   "polytropic_exponent": 1.5664164067183373,
+   "polytropic_head_J_per_kg": 85749.11638162553,
+   "pressure_ratio": 4.545454545454546
+  },
+  "fractionation": null,
+  "inlet_separator": {
+   "liquid_holdup_volume_m3": 4.5,
+   "required_diameter_m": 2.5348870034420035,
+   "seam_to_seam_height_m": 3.4444691086680614,
+   "standard_diameter_mm": 2591,
+   "vapor_velocity_design_m_s": 0.2834864636973475,
+   "vapor_velocity_max_m_s": 0.370220067724363
+  },
+  "lrc_duty_kW": 11027.454559282074,
+  "mche_pinch": {
+   "area_estimate_m2": 882.196364742567,
+   "interval_report": [
+    {
+     "Q_kW": 27.568636398205186,
+     "T_cold_K": 227.99999999999997,
+     "T_hot_K": 232.99999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641037
+    },
+    {
+     "Q_kW": 55.13727279641037,
+     "T_cold_K": 227.84999999999997,
+     "T_hot_K": 232.84999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641037
+    },
+    {
+     "Q_kW": 82.70590919461556,
+     "T_cold_K": 227.7,
+     "T_hot_K": 232.7,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641037
+    },
+    {
+     "Q_kW": 110.27454559282074,
+     "T_cold_K": 227.54999999999998,
+     "T_hot_K": 232.54999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641037
+    },
+    {
+     "Q_kW": 137.84318199102592,
+     "T_cold_K": 227.39999999999998,
+     "T_hot_K": 232.39999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 165.41181838923112,
+     "T_cold_K": 227.24999999999997,
+     "T_hot_K": 232.24999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.51372727964104
+    },
+    {
+     "Q_kW": 192.9804547874363,
+     "T_cold_K": 227.09999999999997,
+     "T_hot_K": 232.09999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 220.5490911856415,
+     "T_cold_K": 226.95,
+     "T_hot_K": 231.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.51372727964104
+    },
+    {
+     "Q_kW": 248.1177275838467,
+     "T_cold_K": 226.79999999999998,
+     "T_hot_K": 231.79999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.51372727964104
+    },
+    {
+     "Q_kW": 275.68636398205183,
+     "T_cold_K": 226.64999999999998,
+     "T_hot_K": 231.64999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641029
+    },
+    {
+     "Q_kW": 303.25500038025706,
+     "T_cold_K": 226.49999999999997,
+     "T_hot_K": 231.49999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641046
+    },
+    {
+     "Q_kW": 330.82363677846223,
+     "T_cold_K": 226.34999999999997,
+     "T_hot_K": 231.34999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 358.39227317666746,
+     "T_cold_K": 226.2,
+     "T_hot_K": 231.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641046
+    },
+    {
+     "Q_kW": 385.9609095748726,
+     "T_cold_K": 226.04999999999998,
+     "T_hot_K": 231.04999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641023
+    },
+    {
+     "Q_kW": 413.52954597307775,
+     "T_cold_K": 225.89999999999998,
+     "T_hot_K": 230.89999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 441.098182371283,
+     "T_cold_K": 225.74999999999997,
+     "T_hot_K": 230.74999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641046
+    },
+    {
+     "Q_kW": 468.66681876948815,
+     "T_cold_K": 225.59999999999997,
+     "T_hot_K": 230.59999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 496.2354551676934,
+     "T_cold_K": 225.45,
+     "T_hot_K": 230.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641046
+    },
+    {
+     "Q_kW": 523.8040915658985,
+     "T_cold_K": 225.29999999999998,
+     "T_hot_K": 230.29999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641023
+    },
+    {
+     "Q_kW": 551.3727279641037,
+     "T_cold_K": 225.14999999999998,
+     "T_hot_K": 230.14999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 578.9413643623088,
+     "T_cold_K": 224.99999999999997,
+     "T_hot_K": 229.99999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 606.5100007605141,
+     "T_cold_K": 224.84999999999997,
+     "T_hot_K": 229.84999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641057
+    },
+    {
+     "Q_kW": 634.0786371587193,
+     "T_cold_K": 224.7,
+     "T_hot_K": 229.7,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 661.6472735569245,
+     "T_cold_K": 224.54999999999998,
+     "T_hot_K": 229.54999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 689.2159099551296,
+     "T_cold_K": 224.39999999999998,
+     "T_hot_K": 229.39999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 716.7845463533349,
+     "T_cold_K": 224.24999999999997,
+     "T_hot_K": 229.24999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641057
+    },
+    {
+     "Q_kW": 744.35318275154,
+     "T_cold_K": 224.09999999999997,
+     "T_hot_K": 229.09999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641012
+    },
+    {
+     "Q_kW": 771.9218191497451,
+     "T_cold_K": 223.95,
+     "T_hot_K": 228.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 799.4904555479504,
+     "T_cold_K": 223.79999999999998,
+     "T_hot_K": 228.79999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641057
+    },
+    {
+     "Q_kW": 827.0590919461555,
+     "T_cold_K": 223.64999999999998,
+     "T_hot_K": 228.64999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641012
+    },
+    {
+     "Q_kW": 854.6277283443608,
+     "T_cold_K": 223.49999999999997,
+     "T_hot_K": 228.49999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641057
+    },
+    {
+     "Q_kW": 882.196364742566,
+     "T_cold_K": 223.34999999999997,
+     "T_hot_K": 228.34999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 909.765001140771,
+     "T_cold_K": 223.2,
+     "T_hot_K": 228.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641012
+    },
+    {
+     "Q_kW": 937.3336375389763,
+     "T_cold_K": 223.04999999999998,
+     "T_hot_K": 228.04999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641057
+    },
+    {
+     "Q_kW": 964.9022739371815,
+     "T_cold_K": 222.89999999999998,
+     "T_hot_K": 227.89999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 992.4709103353867,
+     "T_cold_K": 222.74999999999997,
+     "T_hot_K": 227.74999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641057
+    },
+    {
+     "Q_kW": 1020.0395467335918,
+     "T_cold_K": 222.59999999999997,
+     "T_hot_K": 227.59999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641012
+    },
+    {
+     "Q_kW": 1047.608183131797,
+     "T_cold_K": 222.45,
+     "T_hot_K": 227.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1075.1768195300021,
+     "T_cold_K": 222.29999999999998,
+     "T_hot_K": 227.29999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1102.7454559282073,
+     "T_cold_K": 222.14999999999998,
+     "T_hot_K": 227.14999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1130.3140923264127,
+     "T_cold_K": 221.99999999999997,
+     "T_hot_K": 226.99999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 1157.8827287246177,
+     "T_cold_K": 221.84999999999997,
+     "T_hot_K": 226.84999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 1185.4513651228228,
+     "T_cold_K": 221.7,
+     "T_hot_K": 226.7,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1213.0200015210282,
+     "T_cold_K": 221.54999999999998,
+     "T_hot_K": 226.54999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 1240.5886379192334,
+     "T_cold_K": 221.39999999999998,
+     "T_hot_K": 226.39999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1268.1572743174386,
+     "T_cold_K": 221.24999999999997,
+     "T_hot_K": 226.24999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1295.7259107156437,
+     "T_cold_K": 221.09999999999997,
+     "T_hot_K": 226.09999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1323.294547113849,
+     "T_cold_K": 220.95,
+     "T_hot_K": 225.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1350.863183512054,
+     "T_cold_K": 220.79999999999998,
+     "T_hot_K": 225.79999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1378.4318199102593,
+     "T_cold_K": 220.64999999999998,
+     "T_hot_K": 225.64999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1406.0004563084644,
+     "T_cold_K": 220.49999999999997,
+     "T_hot_K": 225.49999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1433.5690927066698,
+     "T_cold_K": 220.35,
+     "T_hot_K": 225.35,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 1461.1377291048748,
+     "T_cold_K": 220.2,
+     "T_hot_K": 225.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 1488.70636550308,
+     "T_cold_K": 220.04999999999998,
+     "T_hot_K": 225.04999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1516.2750019012851,
+     "T_cold_K": 219.89999999999998,
+     "T_hot_K": 224.89999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1543.8436382994903,
+     "T_cold_K": 219.74999999999997,
+     "T_hot_K": 224.74999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1571.4122746976957,
+     "T_cold_K": 219.59999999999997,
+     "T_hot_K": 224.59999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 1598.9809110959009,
+     "T_cold_K": 219.45,
+     "T_hot_K": 224.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1626.549547494106,
+     "T_cold_K": 219.29999999999998,
+     "T_hot_K": 224.29999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1654.118183892311,
+     "T_cold_K": 219.14999999999998,
+     "T_hot_K": 224.14999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 1681.6868202905162,
+     "T_cold_K": 218.99999999999997,
+     "T_hot_K": 223.99999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1709.2554566887216,
+     "T_cold_K": 218.85,
+     "T_hot_K": 223.85,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 1736.8240930869267,
+     "T_cold_K": 218.7,
+     "T_hot_K": 223.7,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1764.392729485132,
+     "T_cold_K": 218.54999999999998,
+     "T_hot_K": 223.54999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1791.961365883337,
+     "T_cold_K": 218.39999999999998,
+     "T_hot_K": 223.39999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1819.530002281542,
+     "T_cold_K": 218.24999999999997,
+     "T_hot_K": 223.24999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 1847.0986386797476,
+     "T_cold_K": 218.1,
+     "T_hot_K": 223.1,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641126
+    },
+    {
+     "Q_kW": 1874.6672750779526,
+     "T_cold_K": 217.95,
+     "T_hot_K": 222.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 1902.2359114761578,
+     "T_cold_K": 217.79999999999998,
+     "T_hot_K": 222.79999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1929.804547874363,
+     "T_cold_K": 217.64999999999998,
+     "T_hot_K": 222.64999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1957.373184272568,
+     "T_cold_K": 217.49999999999997,
+     "T_hot_K": 222.49999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1984.9418206707735,
+     "T_cold_K": 217.35,
+     "T_hot_K": 222.35,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2012.5104570689787,
+     "T_cold_K": 217.2,
+     "T_hot_K": 222.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 2040.0790934671836,
+     "T_cold_K": 217.04999999999998,
+     "T_hot_K": 222.04999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 2067.647729865389,
+     "T_cold_K": 216.89999999999998,
+     "T_hot_K": 221.89999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2095.216366263594,
+     "T_cold_K": 216.74999999999997,
+     "T_hot_K": 221.74999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 2122.7850026617994,
+     "T_cold_K": 216.6,
+     "T_hot_K": 221.6,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2150.3536390600043,
+     "T_cold_K": 216.45,
+     "T_hot_K": 221.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 2177.9222754582097,
+     "T_cold_K": 216.29999999999998,
+     "T_hot_K": 221.29999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2205.4909118564146,
+     "T_cold_K": 216.14999999999998,
+     "T_hot_K": 221.14999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 2233.05954825462,
+     "T_cold_K": 215.99999999999997,
+     "T_hot_K": 220.99999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2260.6281846528254,
+     "T_cold_K": 215.85,
+     "T_hot_K": 220.85,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2288.1968210510304,
+     "T_cold_K": 215.7,
+     "T_hot_K": 220.7,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 2315.7654574492353,
+     "T_cold_K": 215.54999999999998,
+     "T_hot_K": 220.54999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 2343.3340938474407,
+     "T_cold_K": 215.39999999999998,
+     "T_hot_K": 220.39999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2370.9027302456457,
+     "T_cold_K": 215.25,
+     "T_hot_K": 220.25,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 2398.471366643851,
+     "T_cold_K": 215.1,
+     "T_hot_K": 220.1,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2426.0400030420565,
+     "T_cold_K": 214.95,
+     "T_hot_K": 219.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2453.6086394402614,
+     "T_cold_K": 214.79999999999998,
+     "T_hot_K": 219.79999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 2481.177275838467,
+     "T_cold_K": 214.64999999999998,
+     "T_hot_K": 219.64999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2508.7459122366718,
+     "T_cold_K": 214.5,
+     "T_hot_K": 219.5,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 2536.314548634877,
+     "T_cold_K": 214.35,
+     "T_hot_K": 219.35,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2563.883185033082,
+     "T_cold_K": 214.2,
+     "T_hot_K": 219.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 2591.4518214312875,
+     "T_cold_K": 214.04999999999998,
+     "T_hot_K": 219.04999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2619.0204578294924,
+     "T_cold_K": 213.89999999999998,
+     "T_hot_K": 218.89999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 2646.589094227698,
+     "T_cold_K": 213.74999999999997,
+     "T_hot_K": 218.74999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2674.157730625903,
+     "T_cold_K": 213.6,
+     "T_hot_K": 218.6,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 2701.726367024108,
+     "T_cold_K": 213.45,
+     "T_hot_K": 218.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2729.2950034223136,
+     "T_cold_K": 213.29999999999998,
+     "T_hot_K": 218.29999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2756.8636398205185,
+     "T_cold_K": 213.14999999999998,
+     "T_hot_K": 218.14999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 2784.432276218724,
+     "T_cold_K": 212.99999999999997,
+     "T_hot_K": 217.99999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2812.000912616929,
+     "T_cold_K": 212.85,
+     "T_hot_K": 217.85,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 2839.5695490151343,
+     "T_cold_K": 212.7,
+     "T_hot_K": 217.7,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2867.1381854133397,
+     "T_cold_K": 212.54999999999998,
+     "T_hot_K": 217.54999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2894.706821811544,
+     "T_cold_K": 212.39999999999998,
+     "T_hot_K": 217.39999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640898
+    },
+    {
+     "Q_kW": 2922.2754582097496,
+     "T_cold_K": 212.24999999999997,
+     "T_hot_K": 217.24999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2949.8440946079545,
+     "T_cold_K": 212.1,
+     "T_hot_K": 217.1,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 2977.41273100616,
+     "T_cold_K": 211.95,
+     "T_hot_K": 216.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3004.9813674043653,
+     "T_cold_K": 211.79999999999998,
+     "T_hot_K": 216.79999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3032.5500038025702,
+     "T_cold_K": 211.64999999999998,
+     "T_hot_K": 216.64999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 3060.1186402007756,
+     "T_cold_K": 211.49999999999997,
+     "T_hot_K": 216.49999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3087.6872765989806,
+     "T_cold_K": 211.35,
+     "T_hot_K": 216.35,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 3115.255912997186,
+     "T_cold_K": 211.2,
+     "T_hot_K": 216.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3142.8245493953914,
+     "T_cold_K": 211.04999999999998,
+     "T_hot_K": 216.04999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3170.3931857935963,
+     "T_cold_K": 210.89999999999998,
+     "T_hot_K": 215.89999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 3197.9618221918017,
+     "T_cold_K": 210.74999999999997,
+     "T_hot_K": 215.74999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3225.5304585900067,
+     "T_cold_K": 210.6,
+     "T_hot_K": 215.6,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 3253.099094988212,
+     "T_cold_K": 210.45,
+     "T_hot_K": 215.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3280.6677313864175,
+     "T_cold_K": 210.29999999999998,
+     "T_hot_K": 215.29999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3308.236367784622,
+     "T_cold_K": 210.14999999999998,
+     "T_hot_K": 215.14999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640898
+    },
+    {
+     "Q_kW": 3335.8050041828274,
+     "T_cold_K": 210.0,
+     "T_hot_K": 215.0,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3363.3736405810323,
+     "T_cold_K": 209.85,
+     "T_hot_K": 214.85,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 3390.9422769792377,
+     "T_cold_K": 209.7,
+     "T_hot_K": 214.7,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3418.510913377443,
+     "T_cold_K": 209.54999999999998,
+     "T_hot_K": 214.54999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3446.079549775648,
+     "T_cold_K": 209.39999999999998,
+     "T_hot_K": 214.39999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 3473.6481861738534,
+     "T_cold_K": 209.25,
+     "T_hot_K": 214.25,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3501.2168225720584,
+     "T_cold_K": 209.1,
+     "T_hot_K": 214.1,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 3528.785458970264,
+     "T_cold_K": 208.95,
+     "T_hot_K": 213.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3556.354095368469,
+     "T_cold_K": 208.79999999999998,
+     "T_hot_K": 213.79999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3583.922731766674,
+     "T_cold_K": 208.64999999999998,
+     "T_hot_K": 213.64999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 3611.4913681648795,
+     "T_cold_K": 208.5,
+     "T_hot_K": 213.5,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3639.060004563084,
+     "T_cold_K": 208.35,
+     "T_hot_K": 213.35,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640898
+    },
+    {
+     "Q_kW": 3666.6286409612894,
+     "T_cold_K": 208.2,
+     "T_hot_K": 213.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3694.1972773594953,
+     "T_cold_K": 208.04999999999998,
+     "T_hot_K": 213.04999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 3721.7659137576998,
+     "T_cold_K": 207.89999999999998,
+     "T_hot_K": 212.89999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640898
+    },
+    {
+     "Q_kW": 3749.334550155905,
+     "T_cold_K": 207.75,
+     "T_hot_K": 212.75,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3776.90318655411,
+     "T_cold_K": 207.6,
+     "T_hot_K": 212.6,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 3804.4718229523155,
+     "T_cold_K": 207.45,
+     "T_hot_K": 212.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3832.040459350521,
+     "T_cold_K": 207.29999999999998,
+     "T_hot_K": 212.29999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3859.609095748726,
+     "T_cold_K": 207.14999999999998,
+     "T_hot_K": 212.14999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 3887.1777321469312,
+     "T_cold_K": 207.0,
+     "T_hot_K": 212.0,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3914.746368545136,
+     "T_cold_K": 206.85,
+     "T_hot_K": 211.85,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 3942.3150049433416,
+     "T_cold_K": 206.7,
+     "T_hot_K": 211.7,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3969.883641341547,
+     "T_cold_K": 206.54999999999998,
+     "T_hot_K": 211.54999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3997.452277739752,
+     "T_cold_K": 206.39999999999998,
+     "T_hot_K": 211.39999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4025.0209141379573,
+     "T_cold_K": 206.25,
+     "T_hot_K": 211.25,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 4052.589550536162,
+     "T_cold_K": 206.1,
+     "T_hot_K": 211.1,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640898
+    },
+    {
+     "Q_kW": 4080.158186934367,
+     "T_cold_K": 205.95,
+     "T_hot_K": 210.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 4107.726823332573,
+     "T_cold_K": 205.79999999999998,
+     "T_hot_K": 210.79999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 4135.295459730778,
+     "T_cold_K": 205.64999999999998,
+     "T_hot_K": 210.64999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4162.864096128983,
+     "T_cold_K": 205.5,
+     "T_hot_K": 210.5,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4190.432732527188,
+     "T_cold_K": 205.35,
+     "T_hot_K": 210.35,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4218.001368925394,
+     "T_cold_K": 205.2,
+     "T_hot_K": 210.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 4245.570005323599,
+     "T_cold_K": 205.04999999999998,
+     "T_hot_K": 210.04999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4273.138641721804,
+     "T_cold_K": 204.89999999999998,
+     "T_hot_K": 209.89999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4300.707278120009,
+     "T_cold_K": 204.75,
+     "T_hot_K": 209.75,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4328.2759145182135,
+     "T_cold_K": 204.6,
+     "T_hot_K": 209.6,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4355.844550916419,
+     "T_cold_K": 204.45,
+     "T_hot_K": 209.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 4383.413187314624,
+     "T_cold_K": 204.29999999999998,
+     "T_hot_K": 209.29999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4410.981823712829,
+     "T_cold_K": 204.14999999999998,
+     "T_hot_K": 209.14999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4438.550460111035,
+     "T_cold_K": 204.0,
+     "T_hot_K": 209.0,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 4466.11909650924,
+     "T_cold_K": 203.85,
+     "T_hot_K": 208.85,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4493.687732907445,
+     "T_cold_K": 203.7,
+     "T_hot_K": 208.7,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4521.256369305651,
+     "T_cold_K": 203.54999999999998,
+     "T_hot_K": 208.54999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 4548.825005703856,
+     "T_cold_K": 203.39999999999998,
+     "T_hot_K": 208.39999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4576.393642102061,
+     "T_cold_K": 203.25,
+     "T_hot_K": 208.25,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4603.962278500266,
+     "T_cold_K": 203.1,
+     "T_hot_K": 208.1,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4631.530914898471,
+     "T_cold_K": 202.95,
+     "T_hot_K": 207.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4659.0995512966765,
+     "T_cold_K": 202.79999999999998,
+     "T_hot_K": 207.79999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 4686.668187694881,
+     "T_cold_K": 202.64999999999998,
+     "T_hot_K": 207.64999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4714.236824093086,
+     "T_cold_K": 202.5,
+     "T_hot_K": 207.5,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4741.805460491291,
+     "T_cold_K": 202.35,
+     "T_hot_K": 207.35,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4769.374096889497,
+     "T_cold_K": 202.2,
+     "T_hot_K": 207.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 4796.942733287702,
+     "T_cold_K": 202.04999999999998,
+     "T_hot_K": 207.04999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4824.511369685907,
+     "T_cold_K": 201.89999999999998,
+     "T_hot_K": 206.89999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4852.080006084113,
+     "T_cold_K": 201.75,
+     "T_hot_K": 206.75,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 4879.648642482318,
+     "T_cold_K": 201.6,
+     "T_hot_K": 206.6,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4907.217278880523,
+     "T_cold_K": 201.45,
+     "T_hot_K": 206.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4934.785915278729,
+     "T_cold_K": 201.29999999999998,
+     "T_hot_K": 206.29999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 4962.354551676934,
+     "T_cold_K": 201.14999999999998,
+     "T_hot_K": 206.14999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4989.923188075139,
+     "T_cold_K": 201.0,
+     "T_hot_K": 206.0,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5017.4918244733435,
+     "T_cold_K": 200.85,
+     "T_hot_K": 205.85,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5045.0604608715485,
+     "T_cold_K": 200.7,
+     "T_hot_K": 205.7,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5072.629097269754,
+     "T_cold_K": 200.54999999999998,
+     "T_hot_K": 205.54999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 5100.197733667959,
+     "T_cold_K": 200.39999999999998,
+     "T_hot_K": 205.39999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5127.766370066164,
+     "T_cold_K": 200.25,
+     "T_hot_K": 205.25,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5155.335006464369,
+     "T_cold_K": 200.1,
+     "T_hot_K": 205.1,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5182.903642862575,
+     "T_cold_K": 199.95,
+     "T_hot_K": 204.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 5210.47227926078,
+     "T_cold_K": 199.79999999999998,
+     "T_hot_K": 204.79999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5238.040915658985,
+     "T_cold_K": 199.64999999999998,
+     "T_hot_K": 204.64999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5265.60955205719,
+     "T_cold_K": 199.5,
+     "T_hot_K": 204.5,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5293.178188455396,
+     "T_cold_K": 199.35,
+     "T_hot_K": 204.35,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 5320.746824853601,
+     "T_cold_K": 199.2,
+     "T_hot_K": 204.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5348.315461251806,
+     "T_cold_K": 199.04999999999998,
+     "T_hot_K": 204.04999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5375.884097650011,
+     "T_cold_K": 198.89999999999998,
+     "T_hot_K": 203.89999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 5403.452734048216,
+     "T_cold_K": 198.75,
+     "T_hot_K": 203.75,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5431.021370446421,
+     "T_cold_K": 198.6,
+     "T_hot_K": 203.6,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5458.590006844627,
+     "T_cold_K": 198.45,
+     "T_hot_K": 203.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 5486.158643242832,
+     "T_cold_K": 198.29999999999998,
+     "T_hot_K": 203.29999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5513.727279641037,
+     "T_cold_K": 198.14999999999998,
+     "T_hot_K": 203.14999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5541.295916039242,
+     "T_cold_K": 198.0,
+     "T_hot_K": 203.0,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5568.864552437448,
+     "T_cold_K": 197.85,
+     "T_hot_K": 202.85,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 5596.433188835653,
+     "T_cold_K": 197.7,
+     "T_hot_K": 202.7,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5624.001825233858,
+     "T_cold_K": 197.54999999999998,
+     "T_hot_K": 202.54999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5651.570461632064,
+     "T_cold_K": 197.39999999999998,
+     "T_hot_K": 202.39999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 5679.1390980302685,
+     "T_cold_K": 197.25,
+     "T_hot_K": 202.25,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5706.7077344284735,
+     "T_cold_K": 197.1,
+     "T_hot_K": 202.1,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5734.276370826679,
+     "T_cold_K": 196.95,
+     "T_hot_K": 201.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 5761.845007224884,
+     "T_cold_K": 196.79999999999998,
+     "T_hot_K": 201.79999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5789.413643623088,
+     "T_cold_K": 196.65,
+     "T_hot_K": 201.65,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 5816.982280021293,
+     "T_cold_K": 196.5,
+     "T_hot_K": 201.5,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5844.550916419499,
+     "T_cold_K": 196.35,
+     "T_hot_K": 201.35,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 5872.119552817704,
+     "T_cold_K": 196.2,
+     "T_hot_K": 201.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5899.688189215909,
+     "T_cold_K": 196.05,
+     "T_hot_K": 201.05,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5927.256825614115,
+     "T_cold_K": 195.89999999999998,
+     "T_hot_K": 200.89999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 5954.82546201232,
+     "T_cold_K": 195.75,
+     "T_hot_K": 200.75,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5982.394098410525,
+     "T_cold_K": 195.6,
+     "T_hot_K": 200.6,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6009.962734808731,
+     "T_cold_K": 195.45,
+     "T_hot_K": 200.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 6037.531371206936,
+     "T_cold_K": 195.3,
+     "T_hot_K": 200.3,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6065.1000076051405,
+     "T_cold_K": 195.15,
+     "T_hot_K": 200.15,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6092.668644003345,
+     "T_cold_K": 195.0,
+     "T_hot_K": 200.0,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6120.237280401551,
+     "T_cold_K": 194.85,
+     "T_hot_K": 199.85,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 6147.805916799756,
+     "T_cold_K": 194.7,
+     "T_hot_K": 199.7,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6175.374553197961,
+     "T_cold_K": 194.55,
+     "T_hot_K": 199.55,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6202.943189596167,
+     "T_cold_K": 194.39999999999998,
+     "T_hot_K": 199.39999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 6230.511825994372,
+     "T_cold_K": 194.25,
+     "T_hot_K": 199.25,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6258.080462392577,
+     "T_cold_K": 194.1,
+     "T_hot_K": 199.1,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6285.649098790783,
+     "T_cold_K": 193.95,
+     "T_hot_K": 198.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 6313.217735188988,
+     "T_cold_K": 193.79999999999998,
+     "T_hot_K": 198.79999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6340.786371587193,
+     "T_cold_K": 193.65,
+     "T_hot_K": 198.65,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6368.355007985398,
+     "T_cold_K": 193.5,
+     "T_hot_K": 198.5,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6395.9236443836035,
+     "T_cold_K": 193.35,
+     "T_hot_K": 198.35,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 6423.492280781808,
+     "T_cold_K": 193.2,
+     "T_hot_K": 198.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6451.060917180013,
+     "T_cold_K": 193.05,
+     "T_hot_K": 198.05,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6478.629553578219,
+     "T_cold_K": 192.89999999999998,
+     "T_hot_K": 197.89999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 6506.198189976424,
+     "T_cold_K": 192.75,
+     "T_hot_K": 197.75,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6533.766826374628,
+     "T_cold_K": 192.6,
+     "T_hot_K": 197.6,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 6561.335462772835,
+     "T_cold_K": 192.45,
+     "T_hot_K": 197.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641353
+    },
+    {
+     "Q_kW": 6588.904099171039,
+     "T_cold_K": 192.3,
+     "T_hot_K": 197.3,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 6616.472735569244,
+     "T_cold_K": 192.15,
+     "T_hot_K": 197.15,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6644.041371967449,
+     "T_cold_K": 192.0,
+     "T_hot_K": 197.0,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6671.610008365655,
+     "T_cold_K": 191.85,
+     "T_hot_K": 196.85,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 6699.17864476386,
+     "T_cold_K": 191.7,
+     "T_hot_K": 196.7,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6726.747281162065,
+     "T_cold_K": 191.55,
+     "T_hot_K": 196.55,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6754.3159175602705,
+     "T_cold_K": 191.39999999999998,
+     "T_hot_K": 196.39999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 6781.884553958475,
+     "T_cold_K": 191.25,
+     "T_hot_K": 196.25,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6809.45319035668,
+     "T_cold_K": 191.1,
+     "T_hot_K": 196.1,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6837.021826754886,
+     "T_cold_K": 190.95,
+     "T_hot_K": 195.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 6864.590463153091,
+     "T_cold_K": 190.79999999999998,
+     "T_hot_K": 195.79999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6892.159099551296,
+     "T_cold_K": 190.64999999999998,
+     "T_hot_K": 195.64999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6919.727735949501,
+     "T_cold_K": 190.5,
+     "T_hot_K": 195.5,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6947.296372347707,
+     "T_cold_K": 190.35,
+     "T_hot_K": 195.35,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 6974.865008745912,
+     "T_cold_K": 190.2,
+     "T_hot_K": 195.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7002.433645144117,
+     "T_cold_K": 190.05,
+     "T_hot_K": 195.05,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7030.002281542323,
+     "T_cold_K": 189.89999999999998,
+     "T_hot_K": 194.89999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 7057.570917940528,
+     "T_cold_K": 189.75,
+     "T_hot_K": 194.75,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7085.1395543387325,
+     "T_cold_K": 189.6,
+     "T_hot_K": 194.6,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7112.708190736938,
+     "T_cold_K": 189.45,
+     "T_hot_K": 194.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 7140.276827135143,
+     "T_cold_K": 189.29999999999998,
+     "T_hot_K": 194.29999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7167.845463533348,
+     "T_cold_K": 189.14999999999998,
+     "T_hot_K": 194.14999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7195.414099931554,
+     "T_cold_K": 189.0,
+     "T_hot_K": 194.0,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 7222.982736329759,
+     "T_cold_K": 188.85,
+     "T_hot_K": 193.85,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7250.551372727964,
+     "T_cold_K": 188.7,
+     "T_hot_K": 193.7,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7278.120009126168,
+     "T_cold_K": 188.55,
+     "T_hot_K": 193.55,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 7305.688645524375,
+     "T_cold_K": 188.39999999999998,
+     "T_hot_K": 193.39999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641353
+    },
+    {
+     "Q_kW": 7333.257281922579,
+     "T_cold_K": 188.25,
+     "T_hot_K": 193.25,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 7360.825918320784,
+     "T_cold_K": 188.1,
+     "T_hot_K": 193.1,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7388.394554718991,
+     "T_cold_K": 187.95,
+     "T_hot_K": 192.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641353
+    },
+    {
+     "Q_kW": 7415.963191117195,
+     "T_cold_K": 187.8,
+     "T_hot_K": 192.8,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 7443.5318275153995,
+     "T_cold_K": 187.65,
+     "T_hot_K": 192.65,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7471.100463913605,
+     "T_cold_K": 187.5,
+     "T_hot_K": 192.5,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 7498.66910031181,
+     "T_cold_K": 187.35,
+     "T_hot_K": 192.35,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7526.237736710015,
+     "T_cold_K": 187.2,
+     "T_hot_K": 192.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7553.80637310822,
+     "T_cold_K": 187.05,
+     "T_hot_K": 192.05,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7581.375009506426,
+     "T_cold_K": 186.9,
+     "T_hot_K": 191.9,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 7608.943645904631,
+     "T_cold_K": 186.75,
+     "T_hot_K": 191.75,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7636.512282302836,
+     "T_cold_K": 186.6,
+     "T_hot_K": 191.6,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7664.080918701042,
+     "T_cold_K": 186.45,
+     "T_hot_K": 191.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 7691.649555099247,
+     "T_cold_K": 186.3,
+     "T_hot_K": 191.3,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7719.218191497452,
+     "T_cold_K": 186.15,
+     "T_hot_K": 191.15,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7746.786827895658,
+     "T_cold_K": 186.0,
+     "T_hot_K": 191.0,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 7774.3554642938625,
+     "T_cold_K": 185.85,
+     "T_hot_K": 190.85,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7801.924100692067,
+     "T_cold_K": 185.7,
+     "T_hot_K": 190.7,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7829.492737090272,
+     "T_cold_K": 185.55,
+     "T_hot_K": 190.55,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7857.061373488478,
+     "T_cold_K": 185.4,
+     "T_hot_K": 190.4,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 7884.630009886683,
+     "T_cold_K": 185.25,
+     "T_hot_K": 190.25,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7912.198646284888,
+     "T_cold_K": 185.1,
+     "T_hot_K": 190.1,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7939.767282683094,
+     "T_cold_K": 184.95,
+     "T_hot_K": 189.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 7967.335919081299,
+     "T_cold_K": 184.8,
+     "T_hot_K": 189.8,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7994.904555479504,
+     "T_cold_K": 184.65,
+     "T_hot_K": 189.65,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 8022.47319187771,
+     "T_cold_K": 184.5,
+     "T_hot_K": 189.5,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 8050.041828275915,
+     "T_cold_K": 184.35,
+     "T_hot_K": 189.35,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 8077.610464674119,
+     "T_cold_K": 184.2,
+     "T_hot_K": 189.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 8105.179101072324,
+     "T_cold_K": 184.05,
+     "T_hot_K": 189.05,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 8132.74773747053,
+     "T_cold_K": 183.9,
+     "T_hot_K": 188.9,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641353
+    },
+    {
+     "Q_kW": 8160.316373868734,
+     "T_cold_K": 183.75,
+     "T_hot_K": 188.75,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 8187.885010266939,
+     "T_cold_K": 183.6,
+     "T_hot_K": 188.6,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 8215.453646665146,
+     "T_cold_K": 183.45,
+     "T_hot_K": 188.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641353
+    },
+    {
+     "Q_kW": 8243.02228306335,
+     "T_cold_K": 183.3,
+     "T_hot_K": 188.3,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 8270.590919461556,
+     "T_cold_K": 183.15,
+     "T_hot_K": 188.15,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 8298.159555859762,
+     "T_cold_K": 183.0,
+     "T_hot_K": 188.0,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 8325.728192257966,
+     "T_cold_K": 182.85,
+     "T_hot_K": 187.85,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 8353.296828656172,
+     "T_cold_K": 182.7,
+     "T_hot_K": 187.7,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 8380.865465054376,
+     "T_cold_K": 182.55,
+     "T_hot_K": 187.55,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 8408.434101452582,
+     "T_cold_K": 182.39999999999998,
+     "T_hot_K": 187.39999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 8436.002737850788,
+     "T_cold_K": 182.25,
+     "T_hot_K": 187.25,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 8463.571374248992,
+     "T_cold_K": 182.1,
+     "T_hot_K": 187.1,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 8491.140010647197,
+     "T_cold_K": 181.95,
+     "T_hot_K": 186.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 8518.708647045401,
+     "T_cold_K": 181.8,
+     "T_hot_K": 186.8,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 8546.277283443607,
+     "T_cold_K": 181.65,
+     "T_hot_K": 186.65,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 8573.845919841813,
+     "T_cold_K": 181.5,
+     "T_hot_K": 186.5,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 8601.414556240017,
+     "T_cold_K": 181.35,
+     "T_hot_K": 186.35,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 8628.983192638223,
+     "T_cold_K": 181.2,
+     "T_hot_K": 186.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 8656.551829036427,
+     "T_cold_K": 181.05,
+     "T_hot_K": 186.05,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 8684.120465434633,
+     "T_cold_K": 180.9,
+     "T_hot_K": 185.9,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 8711.689101832839,
+     "T_cold_K": 180.75,
+     "T_hot_K": 185.75,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 8739.257738231043,
+     "T_cold_K": 180.60000000000002,
+     "T_hot_K": 185.60000000000002,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 8766.826374629249,
+     "T_cold_K": 180.45,
+     "T_hot_K": 185.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 8794.395011027455,
+     "T_cold_K": 180.3,
+     "T_hot_K": 185.3,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 8821.963647425659,
+     "T_cold_K": 180.15,
+     "T_hot_K": 185.15,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 8849.532283823864,
+     "T_cold_K": 180.0,
+     "T_hot_K": 185.0,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 8877.10092022207,
+     "T_cold_K": 179.85,
+     "T_hot_K": 184.85,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 8904.669556620274,
+     "T_cold_K": 179.7,
+     "T_hot_K": 184.7,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 8932.23819301848,
+     "T_cold_K": 179.55,
+     "T_hot_K": 184.55,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 8959.806829416686,
+     "T_cold_K": 179.39999999999998,
+     "T_hot_K": 184.39999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 8987.37546581489,
+     "T_cold_K": 179.25,
+     "T_hot_K": 184.25,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 9014.944102213096,
+     "T_cold_K": 179.1,
+     "T_hot_K": 184.1,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9042.512738611302,
+     "T_cold_K": 178.95,
+     "T_hot_K": 183.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9070.081375009506,
+     "T_cold_K": 178.8,
+     "T_hot_K": 183.8,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 9097.650011407712,
+     "T_cold_K": 178.65,
+     "T_hot_K": 183.65,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9125.218647805917,
+     "T_cold_K": 178.5,
+     "T_hot_K": 183.5,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9152.787284204122,
+     "T_cold_K": 178.35,
+     "T_hot_K": 183.35,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 9180.355920602327,
+     "T_cold_K": 178.2,
+     "T_hot_K": 183.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9207.924557000531,
+     "T_cold_K": 178.05,
+     "T_hot_K": 183.05,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 9235.493193398737,
+     "T_cold_K": 177.9,
+     "T_hot_K": 182.9,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9263.061829796941,
+     "T_cold_K": 177.75,
+     "T_hot_K": 182.75,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 9290.630466195147,
+     "T_cold_K": 177.6,
+     "T_hot_K": 182.6,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9318.199102593353,
+     "T_cold_K": 177.45,
+     "T_hot_K": 182.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9345.767738991557,
+     "T_cold_K": 177.3,
+     "T_hot_K": 182.3,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 9373.336375389763,
+     "T_cold_K": 177.15,
+     "T_hot_K": 182.15,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9400.905011787969,
+     "T_cold_K": 177.0,
+     "T_hot_K": 182.0,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9428.473648186173,
+     "T_cold_K": 176.85,
+     "T_hot_K": 181.85,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 9456.042284584379,
+     "T_cold_K": 176.7,
+     "T_hot_K": 181.7,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9483.610920982583,
+     "T_cold_K": 176.55,
+     "T_hot_K": 181.55,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 9511.179557380789,
+     "T_cold_K": 176.4,
+     "T_hot_K": 181.4,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9538.748193778994,
+     "T_cold_K": 176.25,
+     "T_hot_K": 181.25,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9566.316830177198,
+     "T_cold_K": 176.10000000000002,
+     "T_hot_K": 181.10000000000002,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 9593.885466575404,
+     "T_cold_K": 175.95,
+     "T_hot_K": 180.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9621.45410297361,
+     "T_cold_K": 175.8,
+     "T_hot_K": 180.8,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9649.022739371814,
+     "T_cold_K": 175.65,
+     "T_hot_K": 180.65,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 9676.59137577002,
+     "T_cold_K": 175.5,
+     "T_hot_K": 180.5,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9704.160012168226,
+     "T_cold_K": 175.35,
+     "T_hot_K": 180.35,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9731.72864856643,
+     "T_cold_K": 175.2,
+     "T_hot_K": 180.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 9759.297284964636,
+     "T_cold_K": 175.05,
+     "T_hot_K": 180.05,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9786.865921362842,
+     "T_cold_K": 174.9,
+     "T_hot_K": 179.9,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9814.434557761046,
+     "T_cold_K": 174.75,
+     "T_hot_K": 179.75,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 9842.003194159252,
+     "T_cold_K": 174.6,
+     "T_hot_K": 179.6,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9869.571830557457,
+     "T_cold_K": 174.45,
+     "T_hot_K": 179.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9897.140466955661,
+     "T_cold_K": 174.3,
+     "T_hot_K": 179.3,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 9924.709103353867,
+     "T_cold_K": 174.15,
+     "T_hot_K": 179.15,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9952.277739752073,
+     "T_cold_K": 174.0,
+     "T_hot_K": 179.0,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9979.846376150277,
+     "T_cold_K": 173.85,
+     "T_hot_K": 178.85,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 10007.415012548481,
+     "T_cold_K": 173.70000000000002,
+     "T_hot_K": 178.70000000000002,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 10034.983648946687,
+     "T_cold_K": 173.55,
+     "T_hot_K": 178.55,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10062.552285344893,
+     "T_cold_K": 173.4,
+     "T_hot_K": 178.4,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10090.120921743097,
+     "T_cold_K": 173.25,
+     "T_hot_K": 178.25,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 10117.689558141303,
+     "T_cold_K": 173.1,
+     "T_hot_K": 178.1,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10145.258194539509,
+     "T_cold_K": 172.95,
+     "T_hot_K": 177.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10172.826830937713,
+     "T_cold_K": 172.8,
+     "T_hot_K": 177.8,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 10200.395467335919,
+     "T_cold_K": 172.65,
+     "T_hot_K": 177.65,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10227.964103734124,
+     "T_cold_K": 172.5,
+     "T_hot_K": 177.5,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10255.532740132328,
+     "T_cold_K": 172.35000000000002,
+     "T_hot_K": 177.35000000000002,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 10283.101376530534,
+     "T_cold_K": 172.2,
+     "T_hot_K": 177.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10310.670012928738,
+     "T_cold_K": 172.05,
+     "T_hot_K": 177.05,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 10338.238649326944,
+     "T_cold_K": 171.9,
+     "T_hot_K": 176.9,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10365.80728572515,
+     "T_cold_K": 171.75,
+     "T_hot_K": 176.75,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10393.375922123354,
+     "T_cold_K": 171.60000000000002,
+     "T_hot_K": 176.60000000000002,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 10420.94455852156,
+     "T_cold_K": 171.45000000000002,
+     "T_hot_K": 176.45000000000002,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10448.513194919766,
+     "T_cold_K": 171.3,
+     "T_hot_K": 176.3,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10476.08183131797,
+     "T_cold_K": 171.15,
+     "T_hot_K": 176.15,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 10503.650467716176,
+     "T_cold_K": 171.0,
+     "T_hot_K": 176.0,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10531.21910411438,
+     "T_cold_K": 170.85000000000002,
+     "T_hot_K": 175.85000000000002,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 10558.787740512586,
+     "T_cold_K": 170.70000000000002,
+     "T_hot_K": 175.70000000000002,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10586.356376910791,
+     "T_cold_K": 170.55,
+     "T_hot_K": 175.55,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10613.925013308995,
+     "T_cold_K": 170.4,
+     "T_hot_K": 175.4,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 10641.493649707201,
+     "T_cold_K": 170.25,
+     "T_hot_K": 175.25,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10669.062286105407,
+     "T_cold_K": 170.1,
+     "T_hot_K": 175.1,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10696.630922503611,
+     "T_cold_K": 169.95000000000002,
+     "T_hot_K": 174.95000000000002,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 10724.199558901817,
+     "T_cold_K": 169.8,
+     "T_hot_K": 174.8,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10751.768195300023,
+     "T_cold_K": 169.65,
+     "T_hot_K": 174.65,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10779.336831698227,
+     "T_cold_K": 169.5,
+     "T_hot_K": 174.5,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 10806.905468096433,
+     "T_cold_K": 169.35000000000002,
+     "T_hot_K": 174.35000000000002,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10834.474104494639,
+     "T_cold_K": 169.2,
+     "T_hot_K": 174.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10862.042740892843,
+     "T_cold_K": 169.05,
+     "T_hot_K": 174.05,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 10889.611377291048,
+     "T_cold_K": 168.9,
+     "T_hot_K": 173.9,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10917.180013689254,
+     "T_cold_K": 168.75,
+     "T_hot_K": 173.75,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10944.748650087458,
+     "T_cold_K": 168.60000000000002,
+     "T_hot_K": 173.60000000000002,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 10972.317286485664,
+     "T_cold_K": 168.45,
+     "T_hot_K": 173.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10999.88592288387,
+     "T_cold_K": 168.3,
+     "T_hot_K": 173.3,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 11027.454559282074,
+     "T_cold_K": 168.15,
+     "T_hot_K": 173.15,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    }
+   ],
+   "min_approach_K": 5.0,
+   "pinch_temperature_K": 233.14999999999998,
+   "total_duty_kW": 11027.454559282074,
+   "ua_estimate_kW_per_K": 2205.4909118564174
+  },
+  "mche_technology": {
+   "note": "Large base-load trains commonly use a single coil-wound (spiral-wound) main cryogenic heat exchanger, which scales to much larger single-core duties than plate-fin technology.",
+   "typical_technology": "coil-wound (spiral-wound)"
+  },
+  "molecular_sieve": {
+   "bed_height_m": 2.003082185110099,
+   "bed_mass_kg": 11615.12455146952,
+   "bed_volume_m3": 16.1097427898329,
+   "n_beds": 2,
+   "regen_gas_flow_kg_s": 9.506426344208684,
+   "regen_heater_duty_kW": 5455.857349525137,
+   "standard_diameter_mm": 3200,
+   "water_removed_per_cycle_kg": 1277.6637006616472
+  },
+  "mr_blend": null,
+  "mr_makeup": null,
+  "notes": [
+   "Subcooling -100 C to -159 C (10,844 kW) needs a dedicated subcooling loop that this package does not size."
+  ],
+  "precool": {
+   "P_cond_Pa": 1369420.3848039038,
+   "P_evap_Pa": 97424.0612914412,
+   "T_cond_K": 313.15,
+   "T_evap_K": 230.14998852718796,
+   "compressor_power_kW": 9330.260277438663,
+   "cop": 1.3041678751460863,
+   "refrigerant_mass_flow_kg_s": 55.88478364326216
+  },
+  "precool_duty_kW": 12168.225720587116,
+  "precool_frame": {
+   "inlet_volume_flow_m3_h_max": 110000,
+   "inlet_volume_flow_m3_h_min": 55000,
+   "name": "E",
+   "nominal_impeller_diameter_mm": 1120,
+   "nominal_polytropic_efficiency": 0.78,
+   "nominal_polytropic_head_N_m_kg": 30000,
+   "nominal_speed_rpm": 4000
+  },
+  "precool_inlet_m3_h": 86361.34720249288,
+  "refrigerant_storage": {
+   "required_liquid_volume_m3": 40.23704422314876,
+   "standard_diameter_mm": 2591,
+   "vessel_length_m": 8.978058632305395,
+   "vessel_volume_m3": 47.33769908605736
+  },
+  "refrigerant_supply": null,
+  "storage_tank": {
+   "cargo_equivalent": 0.37545231137525464,
+   "required_volume_m3": 63826.892933793286
+  },
+  "subcooling_duty_kW": 10843.663649960707,
+  "trim_cooler": {
+   "air_mass_flow_kg_s": 206.994041386727,
+   "air_volumetric_flow_m3_s": 179.9948185971539,
+   "bay_length_m": 12.2,
+   "bay_width_m": 4.9,
+   "duty_kW": 2915.3040788906633,
+   "fan_power_kW_per_bay": 24.922359498067465,
+   "n_bays": 2,
+   "required_face_area_m2": 59.99827286571797,
+   "total_fan_power_kW": 49.84471899613493
+  },
+  "trim_cooler_duty_kW": 2915.3040788906633
+ },
+ "liq_frac_mr_supply": {
+  "absorber": {
+   "absorption_factor": 2.0,
+   "cross_section_area_m2": 10.429714380661816,
+   "diameter_m": 3.644108229697854,
+   "flooding_velocity_m_s": 0.19108357370993823,
+   "n_theoretical_stages": 6.622051819456376,
+   "packed_height_m": 3.311025909728188,
+   "superficial_gas_velocity_m_s": 0.14331268028245367
+  },
+  "basis": {
+   "ambient_T_K": 313.15,
+   "amine_density_kg_m3": 1010.0,
+   "amine_equilibrium_slope": 0.4,
+   "amine_liquid_to_gas": 0.8,
+   "c3_holdup_s": 300.0,
+   "c3_liquid_density_kg_m3": 500.0,
+   "capacity_mtpa": 2.0,
+   "cargo_size_m3": 170000.0,
+   "co2_in_mole_frac": 0.02,
+   "co2_out_mole_frac": 0.0005,
+   "condensate_density_kg_m3": 550.0,
+   "condensate_flow_m3_s": 0.015,
+   "contingency_days": 1.5,
+   "design_ambient_C_air_cooler": 35.0,
+   "end_C": -159.0,
+   "end_flash_inlet_P_Pa": 450000.0,
+   "end_flash_inlet_T_K": 113.15,
+   "feed_P_Pa": 5000000.0,
+   "feed_T_K": 298.15,
+   "feed_composition": {
+    "Ethane": 0.08,
+    "Methane": 0.85,
+    "Nitrogen": 0.03,
+    "Propane": 0.04
+   },
+   "flash_gas_discharge_P_Pa": 500000.0,
+   "fractionation_specs": [
+    {
+     "K_SB": null,
+     "bottom_allowance_m": 1.2,
+     "bottoms_residence_min": 5.0,
+     "cooling_approach_K": 10.0,
+     "cooling_medium_T_K": 308.15,
+     "downcomer_area_fraction": 0.12,
+     "flooding_fraction": 0.8,
+     "heavy_key": "Propane",
+     "hk_recovery_to_bottoms": 0.995,
+     "light_key": "Ethane",
+     "lk_recovery_to_distillate": 0.98,
+     "name": "deethanizer",
+     "pressure_drop_per_tray_Pa": 700.0,
+     "reflux_factor": 1.2,
+     "top_allowance_m": 1.5,
+     "top_pressure_Pa": 2600000.0,
+     "tray_efficiency": null,
+     "tray_spacing_m": 0.6
+    },
+    {
+     "K_SB": null,
+     "bottom_allowance_m": 1.2,
+     "bottoms_residence_min": 5.0,
+     "cooling_approach_K": 10.0,
+     "cooling_medium_T_K": 308.15,
+     "downcomer_area_fraction": 0.12,
+     "flooding_fraction": 0.8,
+     "heavy_key": "Isobutane",
+     "hk_recovery_to_bottoms": 0.98,
+     "light_key": "Propane",
+     "lk_recovery_to_distillate": 0.985,
+     "name": "depropanizer",
+     "pressure_drop_per_tray_Pa": 700.0,
+     "reflux_factor": 1.2,
+     "top_allowance_m": 1.5,
+     "top_pressure_Pa": 1700000.0,
+     "tray_efficiency": null,
+     "tray_spacing_m": 0.6
+    },
+    {
+     "K_SB": null,
+     "bottom_allowance_m": 1.2,
+     "bottoms_residence_min": 5.0,
+     "cooling_approach_K": 10.0,
+     "cooling_medium_T_K": 308.15,
+     "downcomer_area_fraction": 0.12,
+     "flooding_fraction": 0.8,
+     "heavy_key": "Isopentane",
+     "hk_recovery_to_bottoms": 0.98,
+     "light_key": "n-Butane",
+     "lk_recovery_to_distillate": 0.98,
+     "name": "debutanizer",
+     "pressure_drop_per_tray_Pa": 700.0,
+     "reflux_factor": 1.2,
+     "top_allowance_m": 1.5,
+     "top_pressure_Pa": 600000.0,
+     "tray_efficiency": null,
+     "tray_spacing_m": 0.6
+    }
+   ],
+   "include_refrigerant_supply": true,
+   "inlet_water_ppm_wt": 700.0,
+   "liquefaction_cp_kJ_kg_K": 2.9,
+   "lng_composition": null,
+   "lng_density_kg_m3": 450.0,
+   "lrc_T_cond_K": 236.15,
+   "lrc_T_evap_K": 173.15,
+   "lrc_blend": {
+    "Ethane": 0.35,
+    "Methane": 0.3,
+    "Nitrogen": 0.05,
+    "Propane": 0.3
+   },
+   "lrc_floor_C": -100.0,
+   "mche_U_W_m2K": 2500.0,
+   "mche_min_approach_K": 3.0,
+   "mr_annual_loss_fraction": 0.1,
+   "mr_charge_kmol": 8000.0,
+   "mr_target": {
+    "Ethane": 0.45,
+    "Methane": 0.4,
+    "Nitrogen": 0.05,
+    "Propane": 0.1
+   },
+   "ngl_feed_kmol_h": {
+    "Ethane": 320.0,
+    "Hexane": 40.0,
+    "Isobutane": 60.0,
+    "Isopentane": 50.0,
+    "Pentane": 50.0,
+    "Propane": 300.0,
+    "n-Butane": 100.0
+   },
+   "precool_cp_kJ_kg_K": 2.4,
+   "precool_from_C": 40.0,
+   "precool_to_C": -40.0,
+   "refrigerant_fill_days": 60.0,
+   "refrigerant_storage_factor": 2.75,
+   "shipping_interval_days": 4.0,
+   "storage_P_Pa": 110000.0,
+   "trim_cooler_cp_kJ_kg_K": 2.3,
+   "trim_cooler_dT_K": 20.0
+  },
+  "c3_charge_kg": 16765.43509297865,
+  "cascade": {
+   "lrc": {
+    "P_cond_Pa": 5355608.420532413,
+    "P_evap_Pa": 9089.772732560374,
+    "T_cond_K": 236.15,
+    "T_evap_K": 173.15,
+    "compressor_power_kW": 27218.54463579641,
+    "condensing_duty_kW": 38245.99919507848,
+    "refrigerant_mass_flow_kg_s": 37.610199823526315
+   },
+   "pmr": {
+    "P_cond_Pa": 1369420.3848039038,
+    "P_evap_Pa": 111121.16425719768,
+    "T_cond_K": 313.15,
+    "T_evap_K": 233.14999999999998,
+    "compressor_power_kW": 27389.537056773417,
+    "cop": 1.3963726044657725,
+    "refrigerant_mass_flow_kg_s": 172.80030801383322
+   },
+   "pmr_total_duty_kW": 38245.99919507848,
+   "total_compressor_power_kW": 54608.08169256983
+  },
+  "end_flash": {
+   "flash_temperature_K": 108.43122866767641,
+   "liquid_composition_mole_frac": {
+    "Ethane": 0.08350636792053026,
+    "Methane": 0.859902316825239,
+    "Nitrogen": 0.014836513952641435,
+    "Propane": 0.04175480130158936
+   },
+   "liquid_mass_flow_kg_s": 60.44213346003151,
+   "vapor_composition_mole_frac": {
+    "Ethane": 7.436640656604465e-05,
+    "Methane": 0.6242824015511591,
+    "Nitrogen": 0.37564291520128085,
+    "Propane": 3.1684099410629054e-07
+   },
+   "vapor_mass_flow_kg_s": 2.934042168026387,
+   "vapor_mass_fraction": 0.04629566456085475,
+   "vapor_mole_fraction": 0.04202665472364799
+  },
+  "feed_density_kg_m3": 42.40030638391382,
+  "feed_mass_flow_kg_s": 63.3761756280579,
+  "flash_gas_compressor": {
+   "P_in": 110000.0,
+   "T_in": 108.43122866767641,
+   "T_out_ideal": 186.4231859416751,
+   "Z_avg": 0.9691471486672323,
+   "gas_power_kW": 322.55323504447637,
+   "k_avg": 1.392851001640787,
+   "polytropic_exponent": 1.5664164067183373,
+   "polytropic_head_J_per_kg": 85749.11638162553,
+   "pressure_ratio": 4.545454545454546
+  },
+  "fractionation": {
+   "columns": [
+    {
+     "N_min": 11.566653084379748,
+     "N_real": 35,
+     "N_theoretical": 26.426908909617996,
+     "P_bottom_Pa": 2624500.0,
+     "P_top_Pa": 2600000.0,
+     "R": 2.0381213922286325,
+     "R_min": 1.6984344935238607,
+     "T_bottom_K": 374.5810676301564,
+     "T_top_K": 276.9523891607462,
+     "alpha_lk_hk": 2.2124576778060585,
+     "bottoms_bubble_h_J_mol": 20895.538283938284,
+     "bottoms_kg_h": 33317.13049978495,
+     "bottoms_kmol_h": {
+      "Ethane": 6.399999999999977,
+      "Hexane": 39.999999999998224,
+      "Isobutane": 59.999554963737836,
+      "Isopentane": 49.999999592344224,
+      "Pentane": 49.999999985836354,
+      "Propane": 298.5,
+      "n-Butane": 99.99989499960506
+     },
+     "condenser_duty_kW": 2322.588934983618,
+     "condenser_service": "refrigerated (propane/ethylene-class refrigerant)",
+     "diameter_bottom_m": 1.8868155496945347,
+     "diameter_m": 1.981,
+     "diameter_top_m": 1.3589134656517456,
+     "distillate_kg_h": 9496.129500215047,
+     "distillate_kmol_h": {
+      "Ethane": 313.6,
+      "Hexane": 1.7762403776846487e-12,
+      "Isobutane": 0.0004450362621631054,
+      "Isopentane": 4.0765577600050797e-07,
+      "Pentane": 1.4163644468075485e-08,
+      "Propane": 1.5,
+      "n-Butane": 0.00010500039493424879
+     },
+     "feed_tray_from_top": 21,
+     "flooding_governs": "bottom",
+     "height_m": 25.17555833017064,
+     "min_pressure_for_cooling_water_Pa": null,
+     "name": "deethanizer",
+     "notes": [
+      "No bubble point at 318 K for the distillate (above its critical temperature): a water/air-cooled total condenser is not possible at any pressure."
+     ],
+     "q": 1.0,
+     "reboiler_duty_kW": 3176.046352561156,
+     "theta": 1.4000410008561583,
+     "tray_efficiency": 0.7323453149009918
+    },
+    {
+     "N_min": 14.333216900630159,
+     "N_real": 41,
+     "N_theoretical": 32.26472751976233,
+     "P_bottom_Pa": 1728700.0,
+     "P_top_Pa": 1700000.0,
+     "R": 2.2004485079385656,
+     "R_min": 1.8337070899488048,
+     "T_bottom_K": 396.09311695716167,
+     "T_top_K": 320.90857994990404,
+     "alpha_lk_hk": 1.7567669571509907,
+     "bottoms_bubble_h_J_mol": 23948.219075427627,
+     "bottoms_kg_h": 20081.27234294256,
+     "bottoms_kmol_h": {
+      "Ethane": 2.4407720111696563e-06,
+      "Hexane": 39.999999999437975,
+      "Isobutane": 58.79956386446308,
+      "Isopentane": 49.999895833324345,
+      "Pentane": 49.99998792306351,
+      "Propane": 4.4775000000000205,
+      "n-Butane": 99.85976788155129
+     },
+     "condenser_duty_kW": 3413.975122845434,
+     "condenser_service": "cooling water / air",
+     "diameter_bottom_m": 1.9063367601545724,
+     "diameter_m": 1.981,
+     "diameter_top_m": 1.5708689834603529,
+     "distillate_kg_h": 13235.858156842394,
+     "distillate_kmol_h": {
+      "Ethane": 6.399997559227966,
+      "Hexane": 5.602514953569211e-10,
+      "Isobutane": 1.1999910992747544,
+      "Isopentane": 0.00010375901988034525,
+      "Pentane": 1.2062772843929296e-05,
+      "Propane": 294.0225,
+      "n-Butane": 0.14012711805376243
+     },
+     "feed_tray_from_top": 23,
+     "flooding_governs": "bottom",
+     "height_m": 27.871163952471242,
+     "min_pressure_for_cooling_water_Pa": null,
+     "name": "depropanizer",
+     "notes": [],
+     "q": 0.7690454138013019,
+     "reboiler_duty_kW": 3136.3714023131706,
+     "theta": 1.1519653506497578,
+     "tray_efficiency": 0.7654785001822727
+    },
+    {
+     "N_min": 12.081378842472022,
+     "N_real": 38,
+     "N_theoretical": 27.739318143764052,
+     "P_bottom_Pa": 626600.0,
+     "P_top_Pa": 600000.0,
+     "R": 1.8794085534199643,
+     "R_min": 1.566173794516637,
+     "T_bottom_K": 379.29590482870475,
+     "T_top_K": 323.8239518657939,
+     "alpha_lk_hk": 1.9045915394285813,
+     "bottoms_bubble_h_J_mol": 12367.533779304356,
+     "bottoms_kg_h": 10700.864961002957,
+     "bottoms_kmol_h": {
+      "Ethane": 1.4543555704356337e-17,
+      "Hexane": 39.9999927101748,
+      "Isobutane": 0.04321148374202011,
+      "Isopentane": 48.99989791665786,
+      "Pentane": 49.89394798453855,
+      "Propane": 9.208285076667266e-07,
+      "n-Butane": 1.9971953576310284
+     },
+     "condenser_duty_kW": 2424.0773745375777,
+     "condenser_service": "cooling water / air",
+     "diameter_bottom_m": 1.3598077554003258,
+     "diameter_m": 1.372,
+     "diameter_top_m": 1.2843536070926267,
+     "distillate_kg_h": 9380.407381939604,
+     "distillate_kmol_h": {
+      "Ethane": 2.4407720111551127e-06,
+      "Hexane": 7.289263170543516e-06,
+      "Isobutane": 58.75635238072106,
+      "Isopentane": 0.9999979166664872,
+      "Pentane": 0.10603993852495786,
+      "Propane": 4.477499079171513,
+      "n-Butane": 97.86257252392026
+     },
+     "feed_tray_from_top": 21,
+     "flooding_governs": "bottom",
+     "height_m": 26.019814662083252,
+     "min_pressure_for_cooling_water_Pa": null,
+     "name": "debutanizer",
+     "notes": [],
+     "q": 0.5649328393305918,
+     "reboiler_duty_kW": 1730.917238776092,
+     "theta": 1.2723432410459374,
+     "tray_efficiency": 0.7127362388983346
+    }
+   ],
+   "feed_kmol_h": {
+    "Ethane": 320.0,
+    "Hexane": 40.0,
+    "Isobutane": 60.0,
+    "Isopentane": 50.0,
+    "Pentane": 50.0,
+    "Propane": 300.0,
+    "n-Butane": 100.0
+   }
+  },
+  "inlet_separator": {
+   "liquid_holdup_volume_m3": 4.5,
+   "required_diameter_m": 2.5348870034420035,
+   "seam_to_seam_height_m": 3.4444691086680614,
+   "standard_diameter_mm": 2591,
+   "vapor_velocity_design_m_s": 0.2834864636973475,
+   "vapor_velocity_max_m_s": 0.370220067724363
+  },
+  "lrc_duty_kW": 11027.454559282074,
+  "mche_pinch": {
+   "area_estimate_m2": 882.196364742567,
+   "interval_report": [
+    {
+     "Q_kW": 27.568636398205186,
+     "T_cold_K": 227.99999999999997,
+     "T_hot_K": 232.99999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641037
+    },
+    {
+     "Q_kW": 55.13727279641037,
+     "T_cold_K": 227.84999999999997,
+     "T_hot_K": 232.84999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641037
+    },
+    {
+     "Q_kW": 82.70590919461556,
+     "T_cold_K": 227.7,
+     "T_hot_K": 232.7,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641037
+    },
+    {
+     "Q_kW": 110.27454559282074,
+     "T_cold_K": 227.54999999999998,
+     "T_hot_K": 232.54999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641037
+    },
+    {
+     "Q_kW": 137.84318199102592,
+     "T_cold_K": 227.39999999999998,
+     "T_hot_K": 232.39999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 165.41181838923112,
+     "T_cold_K": 227.24999999999997,
+     "T_hot_K": 232.24999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.51372727964104
+    },
+    {
+     "Q_kW": 192.9804547874363,
+     "T_cold_K": 227.09999999999997,
+     "T_hot_K": 232.09999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 220.5490911856415,
+     "T_cold_K": 226.95,
+     "T_hot_K": 231.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.51372727964104
+    },
+    {
+     "Q_kW": 248.1177275838467,
+     "T_cold_K": 226.79999999999998,
+     "T_hot_K": 231.79999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.51372727964104
+    },
+    {
+     "Q_kW": 275.68636398205183,
+     "T_cold_K": 226.64999999999998,
+     "T_hot_K": 231.64999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641029
+    },
+    {
+     "Q_kW": 303.25500038025706,
+     "T_cold_K": 226.49999999999997,
+     "T_hot_K": 231.49999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641046
+    },
+    {
+     "Q_kW": 330.82363677846223,
+     "T_cold_K": 226.34999999999997,
+     "T_hot_K": 231.34999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 358.39227317666746,
+     "T_cold_K": 226.2,
+     "T_hot_K": 231.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641046
+    },
+    {
+     "Q_kW": 385.9609095748726,
+     "T_cold_K": 226.04999999999998,
+     "T_hot_K": 231.04999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641023
+    },
+    {
+     "Q_kW": 413.52954597307775,
+     "T_cold_K": 225.89999999999998,
+     "T_hot_K": 230.89999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 441.098182371283,
+     "T_cold_K": 225.74999999999997,
+     "T_hot_K": 230.74999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641046
+    },
+    {
+     "Q_kW": 468.66681876948815,
+     "T_cold_K": 225.59999999999997,
+     "T_hot_K": 230.59999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 496.2354551676934,
+     "T_cold_K": 225.45,
+     "T_hot_K": 230.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641046
+    },
+    {
+     "Q_kW": 523.8040915658985,
+     "T_cold_K": 225.29999999999998,
+     "T_hot_K": 230.29999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641023
+    },
+    {
+     "Q_kW": 551.3727279641037,
+     "T_cold_K": 225.14999999999998,
+     "T_hot_K": 230.14999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 578.9413643623088,
+     "T_cold_K": 224.99999999999997,
+     "T_hot_K": 229.99999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 606.5100007605141,
+     "T_cold_K": 224.84999999999997,
+     "T_hot_K": 229.84999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641057
+    },
+    {
+     "Q_kW": 634.0786371587193,
+     "T_cold_K": 224.7,
+     "T_hot_K": 229.7,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 661.6472735569245,
+     "T_cold_K": 224.54999999999998,
+     "T_hot_K": 229.54999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 689.2159099551296,
+     "T_cold_K": 224.39999999999998,
+     "T_hot_K": 229.39999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 716.7845463533349,
+     "T_cold_K": 224.24999999999997,
+     "T_hot_K": 229.24999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641057
+    },
+    {
+     "Q_kW": 744.35318275154,
+     "T_cold_K": 224.09999999999997,
+     "T_hot_K": 229.09999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641012
+    },
+    {
+     "Q_kW": 771.9218191497451,
+     "T_cold_K": 223.95,
+     "T_hot_K": 228.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 799.4904555479504,
+     "T_cold_K": 223.79999999999998,
+     "T_hot_K": 228.79999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641057
+    },
+    {
+     "Q_kW": 827.0590919461555,
+     "T_cold_K": 223.64999999999998,
+     "T_hot_K": 228.64999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641012
+    },
+    {
+     "Q_kW": 854.6277283443608,
+     "T_cold_K": 223.49999999999997,
+     "T_hot_K": 228.49999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641057
+    },
+    {
+     "Q_kW": 882.196364742566,
+     "T_cold_K": 223.34999999999997,
+     "T_hot_K": 228.34999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 909.765001140771,
+     "T_cold_K": 223.2,
+     "T_hot_K": 228.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641012
+    },
+    {
+     "Q_kW": 937.3336375389763,
+     "T_cold_K": 223.04999999999998,
+     "T_hot_K": 228.04999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641057
+    },
+    {
+     "Q_kW": 964.9022739371815,
+     "T_cold_K": 222.89999999999998,
+     "T_hot_K": 227.89999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 992.4709103353867,
+     "T_cold_K": 222.74999999999997,
+     "T_hot_K": 227.74999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641057
+    },
+    {
+     "Q_kW": 1020.0395467335918,
+     "T_cold_K": 222.59999999999997,
+     "T_hot_K": 227.59999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641012
+    },
+    {
+     "Q_kW": 1047.608183131797,
+     "T_cold_K": 222.45,
+     "T_hot_K": 227.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1075.1768195300021,
+     "T_cold_K": 222.29999999999998,
+     "T_hot_K": 227.29999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1102.7454559282073,
+     "T_cold_K": 222.14999999999998,
+     "T_hot_K": 227.14999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1130.3140923264127,
+     "T_cold_K": 221.99999999999997,
+     "T_hot_K": 226.99999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 1157.8827287246177,
+     "T_cold_K": 221.84999999999997,
+     "T_hot_K": 226.84999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 1185.4513651228228,
+     "T_cold_K": 221.7,
+     "T_hot_K": 226.7,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1213.0200015210282,
+     "T_cold_K": 221.54999999999998,
+     "T_hot_K": 226.54999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 1240.5886379192334,
+     "T_cold_K": 221.39999999999998,
+     "T_hot_K": 226.39999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1268.1572743174386,
+     "T_cold_K": 221.24999999999997,
+     "T_hot_K": 226.24999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1295.7259107156437,
+     "T_cold_K": 221.09999999999997,
+     "T_hot_K": 226.09999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1323.294547113849,
+     "T_cold_K": 220.95,
+     "T_hot_K": 225.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1350.863183512054,
+     "T_cold_K": 220.79999999999998,
+     "T_hot_K": 225.79999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1378.4318199102593,
+     "T_cold_K": 220.64999999999998,
+     "T_hot_K": 225.64999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1406.0004563084644,
+     "T_cold_K": 220.49999999999997,
+     "T_hot_K": 225.49999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1433.5690927066698,
+     "T_cold_K": 220.35,
+     "T_hot_K": 225.35,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 1461.1377291048748,
+     "T_cold_K": 220.2,
+     "T_hot_K": 225.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 1488.70636550308,
+     "T_cold_K": 220.04999999999998,
+     "T_hot_K": 225.04999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1516.2750019012851,
+     "T_cold_K": 219.89999999999998,
+     "T_hot_K": 224.89999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1543.8436382994903,
+     "T_cold_K": 219.74999999999997,
+     "T_hot_K": 224.74999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1571.4122746976957,
+     "T_cold_K": 219.59999999999997,
+     "T_hot_K": 224.59999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 1598.9809110959009,
+     "T_cold_K": 219.45,
+     "T_hot_K": 224.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1626.549547494106,
+     "T_cold_K": 219.29999999999998,
+     "T_hot_K": 224.29999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1654.118183892311,
+     "T_cold_K": 219.14999999999998,
+     "T_hot_K": 224.14999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 1681.6868202905162,
+     "T_cold_K": 218.99999999999997,
+     "T_hot_K": 223.99999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1709.2554566887216,
+     "T_cold_K": 218.85,
+     "T_hot_K": 223.85,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 1736.8240930869267,
+     "T_cold_K": 218.7,
+     "T_hot_K": 223.7,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1764.392729485132,
+     "T_cold_K": 218.54999999999998,
+     "T_hot_K": 223.54999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1791.961365883337,
+     "T_cold_K": 218.39999999999998,
+     "T_hot_K": 223.39999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1819.530002281542,
+     "T_cold_K": 218.24999999999997,
+     "T_hot_K": 223.24999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 1847.0986386797476,
+     "T_cold_K": 218.1,
+     "T_hot_K": 223.1,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641126
+    },
+    {
+     "Q_kW": 1874.6672750779526,
+     "T_cold_K": 217.95,
+     "T_hot_K": 222.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 1902.2359114761578,
+     "T_cold_K": 217.79999999999998,
+     "T_hot_K": 222.79999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1929.804547874363,
+     "T_cold_K": 217.64999999999998,
+     "T_hot_K": 222.64999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1957.373184272568,
+     "T_cold_K": 217.49999999999997,
+     "T_hot_K": 222.49999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 1984.9418206707735,
+     "T_cold_K": 217.35,
+     "T_hot_K": 222.35,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2012.5104570689787,
+     "T_cold_K": 217.2,
+     "T_hot_K": 222.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641034
+    },
+    {
+     "Q_kW": 2040.0790934671836,
+     "T_cold_K": 217.04999999999998,
+     "T_hot_K": 222.04999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 2067.647729865389,
+     "T_cold_K": 216.89999999999998,
+     "T_hot_K": 221.89999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2095.216366263594,
+     "T_cold_K": 216.74999999999997,
+     "T_hot_K": 221.74999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 2122.7850026617994,
+     "T_cold_K": 216.6,
+     "T_hot_K": 221.6,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2150.3536390600043,
+     "T_cold_K": 216.45,
+     "T_hot_K": 221.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 2177.9222754582097,
+     "T_cold_K": 216.29999999999998,
+     "T_hot_K": 221.29999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2205.4909118564146,
+     "T_cold_K": 216.14999999999998,
+     "T_hot_K": 221.14999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 2233.05954825462,
+     "T_cold_K": 215.99999999999997,
+     "T_hot_K": 220.99999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2260.6281846528254,
+     "T_cold_K": 215.85,
+     "T_hot_K": 220.85,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2288.1968210510304,
+     "T_cold_K": 215.7,
+     "T_hot_K": 220.7,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 2315.7654574492353,
+     "T_cold_K": 215.54999999999998,
+     "T_hot_K": 220.54999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 2343.3340938474407,
+     "T_cold_K": 215.39999999999998,
+     "T_hot_K": 220.39999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2370.9027302456457,
+     "T_cold_K": 215.25,
+     "T_hot_K": 220.25,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 2398.471366643851,
+     "T_cold_K": 215.1,
+     "T_hot_K": 220.1,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2426.0400030420565,
+     "T_cold_K": 214.95,
+     "T_hot_K": 219.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2453.6086394402614,
+     "T_cold_K": 214.79999999999998,
+     "T_hot_K": 219.79999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 2481.177275838467,
+     "T_cold_K": 214.64999999999998,
+     "T_hot_K": 219.64999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2508.7459122366718,
+     "T_cold_K": 214.5,
+     "T_hot_K": 219.5,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 2536.314548634877,
+     "T_cold_K": 214.35,
+     "T_hot_K": 219.35,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2563.883185033082,
+     "T_cold_K": 214.2,
+     "T_hot_K": 219.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 2591.4518214312875,
+     "T_cold_K": 214.04999999999998,
+     "T_hot_K": 219.04999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2619.0204578294924,
+     "T_cold_K": 213.89999999999998,
+     "T_hot_K": 218.89999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 2646.589094227698,
+     "T_cold_K": 213.74999999999997,
+     "T_hot_K": 218.74999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2674.157730625903,
+     "T_cold_K": 213.6,
+     "T_hot_K": 218.6,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 2701.726367024108,
+     "T_cold_K": 213.45,
+     "T_hot_K": 218.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2729.2950034223136,
+     "T_cold_K": 213.29999999999998,
+     "T_hot_K": 218.29999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2756.8636398205185,
+     "T_cold_K": 213.14999999999998,
+     "T_hot_K": 218.14999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 2784.432276218724,
+     "T_cold_K": 212.99999999999997,
+     "T_hot_K": 217.99999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2812.000912616929,
+     "T_cold_K": 212.85,
+     "T_hot_K": 217.85,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 2839.5695490151343,
+     "T_cold_K": 212.7,
+     "T_hot_K": 217.7,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2867.1381854133397,
+     "T_cold_K": 212.54999999999998,
+     "T_hot_K": 217.54999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2894.706821811544,
+     "T_cold_K": 212.39999999999998,
+     "T_hot_K": 217.39999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640898
+    },
+    {
+     "Q_kW": 2922.2754582097496,
+     "T_cold_K": 212.24999999999997,
+     "T_hot_K": 217.24999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 2949.8440946079545,
+     "T_cold_K": 212.1,
+     "T_hot_K": 217.1,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 2977.41273100616,
+     "T_cold_K": 211.95,
+     "T_hot_K": 216.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3004.9813674043653,
+     "T_cold_K": 211.79999999999998,
+     "T_hot_K": 216.79999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3032.5500038025702,
+     "T_cold_K": 211.64999999999998,
+     "T_hot_K": 216.64999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 3060.1186402007756,
+     "T_cold_K": 211.49999999999997,
+     "T_hot_K": 216.49999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3087.6872765989806,
+     "T_cold_K": 211.35,
+     "T_hot_K": 216.35,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 3115.255912997186,
+     "T_cold_K": 211.2,
+     "T_hot_K": 216.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3142.8245493953914,
+     "T_cold_K": 211.04999999999998,
+     "T_hot_K": 216.04999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3170.3931857935963,
+     "T_cold_K": 210.89999999999998,
+     "T_hot_K": 215.89999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 3197.9618221918017,
+     "T_cold_K": 210.74999999999997,
+     "T_hot_K": 215.74999999999997,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3225.5304585900067,
+     "T_cold_K": 210.6,
+     "T_hot_K": 215.6,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 3253.099094988212,
+     "T_cold_K": 210.45,
+     "T_hot_K": 215.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3280.6677313864175,
+     "T_cold_K": 210.29999999999998,
+     "T_hot_K": 215.29999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3308.236367784622,
+     "T_cold_K": 210.14999999999998,
+     "T_hot_K": 215.14999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640898
+    },
+    {
+     "Q_kW": 3335.8050041828274,
+     "T_cold_K": 210.0,
+     "T_hot_K": 215.0,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3363.3736405810323,
+     "T_cold_K": 209.85,
+     "T_hot_K": 214.85,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 3390.9422769792377,
+     "T_cold_K": 209.7,
+     "T_hot_K": 214.7,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3418.510913377443,
+     "T_cold_K": 209.54999999999998,
+     "T_hot_K": 214.54999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3446.079549775648,
+     "T_cold_K": 209.39999999999998,
+     "T_hot_K": 214.39999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 3473.6481861738534,
+     "T_cold_K": 209.25,
+     "T_hot_K": 214.25,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3501.2168225720584,
+     "T_cold_K": 209.1,
+     "T_hot_K": 214.1,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 3528.785458970264,
+     "T_cold_K": 208.95,
+     "T_hot_K": 213.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3556.354095368469,
+     "T_cold_K": 208.79999999999998,
+     "T_hot_K": 213.79999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3583.922731766674,
+     "T_cold_K": 208.64999999999998,
+     "T_hot_K": 213.64999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 3611.4913681648795,
+     "T_cold_K": 208.5,
+     "T_hot_K": 213.5,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3639.060004563084,
+     "T_cold_K": 208.35,
+     "T_hot_K": 213.35,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640898
+    },
+    {
+     "Q_kW": 3666.6286409612894,
+     "T_cold_K": 208.2,
+     "T_hot_K": 213.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3694.1972773594953,
+     "T_cold_K": 208.04999999999998,
+     "T_hot_K": 213.04999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 3721.7659137576998,
+     "T_cold_K": 207.89999999999998,
+     "T_hot_K": 212.89999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640898
+    },
+    {
+     "Q_kW": 3749.334550155905,
+     "T_cold_K": 207.75,
+     "T_hot_K": 212.75,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3776.90318655411,
+     "T_cold_K": 207.6,
+     "T_hot_K": 212.6,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 3804.4718229523155,
+     "T_cold_K": 207.45,
+     "T_hot_K": 212.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3832.040459350521,
+     "T_cold_K": 207.29999999999998,
+     "T_hot_K": 212.29999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3859.609095748726,
+     "T_cold_K": 207.14999999999998,
+     "T_hot_K": 212.14999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 3887.1777321469312,
+     "T_cold_K": 207.0,
+     "T_hot_K": 212.0,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3914.746368545136,
+     "T_cold_K": 206.85,
+     "T_hot_K": 211.85,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 3942.3150049433416,
+     "T_cold_K": 206.7,
+     "T_hot_K": 211.7,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3969.883641341547,
+     "T_cold_K": 206.54999999999998,
+     "T_hot_K": 211.54999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 3997.452277739752,
+     "T_cold_K": 206.39999999999998,
+     "T_hot_K": 211.39999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4025.0209141379573,
+     "T_cold_K": 206.25,
+     "T_hot_K": 211.25,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 4052.589550536162,
+     "T_cold_K": 206.1,
+     "T_hot_K": 211.1,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640898
+    },
+    {
+     "Q_kW": 4080.158186934367,
+     "T_cold_K": 205.95,
+     "T_hot_K": 210.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.5137272796410794
+    },
+    {
+     "Q_kW": 4107.726823332573,
+     "T_cold_K": 205.79999999999998,
+     "T_hot_K": 210.79999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 4135.295459730778,
+     "T_cold_K": 205.64999999999998,
+     "T_hot_K": 210.64999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4162.864096128983,
+     "T_cold_K": 205.5,
+     "T_hot_K": 210.5,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4190.432732527188,
+     "T_cold_K": 205.35,
+     "T_hot_K": 210.35,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4218.001368925394,
+     "T_cold_K": 205.2,
+     "T_hot_K": 210.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 4245.570005323599,
+     "T_cold_K": 205.04999999999998,
+     "T_hot_K": 210.04999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4273.138641721804,
+     "T_cold_K": 204.89999999999998,
+     "T_hot_K": 209.89999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4300.707278120009,
+     "T_cold_K": 204.75,
+     "T_hot_K": 209.75,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4328.2759145182135,
+     "T_cold_K": 204.6,
+     "T_hot_K": 209.6,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4355.844550916419,
+     "T_cold_K": 204.45,
+     "T_hot_K": 209.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 4383.413187314624,
+     "T_cold_K": 204.29999999999998,
+     "T_hot_K": 209.29999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4410.981823712829,
+     "T_cold_K": 204.14999999999998,
+     "T_hot_K": 209.14999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4438.550460111035,
+     "T_cold_K": 204.0,
+     "T_hot_K": 209.0,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 4466.11909650924,
+     "T_cold_K": 203.85,
+     "T_hot_K": 208.85,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4493.687732907445,
+     "T_cold_K": 203.7,
+     "T_hot_K": 208.7,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4521.256369305651,
+     "T_cold_K": 203.54999999999998,
+     "T_hot_K": 208.54999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 4548.825005703856,
+     "T_cold_K": 203.39999999999998,
+     "T_hot_K": 208.39999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4576.393642102061,
+     "T_cold_K": 203.25,
+     "T_hot_K": 208.25,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4603.962278500266,
+     "T_cold_K": 203.1,
+     "T_hot_K": 208.1,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4631.530914898471,
+     "T_cold_K": 202.95,
+     "T_hot_K": 207.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4659.0995512966765,
+     "T_cold_K": 202.79999999999998,
+     "T_hot_K": 207.79999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 4686.668187694881,
+     "T_cold_K": 202.64999999999998,
+     "T_hot_K": 207.64999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4714.236824093086,
+     "T_cold_K": 202.5,
+     "T_hot_K": 207.5,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4741.805460491291,
+     "T_cold_K": 202.35,
+     "T_hot_K": 207.35,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4769.374096889497,
+     "T_cold_K": 202.2,
+     "T_hot_K": 207.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 4796.942733287702,
+     "T_cold_K": 202.04999999999998,
+     "T_hot_K": 207.04999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4824.511369685907,
+     "T_cold_K": 201.89999999999998,
+     "T_hot_K": 206.89999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4852.080006084113,
+     "T_cold_K": 201.75,
+     "T_hot_K": 206.75,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 4879.648642482318,
+     "T_cold_K": 201.6,
+     "T_hot_K": 206.6,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4907.217278880523,
+     "T_cold_K": 201.45,
+     "T_hot_K": 206.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4934.785915278729,
+     "T_cold_K": 201.29999999999998,
+     "T_hot_K": 206.29999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 4962.354551676934,
+     "T_cold_K": 201.14999999999998,
+     "T_hot_K": 206.14999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 4989.923188075139,
+     "T_cold_K": 201.0,
+     "T_hot_K": 206.0,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5017.4918244733435,
+     "T_cold_K": 200.85,
+     "T_hot_K": 205.85,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5045.0604608715485,
+     "T_cold_K": 200.7,
+     "T_hot_K": 205.7,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5072.629097269754,
+     "T_cold_K": 200.54999999999998,
+     "T_hot_K": 205.54999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 5100.197733667959,
+     "T_cold_K": 200.39999999999998,
+     "T_hot_K": 205.39999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5127.766370066164,
+     "T_cold_K": 200.25,
+     "T_hot_K": 205.25,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5155.335006464369,
+     "T_cold_K": 200.1,
+     "T_hot_K": 205.1,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5182.903642862575,
+     "T_cold_K": 199.95,
+     "T_hot_K": 204.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 5210.47227926078,
+     "T_cold_K": 199.79999999999998,
+     "T_hot_K": 204.79999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5238.040915658985,
+     "T_cold_K": 199.64999999999998,
+     "T_hot_K": 204.64999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5265.60955205719,
+     "T_cold_K": 199.5,
+     "T_hot_K": 204.5,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5293.178188455396,
+     "T_cold_K": 199.35,
+     "T_hot_K": 204.35,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 5320.746824853601,
+     "T_cold_K": 199.2,
+     "T_hot_K": 204.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5348.315461251806,
+     "T_cold_K": 199.04999999999998,
+     "T_hot_K": 204.04999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5375.884097650011,
+     "T_cold_K": 198.89999999999998,
+     "T_hot_K": 203.89999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 5403.452734048216,
+     "T_cold_K": 198.75,
+     "T_hot_K": 203.75,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5431.021370446421,
+     "T_cold_K": 198.6,
+     "T_hot_K": 203.6,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5458.590006844627,
+     "T_cold_K": 198.45,
+     "T_hot_K": 203.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 5486.158643242832,
+     "T_cold_K": 198.29999999999998,
+     "T_hot_K": 203.29999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5513.727279641037,
+     "T_cold_K": 198.14999999999998,
+     "T_hot_K": 203.14999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5541.295916039242,
+     "T_cold_K": 198.0,
+     "T_hot_K": 203.0,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5568.864552437448,
+     "T_cold_K": 197.85,
+     "T_hot_K": 202.85,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 5596.433188835653,
+     "T_cold_K": 197.7,
+     "T_hot_K": 202.7,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5624.001825233858,
+     "T_cold_K": 197.54999999999998,
+     "T_hot_K": 202.54999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5651.570461632064,
+     "T_cold_K": 197.39999999999998,
+     "T_hot_K": 202.39999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 5679.1390980302685,
+     "T_cold_K": 197.25,
+     "T_hot_K": 202.25,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5706.7077344284735,
+     "T_cold_K": 197.1,
+     "T_hot_K": 202.1,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5734.276370826679,
+     "T_cold_K": 196.95,
+     "T_hot_K": 201.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 5761.845007224884,
+     "T_cold_K": 196.79999999999998,
+     "T_hot_K": 201.79999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5789.413643623088,
+     "T_cold_K": 196.65,
+     "T_hot_K": 201.65,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 5816.982280021293,
+     "T_cold_K": 196.5,
+     "T_hot_K": 201.5,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5844.550916419499,
+     "T_cold_K": 196.35,
+     "T_hot_K": 201.35,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 5872.119552817704,
+     "T_cold_K": 196.2,
+     "T_hot_K": 201.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5899.688189215909,
+     "T_cold_K": 196.05,
+     "T_hot_K": 201.05,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5927.256825614115,
+     "T_cold_K": 195.89999999999998,
+     "T_hot_K": 200.89999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 5954.82546201232,
+     "T_cold_K": 195.75,
+     "T_hot_K": 200.75,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 5982.394098410525,
+     "T_cold_K": 195.6,
+     "T_hot_K": 200.6,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6009.962734808731,
+     "T_cold_K": 195.45,
+     "T_hot_K": 200.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 6037.531371206936,
+     "T_cold_K": 195.3,
+     "T_hot_K": 200.3,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6065.1000076051405,
+     "T_cold_K": 195.15,
+     "T_hot_K": 200.15,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6092.668644003345,
+     "T_cold_K": 195.0,
+     "T_hot_K": 200.0,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6120.237280401551,
+     "T_cold_K": 194.85,
+     "T_hot_K": 199.85,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 6147.805916799756,
+     "T_cold_K": 194.7,
+     "T_hot_K": 199.7,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6175.374553197961,
+     "T_cold_K": 194.55,
+     "T_hot_K": 199.55,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6202.943189596167,
+     "T_cold_K": 194.39999999999998,
+     "T_hot_K": 199.39999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 6230.511825994372,
+     "T_cold_K": 194.25,
+     "T_hot_K": 199.25,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6258.080462392577,
+     "T_cold_K": 194.1,
+     "T_hot_K": 199.1,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6285.649098790783,
+     "T_cold_K": 193.95,
+     "T_hot_K": 198.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 6313.217735188988,
+     "T_cold_K": 193.79999999999998,
+     "T_hot_K": 198.79999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6340.786371587193,
+     "T_cold_K": 193.65,
+     "T_hot_K": 198.65,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6368.355007985398,
+     "T_cold_K": 193.5,
+     "T_hot_K": 198.5,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6395.9236443836035,
+     "T_cold_K": 193.35,
+     "T_hot_K": 198.35,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 6423.492280781808,
+     "T_cold_K": 193.2,
+     "T_hot_K": 198.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6451.060917180013,
+     "T_cold_K": 193.05,
+     "T_hot_K": 198.05,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6478.629553578219,
+     "T_cold_K": 192.89999999999998,
+     "T_hot_K": 197.89999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 6506.198189976424,
+     "T_cold_K": 192.75,
+     "T_hot_K": 197.75,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6533.766826374628,
+     "T_cold_K": 192.6,
+     "T_hot_K": 197.6,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 6561.335462772835,
+     "T_cold_K": 192.45,
+     "T_hot_K": 197.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641353
+    },
+    {
+     "Q_kW": 6588.904099171039,
+     "T_cold_K": 192.3,
+     "T_hot_K": 197.3,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 6616.472735569244,
+     "T_cold_K": 192.15,
+     "T_hot_K": 197.15,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6644.041371967449,
+     "T_cold_K": 192.0,
+     "T_hot_K": 197.0,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6671.610008365655,
+     "T_cold_K": 191.85,
+     "T_hot_K": 196.85,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 6699.17864476386,
+     "T_cold_K": 191.7,
+     "T_hot_K": 196.7,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6726.747281162065,
+     "T_cold_K": 191.55,
+     "T_hot_K": 196.55,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6754.3159175602705,
+     "T_cold_K": 191.39999999999998,
+     "T_hot_K": 196.39999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 6781.884553958475,
+     "T_cold_K": 191.25,
+     "T_hot_K": 196.25,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6809.45319035668,
+     "T_cold_K": 191.1,
+     "T_hot_K": 196.1,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6837.021826754886,
+     "T_cold_K": 190.95,
+     "T_hot_K": 195.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 6864.590463153091,
+     "T_cold_K": 190.79999999999998,
+     "T_hot_K": 195.79999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6892.159099551296,
+     "T_cold_K": 190.64999999999998,
+     "T_hot_K": 195.64999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6919.727735949501,
+     "T_cold_K": 190.5,
+     "T_hot_K": 195.5,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 6947.296372347707,
+     "T_cold_K": 190.35,
+     "T_hot_K": 195.35,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 6974.865008745912,
+     "T_cold_K": 190.2,
+     "T_hot_K": 195.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7002.433645144117,
+     "T_cold_K": 190.05,
+     "T_hot_K": 195.05,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7030.002281542323,
+     "T_cold_K": 189.89999999999998,
+     "T_hot_K": 194.89999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 7057.570917940528,
+     "T_cold_K": 189.75,
+     "T_hot_K": 194.75,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7085.1395543387325,
+     "T_cold_K": 189.6,
+     "T_hot_K": 194.6,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7112.708190736938,
+     "T_cold_K": 189.45,
+     "T_hot_K": 194.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 7140.276827135143,
+     "T_cold_K": 189.29999999999998,
+     "T_hot_K": 194.29999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7167.845463533348,
+     "T_cold_K": 189.14999999999998,
+     "T_hot_K": 194.14999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7195.414099931554,
+     "T_cold_K": 189.0,
+     "T_hot_K": 194.0,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 7222.982736329759,
+     "T_cold_K": 188.85,
+     "T_hot_K": 193.85,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7250.551372727964,
+     "T_cold_K": 188.7,
+     "T_hot_K": 193.7,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7278.120009126168,
+     "T_cold_K": 188.55,
+     "T_hot_K": 193.55,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 7305.688645524375,
+     "T_cold_K": 188.39999999999998,
+     "T_hot_K": 193.39999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641353
+    },
+    {
+     "Q_kW": 7333.257281922579,
+     "T_cold_K": 188.25,
+     "T_hot_K": 193.25,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 7360.825918320784,
+     "T_cold_K": 188.1,
+     "T_hot_K": 193.1,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7388.394554718991,
+     "T_cold_K": 187.95,
+     "T_hot_K": 192.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641353
+    },
+    {
+     "Q_kW": 7415.963191117195,
+     "T_cold_K": 187.8,
+     "T_hot_K": 192.8,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 7443.5318275153995,
+     "T_cold_K": 187.65,
+     "T_hot_K": 192.65,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7471.100463913605,
+     "T_cold_K": 187.5,
+     "T_hot_K": 192.5,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 7498.66910031181,
+     "T_cold_K": 187.35,
+     "T_hot_K": 192.35,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7526.237736710015,
+     "T_cold_K": 187.2,
+     "T_hot_K": 192.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7553.80637310822,
+     "T_cold_K": 187.05,
+     "T_hot_K": 192.05,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7581.375009506426,
+     "T_cold_K": 186.9,
+     "T_hot_K": 191.9,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 7608.943645904631,
+     "T_cold_K": 186.75,
+     "T_hot_K": 191.75,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7636.512282302836,
+     "T_cold_K": 186.6,
+     "T_hot_K": 191.6,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7664.080918701042,
+     "T_cold_K": 186.45,
+     "T_hot_K": 191.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 7691.649555099247,
+     "T_cold_K": 186.3,
+     "T_hot_K": 191.3,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7719.218191497452,
+     "T_cold_K": 186.15,
+     "T_hot_K": 191.15,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7746.786827895658,
+     "T_cold_K": 186.0,
+     "T_hot_K": 191.0,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 7774.3554642938625,
+     "T_cold_K": 185.85,
+     "T_hot_K": 190.85,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7801.924100692067,
+     "T_cold_K": 185.7,
+     "T_hot_K": 190.7,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7829.492737090272,
+     "T_cold_K": 185.55,
+     "T_hot_K": 190.55,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7857.061373488478,
+     "T_cold_K": 185.4,
+     "T_hot_K": 190.4,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 7884.630009886683,
+     "T_cold_K": 185.25,
+     "T_hot_K": 190.25,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7912.198646284888,
+     "T_cold_K": 185.1,
+     "T_hot_K": 190.1,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7939.767282683094,
+     "T_cold_K": 184.95,
+     "T_hot_K": 189.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 7967.335919081299,
+     "T_cold_K": 184.8,
+     "T_hot_K": 189.8,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 7994.904555479504,
+     "T_cold_K": 184.65,
+     "T_hot_K": 189.65,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 8022.47319187771,
+     "T_cold_K": 184.5,
+     "T_hot_K": 189.5,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 8050.041828275915,
+     "T_cold_K": 184.35,
+     "T_hot_K": 189.35,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 8077.610464674119,
+     "T_cold_K": 184.2,
+     "T_hot_K": 189.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 8105.179101072324,
+     "T_cold_K": 184.05,
+     "T_hot_K": 189.05,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 8132.74773747053,
+     "T_cold_K": 183.9,
+     "T_hot_K": 188.9,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641353
+    },
+    {
+     "Q_kW": 8160.316373868734,
+     "T_cold_K": 183.75,
+     "T_hot_K": 188.75,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 8187.885010266939,
+     "T_cold_K": 183.6,
+     "T_hot_K": 188.6,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640989
+    },
+    {
+     "Q_kW": 8215.453646665146,
+     "T_cold_K": 183.45,
+     "T_hot_K": 188.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641353
+    },
+    {
+     "Q_kW": 8243.02228306335,
+     "T_cold_K": 183.3,
+     "T_hot_K": 188.3,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 8270.590919461556,
+     "T_cold_K": 183.15,
+     "T_hot_K": 188.15,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 8298.159555859762,
+     "T_cold_K": 183.0,
+     "T_hot_K": 188.0,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 8325.728192257966,
+     "T_cold_K": 182.85,
+     "T_hot_K": 187.85,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 8353.296828656172,
+     "T_cold_K": 182.7,
+     "T_hot_K": 187.7,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 8380.865465054376,
+     "T_cold_K": 182.55,
+     "T_hot_K": 187.55,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 8408.434101452582,
+     "T_cold_K": 182.39999999999998,
+     "T_hot_K": 187.39999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 8436.002737850788,
+     "T_cold_K": 182.25,
+     "T_hot_K": 187.25,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 8463.571374248992,
+     "T_cold_K": 182.1,
+     "T_hot_K": 187.1,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 8491.140010647197,
+     "T_cold_K": 181.95,
+     "T_hot_K": 186.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 8518.708647045401,
+     "T_cold_K": 181.8,
+     "T_hot_K": 186.8,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 8546.277283443607,
+     "T_cold_K": 181.65,
+     "T_hot_K": 186.65,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 8573.845919841813,
+     "T_cold_K": 181.5,
+     "T_hot_K": 186.5,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 8601.414556240017,
+     "T_cold_K": 181.35,
+     "T_hot_K": 186.35,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 8628.983192638223,
+     "T_cold_K": 181.2,
+     "T_hot_K": 186.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 8656.551829036427,
+     "T_cold_K": 181.05,
+     "T_hot_K": 186.05,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 8684.120465434633,
+     "T_cold_K": 180.9,
+     "T_hot_K": 185.9,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 8711.689101832839,
+     "T_cold_K": 180.75,
+     "T_hot_K": 185.75,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 8739.257738231043,
+     "T_cold_K": 180.60000000000002,
+     "T_hot_K": 185.60000000000002,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 8766.826374629249,
+     "T_cold_K": 180.45,
+     "T_hot_K": 185.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 8794.395011027455,
+     "T_cold_K": 180.3,
+     "T_hot_K": 185.3,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 8821.963647425659,
+     "T_cold_K": 180.15,
+     "T_hot_K": 185.15,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 8849.532283823864,
+     "T_cold_K": 180.0,
+     "T_hot_K": 185.0,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 8877.10092022207,
+     "T_cold_K": 179.85,
+     "T_hot_K": 184.85,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 8904.669556620274,
+     "T_cold_K": 179.7,
+     "T_hot_K": 184.7,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 8932.23819301848,
+     "T_cold_K": 179.55,
+     "T_hot_K": 184.55,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 8959.806829416686,
+     "T_cold_K": 179.39999999999998,
+     "T_hot_K": 184.39999999999998,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 8987.37546581489,
+     "T_cold_K": 179.25,
+     "T_hot_K": 184.25,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 9014.944102213096,
+     "T_cold_K": 179.1,
+     "T_hot_K": 184.1,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9042.512738611302,
+     "T_cold_K": 178.95,
+     "T_hot_K": 183.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9070.081375009506,
+     "T_cold_K": 178.8,
+     "T_hot_K": 183.8,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 9097.650011407712,
+     "T_cold_K": 178.65,
+     "T_hot_K": 183.65,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9125.218647805917,
+     "T_cold_K": 178.5,
+     "T_hot_K": 183.5,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9152.787284204122,
+     "T_cold_K": 178.35,
+     "T_hot_K": 183.35,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 9180.355920602327,
+     "T_cold_K": 178.2,
+     "T_hot_K": 183.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9207.924557000531,
+     "T_cold_K": 178.05,
+     "T_hot_K": 183.05,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 9235.493193398737,
+     "T_cold_K": 177.9,
+     "T_hot_K": 182.9,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9263.061829796941,
+     "T_cold_K": 177.75,
+     "T_hot_K": 182.75,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 9290.630466195147,
+     "T_cold_K": 177.6,
+     "T_hot_K": 182.6,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9318.199102593353,
+     "T_cold_K": 177.45,
+     "T_hot_K": 182.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9345.767738991557,
+     "T_cold_K": 177.3,
+     "T_hot_K": 182.3,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 9373.336375389763,
+     "T_cold_K": 177.15,
+     "T_hot_K": 182.15,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9400.905011787969,
+     "T_cold_K": 177.0,
+     "T_hot_K": 182.0,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9428.473648186173,
+     "T_cold_K": 176.85,
+     "T_hot_K": 181.85,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 9456.042284584379,
+     "T_cold_K": 176.7,
+     "T_hot_K": 181.7,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9483.610920982583,
+     "T_cold_K": 176.55,
+     "T_hot_K": 181.55,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 9511.179557380789,
+     "T_cold_K": 176.4,
+     "T_hot_K": 181.4,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9538.748193778994,
+     "T_cold_K": 176.25,
+     "T_hot_K": 181.25,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9566.316830177198,
+     "T_cold_K": 176.10000000000002,
+     "T_hot_K": 181.10000000000002,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 9593.885466575404,
+     "T_cold_K": 175.95,
+     "T_hot_K": 180.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9621.45410297361,
+     "T_cold_K": 175.8,
+     "T_hot_K": 180.8,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9649.022739371814,
+     "T_cold_K": 175.65,
+     "T_hot_K": 180.65,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 9676.59137577002,
+     "T_cold_K": 175.5,
+     "T_hot_K": 180.5,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9704.160012168226,
+     "T_cold_K": 175.35,
+     "T_hot_K": 180.35,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9731.72864856643,
+     "T_cold_K": 175.2,
+     "T_hot_K": 180.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 9759.297284964636,
+     "T_cold_K": 175.05,
+     "T_hot_K": 180.05,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9786.865921362842,
+     "T_cold_K": 174.9,
+     "T_hot_K": 179.9,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9814.434557761046,
+     "T_cold_K": 174.75,
+     "T_hot_K": 179.75,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 9842.003194159252,
+     "T_cold_K": 174.6,
+     "T_hot_K": 179.6,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9869.571830557457,
+     "T_cold_K": 174.45,
+     "T_hot_K": 179.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9897.140466955661,
+     "T_cold_K": 174.3,
+     "T_hot_K": 179.3,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 9924.709103353867,
+     "T_cold_K": 174.15,
+     "T_hot_K": 179.15,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9952.277739752073,
+     "T_cold_K": 174.0,
+     "T_hot_K": 179.0,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 9979.846376150277,
+     "T_cold_K": 173.85,
+     "T_hot_K": 178.85,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 10007.415012548481,
+     "T_cold_K": 173.70000000000002,
+     "T_hot_K": 178.70000000000002,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 10034.983648946687,
+     "T_cold_K": 173.55,
+     "T_hot_K": 178.55,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10062.552285344893,
+     "T_cold_K": 173.4,
+     "T_hot_K": 178.4,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10090.120921743097,
+     "T_cold_K": 173.25,
+     "T_hot_K": 178.25,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 10117.689558141303,
+     "T_cold_K": 173.1,
+     "T_hot_K": 178.1,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10145.258194539509,
+     "T_cold_K": 172.95,
+     "T_hot_K": 177.95,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10172.826830937713,
+     "T_cold_K": 172.8,
+     "T_hot_K": 177.8,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 10200.395467335919,
+     "T_cold_K": 172.65,
+     "T_hot_K": 177.65,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10227.964103734124,
+     "T_cold_K": 172.5,
+     "T_hot_K": 177.5,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10255.532740132328,
+     "T_cold_K": 172.35000000000002,
+     "T_hot_K": 177.35000000000002,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 10283.101376530534,
+     "T_cold_K": 172.2,
+     "T_hot_K": 177.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10310.670012928738,
+     "T_cold_K": 172.05,
+     "T_hot_K": 177.05,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 10338.238649326944,
+     "T_cold_K": 171.9,
+     "T_hot_K": 176.9,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10365.80728572515,
+     "T_cold_K": 171.75,
+     "T_hot_K": 176.75,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10393.375922123354,
+     "T_cold_K": 171.60000000000002,
+     "T_hot_K": 176.60000000000002,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 10420.94455852156,
+     "T_cold_K": 171.45000000000002,
+     "T_hot_K": 176.45000000000002,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10448.513194919766,
+     "T_cold_K": 171.3,
+     "T_hot_K": 176.3,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10476.08183131797,
+     "T_cold_K": 171.15,
+     "T_hot_K": 176.15,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 10503.650467716176,
+     "T_cold_K": 171.0,
+     "T_hot_K": 176.0,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10531.21910411438,
+     "T_cold_K": 170.85000000000002,
+     "T_hot_K": 175.85000000000002,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 10558.787740512586,
+     "T_cold_K": 170.70000000000002,
+     "T_hot_K": 175.70000000000002,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10586.356376910791,
+     "T_cold_K": 170.55,
+     "T_hot_K": 175.55,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10613.925013308995,
+     "T_cold_K": 170.4,
+     "T_hot_K": 175.4,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 10641.493649707201,
+     "T_cold_K": 170.25,
+     "T_hot_K": 175.25,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10669.062286105407,
+     "T_cold_K": 170.1,
+     "T_hot_K": 175.1,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10696.630922503611,
+     "T_cold_K": 169.95000000000002,
+     "T_hot_K": 174.95000000000002,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 10724.199558901817,
+     "T_cold_K": 169.8,
+     "T_hot_K": 174.8,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10751.768195300023,
+     "T_cold_K": 169.65,
+     "T_hot_K": 174.65,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10779.336831698227,
+     "T_cold_K": 169.5,
+     "T_hot_K": 174.5,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 10806.905468096433,
+     "T_cold_K": 169.35000000000002,
+     "T_hot_K": 174.35000000000002,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10834.474104494639,
+     "T_cold_K": 169.2,
+     "T_hot_K": 174.2,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10862.042740892843,
+     "T_cold_K": 169.05,
+     "T_hot_K": 174.05,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 10889.611377291048,
+     "T_cold_K": 168.9,
+     "T_hot_K": 173.9,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10917.180013689254,
+     "T_cold_K": 168.75,
+     "T_hot_K": 173.75,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10944.748650087458,
+     "T_cold_K": 168.60000000000002,
+     "T_hot_K": 173.60000000000002,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    },
+    {
+     "Q_kW": 10972.317286485664,
+     "T_cold_K": 168.45,
+     "T_hot_K": 173.45,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 10999.88592288387,
+     "T_cold_K": 168.3,
+     "T_hot_K": 173.3,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279641171
+    },
+    {
+     "Q_kW": 11027.454559282074,
+     "T_cold_K": 168.15,
+     "T_hot_K": 173.15,
+     "local_approach_K": 5.0,
+     "ua_slice_kW_per_K": 5.513727279640807
+    }
+   ],
+   "min_approach_K": 5.0,
+   "pinch_temperature_K": 233.14999999999998,
+   "total_duty_kW": 11027.454559282074,
+   "ua_estimate_kW_per_K": 2205.4909118564174
+  },
+  "mche_technology": {
+   "note": "Large base-load trains commonly use a single coil-wound (spiral-wound) main cryogenic heat exchanger, which scales to much larger single-core duties than plate-fin technology.",
+   "typical_technology": "coil-wound (spiral-wound)"
+  },
+  "molecular_sieve": {
+   "bed_height_m": 2.003082185110099,
+   "bed_mass_kg": 11615.12455146952,
+   "bed_volume_m3": 16.1097427898329,
+   "n_beds": 2,
+   "regen_gas_flow_kg_s": 9.506426344208684,
+   "regen_heater_duty_kW": 5455.857349525137,
+   "standard_diameter_mm": 3200,
+   "water_removed_per_cycle_kg": 1277.6637006616472
+  },
+  "mr_blend": {
+   "achieved": {
+    "Ethane": 0.4498889634264023,
+    "Hexane": 1.8878659698419544e-13,
+    "Isobutane": 0.0003995614438059811,
+    "Isopentane": 3.507578806341555e-08,
+    "Methane": 0.39988895387528184,
+    "Nitrogen": 0.0498889538752819,
+    "Pentane": 4.0303810078489375e-09,
+    "Propane": 0.09988679449023809,
+    "n-Butane": 4.673389367807215e-05
+   },
+   "max_abs_error": 0.0003995614438059811,
+   "reachable": true,
+   "source_kmol_per_kmol_mr": {
+    "ethane distillate": 0.4499038445938464,
+    "methane": 0.39988895387528184,
+    "nitrogen": 0.0498889538752819,
+    "propane distillate": 0.10031824776663589
+   },
+   "target": {
+    "Ethane": 0.45,
+    "Hexane": 0.0,
+    "Isobutane": 0.0,
+    "Isopentane": 0.0,
+    "Methane": 0.4,
+    "Nitrogen": 0.05,
+    "Pentane": 0.0,
+    "Propane": 0.1,
+    "n-Butane": 0.0
+   }
+  },
+  "mr_makeup": {
+   "by_source_kmol_h": {
+    "ethane distillate": 0.041087109095328436,
+    "methane": 0.03651953916669241,
+    "nitrogen": 0.004556068847057708,
+    "propane distillate": 0.009161483814304648
+   },
+   "makeup_kg_h": 2.353586016684744,
+   "makeup_kmol_h": 0.091324200913242
+  },
+  "notes": [
+   "Subcooling -100 C to -159 C (10,844 kW) needs a dedicated subcooling loop that this package does not size.",
+   "Nitrogen (12.3 t of demand) is not stored here: supplied from the nitrogen system.",
+   "Methane (42.4 t of demand) is not stored here: supplied from the fuel gas / feed gas.",
+   "Ethane cannot be stored at ambient (critical temperature 32 C): stored at -15 C and 30 bar design, needing refrigeration to hold it.",
+   "Feed scaled x0.022 (20.1 kmol/h): propane is the limiting product for a 60-day fill.",
+   "deethanizer: No bubble point at 318 K for the distillate (above its critical temperature): a water/air-cooled total condenser is not possible at any pressure.",
+   "deethanizer: Height/diameter = 60 > 30: consider splitting into two shells.",
+   "depropanizer: Height/diameter = 59 > 30: consider splitting into two shells.",
+   "debutanizer: Height/diameter = 55 > 30: consider splitting into two shells."
+  ],
+  "precool": {
+   "P_cond_Pa": 1369420.3848039038,
+   "P_evap_Pa": 97424.0612914412,
+   "T_cond_K": 313.15,
+   "T_evap_K": 230.14998852718796,
+   "compressor_power_kW": 9330.260277438663,
+   "cop": 1.3041678751460863,
+   "refrigerant_mass_flow_kg_s": 55.88478364326216
+  },
+  "precool_duty_kW": 12168.225720587116,
+  "precool_frame": {
+   "inlet_volume_flow_m3_h_max": 110000,
+   "inlet_volume_flow_m3_h_min": 55000,
+   "name": "E",
+   "nominal_impeller_diameter_mm": 1120,
+   "nominal_polytropic_efficiency": 0.78,
+   "nominal_polytropic_head_N_m_kg": 30000,
+   "nominal_speed_rpm": 4000
+  },
+  "precool_inlet_m3_h": 86361.34720249288,
+  "refrigerant_storage": {
+   "required_liquid_volume_m3": 40.23704422314876,
+   "standard_diameter_mm": 2591,
+   "vessel_length_m": 8.978058632305395,
+   "vessel_volume_m3": 47.33769908605736
+  },
+  "refrigerant_supply": {
+   "basis": {
+    "ambient_design_T_K": 318.15,
+    "ambient_storage_T_K": 308.15,
+    "annual_loss_fraction": 0.1,
+    "column_specs": null,
+    "ethane_storage_T_K": 258.15,
+    "ethane_upset_rise_K": 20.0,
+    "feed_margin": 0.1,
+    "fill_days": 60.0,
+    "loops": [
+     {
+      "charge_kg": 16765.43509297865,
+      "charge_kmol": null,
+      "composition": {
+       "Propane": 1.0
+      },
+      "name": "C3 precool"
+     },
+     {
+      "charge_kg": null,
+      "charge_kmol": 8000.0,
+      "composition": {
+       "Ethane": 0.35,
+       "Methane": 0.3,
+       "Nitrogen": 0.05,
+       "Propane": 0.3
+      },
+      "name": "LRC mixed refrigerant"
+     }
+    ],
+    "makeup_years": 1.0,
+    "ngl_available_kmol_h": null,
+    "ngl_feed_kmol_h": {
+     "Ethane": 320.0,
+     "Hexane": 40.0,
+     "Isobutane": 60.0,
+     "Isopentane": 50.0,
+     "Pentane": 50.0,
+     "Propane": 300.0,
+     "n-Butane": 100.0
+    },
+    "product_specs": null,
+    "storage_factor": 2.75
+   },
+   "demand": {
+    "by_component_kg": {
+     "Ethane": 92612.64319999999,
+     "Methane": 42352.992,
+     "Nitrogen": 12325.931199999999,
+     "Propane": 134854.41540227653
+    },
+    "by_component_kmol": {
+     "Ethane": 3080.0,
+     "Methane": 2640.0,
+     "Nitrogen": 439.99999999999994,
+     "Propane": 3058.226994025178
+    },
+    "charge_kg": {
+     "Ethane": 84193.31199999999,
+     "Methane": 38502.72,
+     "Nitrogen": 11205.392,
+     "Propane": 122594.92309297866
+    },
+    "makeup_kg": {
+     "Ethane": 8419.331199999999,
+     "Methane": 3850.2720000000004,
+     "Nitrogen": 1120.5392,
+     "Propane": 12259.492309297866
+    },
+    "total_kg": 282145.9818022765
+   },
+   "feed_scale": 0.021850030035792247,
+   "fill_days_achieved": {
+    "butane": 0.0,
+    "ethane": 50.72792186554178,
+    "propane": 54.545454545454554
+   },
+   "notes": [
+    "Nitrogen (12.3 t of demand) is not stored here: supplied from the nitrogen system.",
+    "Methane (42.4 t of demand) is not stored here: supplied from the fuel gas / feed gas.",
+    "Ethane cannot be stored at ambient (critical temperature 32 C): stored at -15 C and 30 bar design, needing refrigeration to hold it.",
+    "Feed scaled x0.022 (20.1 kmol/h): propane is the limiting product for a 60-day fill.",
+    "deethanizer: No bubble point at 318 K for the distillate (above its critical temperature): a water/air-cooled total condenser is not possible at any pressure.",
+    "deethanizer: Height/diameter = 60 > 30: consider splitting into two shells.",
+    "depropanizer: Height/diameter = 59 > 30: consider splitting into two shells.",
+    "debutanizer: Height/diameter = 55 > 30: consider splitting into two shells."
+   ],
+   "production": {
+    "butane": {
+     "component_kg_h": 198.90171730081397,
+     "coverage": Infinity,
+     "product": "butane",
+     "required_kg_h": 0.0,
+     "spec": {
+      "name": "butane",
+      "passed": true,
+      "violations": []
+     }
+    },
+    "ethane": {
+     "component_kg_h": 209.1918016037444,
+     "coverage": 1.182780563316482,
+     "product": "ethane",
+     "required_kg_h": 176.86442277777775,
+     "spec": {
+      "name": "ethane refrigerant",
+      "passed": true,
+      "violations": []
+     }
+    },
+    "propane": {
+     "component_kg_h": 283.28792124436563,
+     "coverage": 1.1,
+     "product": "propane",
+     "required_kg_h": 257.5344738585142,
+     "spec": {
+      "name": "propane refrigerant",
+      "passed": true,
+      "violations": []
+     }
+    }
+   },
+   "scaled_feed_kmol_h": {
+    "Ethane": 6.992009611453519,
+    "Hexane": 0.8740012014316899,
+    "Isobutane": 1.311001802147535,
+    "Isopentane": 1.0925015017896123,
+    "Pentane": 1.0925015017896123,
+    "Propane": 6.555009010737674,
+    "n-Butane": 2.1850030035792245
+   },
+   "storage": {
+    "Ethane": {
+     "capacity_kg": 254684.76879999996,
+     "capacity_range_kg": [
+      231531.60799999998,
+      277837.9296
+     ],
+     "component": "Ethane",
+     "demand_kg": 92612.64319999999,
+     "design_T_K": 278.15,
+     "design_pressure_Pa": 2957149.271348628,
+     "liquid_density_kg_m3": 432.74021034558314,
+     "n_vessels": 3,
+     "needs_refrigeration": true,
+     "storage_T_K": 258.15,
+     "total_volume_m3": 692.3995797049325,
+     "vessel": {
+      "required_liquid_volume_m3": 196.17988091639754,
+      "standard_diameter_mm": 4267,
+      "vessel_length_m": 16.139882689076266,
+      "vessel_volume_m3": 230.79985990164417
+     }
+    },
+    "Propane": {
+     "capacity_kg": 370849.64235626045,
+     "capacity_range_kg": [
+      337136.03850569134,
+      404563.24620682956
+     ],
+     "component": "Propane",
+     "demand_kg": 134854.41540227653,
+     "design_T_K": 318.15,
+     "design_pressure_Pa": 1687745.4753401543,
+     "liquid_density_kg_m3": 476.104830605839,
+     "n_vessels": 4,
+     "needs_refrigeration": false,
+     "storage_T_K": 308.15,
+     "total_volume_m3": 916.3815799443547,
+     "vessel": {
+      "required_liquid_volume_m3": 194.73108573817538,
+      "standard_diameter_mm": 4267,
+      "vessel_length_m": 16.020689099459553,
+      "vessel_volume_m3": 229.09539498608868
+     }
+    }
+   },
+   "train": {
+    "columns": [
+     {
+      "N_min": 13.378125569218506,
+      "N_real": 41,
+      "N_theoretical": 30.36649329944344,
+      "P_bottom_Pa": 2628700.0,
+      "P_top_Pa": 2600000.0,
+      "R": 2.0495476090133544,
+      "R_min": 1.7079563408444622,
+      "T_bottom_K": 375.95164773610577,
+      "T_top_K": 276.94903681613164,
+      "alpha_lk_hk": 2.206344980033012,
+      "bottoms_bubble_h_J_mol": 21158.799234381633,
+      "bottoms_kg_h": 724.8270077240317,
+      "bottoms_kmol_h": {
+       "Ethane": 0.03496004805726738,
+       "Hexane": 0.8740012014316891,
+       "Isobutane": 1.3109981797361505,
+       "Isopentane": 1.0925015006034822,
+       "Pentane": 1.0925015017648212,
+       "Propane": 6.522233965683985,
+       "n-Butane": 2.185002366304679
+      },
+      "condenser_duty_kW": 51.71125048855168,
+      "condenser_service": "refrigerated (propane/ethylene-class refrigerant)",
+      "diameter_bottom_m": 0.2824316105596715,
+      "diameter_m": 0.457,
+      "diameter_top_m": 0.202829300699613,
+      "distillate_kg_h": 210.6440092061512,
+      "distillate_kmol_h": {
+       "Ethane": 6.957049563396252,
+       "Hexane": 8.228377387382724e-16,
+       "Isobutane": 3.622411384515939e-06,
+       "Isopentane": 1.1861301898196702e-09,
+       "Pentane": 2.4791167827179815e-11,
+       "Propane": 0.03277504505368878,
+       "n-Butane": 6.372745456956101e-07
+      },
+      "feed_tray_from_top": 19,
+      "flooding_governs": "bottom",
+      "height_m": 27.551277407331522,
+      "min_pressure_for_cooling_water_Pa": null,
+      "name": "deethanizer",
+      "notes": [
+       "No bubble point at 318 K for the distillate (above its critical temperature): a water/air-cooled total condenser is not possible at any pressure.",
+       "Height/diameter = 60 > 30: consider splitting into two shells."
+      ],
+      "q": 1.0,
+      "reboiler_duty_kW": 70.90009769885546,
+      "theta": 1.3989070032028044,
+      "tray_efficiency": 0.7328416666923688
+     },
+     {
+      "N_min": 14.419087238310638,
+      "N_real": 41,
+      "N_theoretical": 32.38928208934344,
+      "P_bottom_Pa": 1728700.0,
+      "P_top_Pa": 1700000.0,
+      "R": 2.2543552881684743,
+      "R_min": 1.878629406807062,
+      "T_bottom_K": 396.09309493509795,
+      "T_top_K": 322.4251918008709,
+      "alpha_lk_hk": 1.7508816943364107,
+      "bottoms_bubble_h_J_mol": 23948.216492262127,
+      "bottoms_kg_h": 438.77649617066277,
+      "bottoms_kmol_h": {
+       "Ethane": 1.3183625052759496e-08,
+       "Hexane": 0.8740012014190784,
+       "Isobutane": 1.2847782161414274,
+       "Isopentane": 1.0924992525932222,
+       "Pentane": 1.0925012322795415,
+       "Propane": 0.09783350948525982,
+       "n-Butane": 2.181934530760794
+      },
+      "condenser_duty_kW": 74.19578876148437,
+      "condenser_service": "cooling water / air",
+      "diameter_bottom_m": 0.2817671699902206,
+      "diameter_m": 0.457,
+      "diameter_top_m": 0.23371635542666322,
+      "distillate_kg_h": 286.0505115533689,
+      "distillate_kmol_h": {
+       "Ethane": 0.034960034873642326,
+       "Hexane": 1.2610704526997718e-11,
+       "Isobutane": 0.026219963594723117,
+       "Isopentane": 2.2480102598688732e-06,
+       "Pentane": 2.6948527968332195e-07,
+       "Propane": 6.424400456198725,
+       "n-Butane": 0.0030678355438850317
+      },
+      "feed_tray_from_top": 23,
+      "flooding_governs": "bottom",
+      "height_m": 27.18084640234025,
+      "min_pressure_for_cooling_water_Pa": null,
+      "name": "depropanizer",
+      "notes": [
+       "Height/diameter = 59 > 30: consider splitting into two shells."
+      ],
+      "q": 0.7658769714029016,
+      "reboiler_duty_kW": 67.78930811160335,
+      "theta": 1.1527830826223173,
+      "tray_efficiency": 0.7674906378932834
+     },
+     {
+      "N_min": 12.081378926067208,
+      "N_real": 38,
+      "N_theoretical": 27.739320178602622,
+      "P_bottom_Pa": 626600.0,
+      "P_top_Pa": 600000.0,
+      "R": 1.879407093952556,
+      "R_min": 1.5661725782937967,
+      "T_bottom_K": 379.295906569164,
+      "T_top_K": 323.82393341561794,
+      "alpha_lk_hk": 1.904591530938089,
+      "bottoms_bubble_h_J_mol": 12367.533733362281,
+      "bottoms_kg_h": 233.8142173778077,
+      "bottoms_kmol_h": {
+       "Ethane": 7.855568841293593e-20,
+       "Hexane": 0.8740010421482984,
+       "Isobutane": 0.0009441764680382381,
+       "Isopentane": 1.0706492675413577,
+       "Pentane": 1.0901842556447403,
+       "Propane": 2.012011716956419e-08,
+       "n-Butane": 0.04363869061521575
+      },
+      "condenser_duty_kW": 52.96615624413196,
+      "condenser_service": "cooling water / air",
+      "diameter_bottom_m": 0.20100344912503698,
+      "diameter_m": 0.457,
+      "diameter_top_m": 0.18985000124477375,
+      "distillate_kg_h": 204.96227879285507,
+      "distillate_kmol_h": {
+       "Ethane": 1.318362505268094e-08,
+       "Hexane": 1.5927078005010824e-07,
+       "Isobutane": 1.2838340396733892,
+       "Isopentane": 0.02184998505186453,
+       "Pentane": 0.002316976634801159,
+       "Propane": 0.09783348936514265,
+       "n-Butane": 2.1382958401455783
+      },
+      "feed_tray_from_top": 21,
+      "flooding_governs": "bottom",
+      "height_m": 25.120533212751756,
+      "min_pressure_for_cooling_water_Pa": null,
+      "name": "debutanizer",
+      "notes": [
+       "Height/diameter = 55 > 30: consider splitting into two shells."
+      ],
+      "q": 0.5649328767360199,
+      "reboiler_duty_kW": 37.82058629253096,
+      "theta": 1.2723432985290386,
+      "tray_efficiency": 0.7127362208723867
+     }
+    ],
+    "feed_kmol_h": {
+     "Ethane": 6.992009611453519,
+     "Hexane": 0.8740012014316899,
+     "Isobutane": 1.311001802147535,
+     "Isopentane": 1.0925015017896123,
+     "Pentane": 1.0925015017896123,
+     "Propane": 6.555009010737674,
+     "n-Butane": 2.1850030035792245
+    }
+   }
+  },
+  "storage_tank": {
+   "cargo_equivalent": 0.37545231137525464,
+   "required_volume_m3": 63826.892933793286
+  },
+  "subcooling_duty_kW": 10843.663649960707,
+  "trim_cooler": {
+   "air_mass_flow_kg_s": 206.994041386727,
+   "air_volumetric_flow_m3_s": 179.9948185971539,
+   "bay_length_m": 12.2,
+   "bay_width_m": 4.9,
+   "duty_kW": 2915.3040788906633,
+   "fan_power_kW_per_bay": 24.922359498067465,
+   "n_bays": 2,
+   "required_face_area_m2": 59.99827286571797,
+   "total_fan_power_kW": 49.84471899613493
+  },
+  "trim_cooler_duty_kW": 2915.3040788906633
+ }
+}
