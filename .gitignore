@@ -11,3 +11,4 @@ dist/
 build/
 *.log
 .streamlit/secrets.toml
+graphify-out/
