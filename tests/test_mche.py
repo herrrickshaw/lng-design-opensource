@@ -38,3 +38,14 @@ def test_larger_min_approach_reduces_estimated_area():
     loose = analyze_composite_curves(hot, cold_loose, min_approach_K=3.0)
     # loose approach (bigger driving force) needs less area for the same duty
     assert loose.area_estimate_m2 < tight.area_estimate_m2
+
+
+def test_ua_matches_lmtd_for_linear_counter_current_streams():
+    # hot 300 -> 200 K, cold 180 -> 250 K, 1000 kW each: approaches 50 K (warm) and 20 K (cold)
+    # LMTD = 30 / ln 2.5 = 32.741 K -> UA = 30.543 kW/K -> A = 30543 / 2000 = 15.27 m2
+    hot = [StreamSegment(300.0, 200.0, 1000.0)]
+    cold = [StreamSegment(180.0, 250.0, 1000.0)]
+    r = analyze_composite_curves(hot, cold, min_approach_K=10.0, overall_U_W_m2K=2000.0)
+    assert r.ua_estimate_kW_per_K == pytest.approx(30.543, rel=1e-4)
+    assert r.min_approach_K == pytest.approx(20.0)
+    assert r.area_estimate_m2 == pytest.approx(15.2715, rel=1e-4)

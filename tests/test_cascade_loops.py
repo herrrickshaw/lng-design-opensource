@@ -128,3 +128,37 @@ def test_single_stage_cannot_span_full_precool_to_lng_rundown_range():
     # silently into a wrong-but-plausible-looking number.
     with pytest.raises(ValueError, match="did not converge"):
         mixed_refrigerant_cycle(LRC_BLEND, 5000.0, T_evap_K=173.15 - 60, T_cond_K=236.15)
+
+
+def test_pure_propane_cycle_pressures_match_saturation_tables():
+    # propane saturation (NIST): -40 C -> 1.11 bar, 40 C -> 13.69 bar
+    r = mixed_refrigerant_cycle(GasMixture({"Propane": 1.0}), 5000.0, 233.15, 313.15)
+    assert r.P_evap_Pa / 1e5 == pytest.approx(1.11, abs=0.01)
+    assert r.P_cond_Pa / 1e5 == pytest.approx(13.69, abs=0.02)
+    assert r.condensing_duty_kW == pytest.approx(5000.0 + r.compressor_power_kW)
+
+
+@pytest.mark.parametrize("blend,T_evap,T_cond", [
+    ({"Nitrogen": 0.05, "Methane": 0.30, "Ethane": 0.35, "Propane": 0.30}, 173.15, 236.15),
+    ({"Ethane": 0.30, "Propane": 0.70}, 223.15, 313.15),
+])
+def test_mr_cycle_agrees_with_an_independent_peng_robinson_cycle(blend, T_evap, T_cond):
+    """Same textbook single-stage cycle (dew-point suction, bubble-point condensate,
+    isentropic compression / 0.75) re-solved on CoolProp's Peng-Robinson backend."""
+    import CoolProp.CoolProp as CP
+    names, fracs = "&".join(blend), list(blend.values())
+
+    def st():
+        a = CP.AbstractState("PR", names)
+        a.set_mole_fractions(fracs)
+        return a
+    e, c, k = st(), st(), st()
+    e.update(CP.QT_INPUTS, 1.0, T_evap)
+    c.update(CP.QT_INPUTS, 0.0, T_cond)
+    k.update(CP.PSmass_INPUTS, c.p(), e.smass())
+    m = 5000e3 / (e.hmass() - c.hmass())
+    w_pr = m * (k.hmass() - e.hmass()) / 0.75 / 1000.0
+    r = mixed_refrigerant_cycle(GasMixture(blend), 5000.0, T_evap, T_cond)
+    assert r.refrigerant_mass_flow_kg_s == pytest.approx(m, rel=0.05)
+    assert r.compressor_power_kW == pytest.approx(w_pr, rel=0.06)
+    assert r.P_cond_Pa == pytest.approx(c.p(), rel=0.12)
