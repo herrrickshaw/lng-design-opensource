@@ -117,8 +117,8 @@ def _bubble(comp: dict[str, float], P: float) -> _Bubble:
     try:
         mu = s.viscosity() * 1000.0
         if not math.isfinite(mu):
-            raise ValueError
-    except Exception:
+            raise ValueError("non-finite mixture viscosity")
+    except ValueError:  # CoolProp raises ValueError when it has no mixture viscosity
         mu = _mixture_viscosity_cP(names, x, s.T())
     return _Bubble(
         T=s.T(), K={n: yi / xi for n, xi, yi in zip(names, x, y)},
@@ -287,6 +287,10 @@ _MW = {
 }
 
 
+_SIGMA_T_CRIT_FRACTION = 0.98   # evaluate sigma at min(T, 0.98 Tc): CoolProp has no sigma at/above Tc
+_SIGMA_FALLBACK_N_PER_M = 0.010  # N/m, used when a pure component has no surface-tension model
+
+
 def _surface_tension(comp: dict[str, float], T: float) -> float:
     """Mole-fraction-weighted pure-component surface tension, N/m (CoolProp
     has no mixture surface tension - approximation, adequate because the
@@ -294,9 +298,9 @@ def _surface_tension(comp: dict[str, float], T: float) -> float:
     tot = 0.0
     for n, x in comp.items():
         try:
-            tot += x * CP.PropsSI("I", "T", min(T, CP.PropsSI("Tcrit", n) * 0.98), "Q", 0, n)
-        except Exception:
-            tot += x * 0.010
+            tot += x * CP.PropsSI("I", "T", min(T, CP.PropsSI("Tcrit", n) * _SIGMA_T_CRIT_FRACTION), "Q", 0, n)
+        except ValueError:
+            tot += x * _SIGMA_FALLBACK_N_PER_M
     return tot
 
 
@@ -324,6 +328,113 @@ def _flood_diameter(
     return math.sqrt(4.0 * A_tot / math.pi)
 
 
+def _validate_column_inputs(feed: dict[str, float], spec: ColumnSpec) -> None:
+    """Reject specs the shortcut method cannot handle (keys absent, R <= Rmin, recoveries out of range)."""
+    lk, hk = spec.light_key, spec.heavy_key
+    if lk not in feed or hk not in feed:
+        raise ValueError("light_key and heavy_key must both be in the feed")
+    if spec.reflux_factor <= 1.0:
+        raise ValueError("reflux_factor must exceed 1.0 (R at or below R_min needs infinite stages)")
+    for r in (spec.lk_recovery_to_distillate, spec.hk_recovery_to_bottoms):
+        if not (0.5 < r < 1.0):
+            raise ValueError("recoveries must be in (0.5, 1.0)")
+
+
+def _fenske_distribution(feed: dict[str, float], spec: ColumnSpec, z: dict[str, float], F: float,
+                         d: dict[str, float], b: dict[str, float], P_bot: float):
+    """Inner loop: alpha at top/bottom compositions -> Fenske non-key distribution.
+    Returns (d, b, alpha, n_min) kmol/h splits, geometric-mean volatilities and minimum stages."""
+    lk, hk = spec.light_key, spec.heavy_key
+    alpha_g = None
+    for _ in range(10):
+        xd = _frac({k: max(v, 1e-12) for k, v in d.items()}) if sum(d.values()) > 0 else z
+        xb = _frac({k: max(v, 1e-12) for k, v in b.items()}) if sum(b.values()) > 0 else z
+        a_top = _alphas(xd, spec.top_pressure_Pa, hk)
+        a_bot = _alphas(xb, P_bot, hk)
+        alpha = {k: math.sqrt(a_top[k] * a_bot[k]) for k in feed}
+        if alpha[lk] <= 1.0:
+            raise ValueError(f"alpha_LK/HK = {alpha[lk]:.3f} <= 1: {lk} is not more volatile than {hk} here")
+        between = [k for k in feed if k not in (lk, hk) and alpha[hk] < alpha[k] < alpha[lk]]
+        if between:
+            raise ValueError(f"Keys not adjacent: {between} have volatility between {lk} and {hk}")
+        n_min = fenske_min_stages(d[lk], b[lk], d[hk], b[hk], alpha[lk])
+        ratio_hk = d[hk] / b[hk]
+        d_new, b_new = {}, {}
+        for k in feed:
+            if k in (lk, hk):
+                d_new[k], b_new[k] = d[k], b[k]
+                continue
+            rr = ratio_hk * alpha[k] ** n_min
+            d_new[k] = feed[k] * rr / (1.0 + rr)
+            b_new[k] = feed[k] - d_new[k]
+        change = max(abs(d_new[k] - d[k]) for k in feed) / F
+        d, b = d_new, b_new
+        alpha_g = alpha
+        if change < 1e-7:
+            break
+    return d, b, alpha_g, n_min
+
+
+def _feed_condition(z: dict[str, float], P_feed: float, feed_T_K: float | None,
+                    feed_h_J_mol: float | None) -> tuple[float, float]:
+    """Feed molar enthalpy (J/mol) and thermal condition q (1 = saturated liquid)."""
+    bub_f, dew_f = _bubble(z, P_feed), _dew(z, P_feed)
+    if feed_h_J_mol is not None:
+        h_f = feed_h_J_mol
+    elif feed_T_K is not None:
+        sf = _state(z); sf.update(CP.PT_INPUTS, P_feed, feed_T_K); h_f = sf.hmolar()
+    else:
+        h_f = bub_f.h_L
+    q = (dew_f.h_V - h_f) / (dew_f.h_V - bub_f.h_L)
+    return h_f, q
+
+
+def _condenser_service(x_d: dict[str, float], top_bub, spec: ColumnSpec, notes: list[str]):
+    """Condenser service class + the pressure that would make it water/air-coolable (Pa or None)."""
+    t_needed = spec.cooling_medium_T_K + spec.cooling_approach_K
+    service = ("cooling water / air" if top_bub.T >= t_needed
+               else "refrigerated (propane/ethylene-class refrigerant)")
+    p_cw = None
+    if top_bub.T < t_needed:
+        try:
+            sp = _state(x_d); sp.update(CP.QT_INPUTS, 0.0, t_needed); p_cw = sp.p()
+        except ValueError:
+            notes.append(
+                f"No bubble point at {t_needed:.0f} K for the distillate (above its critical "
+                "temperature): a water/air-cooled total condenser is not possible at any pressure."
+            )
+    return service, p_cw
+
+
+def _column_diameter(V, R, D, B, F, q, x_d, x_b, top_bub, bot_bub, P_bot, spec, notes):
+    """Flooding diameter of the top and bottom sections and the standard shell: (d_top, d_bot, d_std) in m."""
+    L_top = D * R
+    V_top = V
+    d_top = _flood_diameter(V_top, L_top, x_d, x_d, top_bub.T, spec.top_pressure_Pa, spec)
+    V_bot = V - (1.0 - q) * F
+    L_bot = V_bot + B
+    y_b = bot_bub.y
+    d_bot = _flood_diameter(V_bot, L_bot, y_b, x_b, bot_bub.T, P_bot, spec)
+    d_req = max(d_top, d_bot)
+    try:
+        d_std = match_standard_size(d_req * 1000.0, STANDARD_VESSEL_DIAMETERS_MM) / 1000.0
+    except ValueError:
+        d_std = math.ceil(d_req * 10.0) / 10.0
+        notes.append("Diameter exceeds the standard-vessel series: rounded up to 0.1 m (custom-fabricated shell).")
+    return d_top, d_bot, d_std
+
+
+def _column_height(n_real, B, bot_bub, d_std, spec, notes) -> float:
+    """Tray stack + allowances + bottoms sump (m)."""
+    area = math.pi / 4.0 * d_std ** 2
+    b_vol_m3_s = B * bot_bub.MW_L / 3600.0 / bot_bub.rho_L
+    h_sump = b_vol_m3_s * spec.bottoms_residence_min * 60.0 / area
+    height = (n_real - 1) * spec.tray_spacing_m + spec.top_allowance_m + spec.bottom_allowance_m + h_sump
+    if height / d_std > 30.0:
+        notes.append(f"Height/diameter = {height/d_std:.0f} > 30: consider splitting into two shells.")
+    return height
+
+
 def size_column(
     feed_kmol_h: dict[str, float],
     spec: ColumnSpec,
@@ -335,13 +446,7 @@ def size_column(
     single-phase feed, or neither for saturated liquid (q = 1)."""
     feed = {k: v for k, v in feed_kmol_h.items() if v > 0}
     lk, hk = spec.light_key, spec.heavy_key
-    if lk not in feed or hk not in feed:
-        raise ValueError("light_key and heavy_key must both be in the feed")
-    if spec.reflux_factor <= 1.0:
-        raise ValueError("reflux_factor must exceed 1.0 (R at or below R_min needs infinite stages)")
-    for r in (spec.lk_recovery_to_distillate, spec.hk_recovery_to_bottoms):
-        if not (0.5 < r < 1.0):
-            raise ValueError("recoveries must be in (0.5, 1.0)")
+    _validate_column_inputs(feed, spec)
     F = sum(feed.values())
     z = _frac(feed)
     notes: list[str] = []
@@ -354,47 +459,12 @@ def size_column(
     n_real = 30
     P_bot = spec.top_pressure_Pa + n_real * spec.pressure_drop_per_tray_Pa
     for _ in range(12):
-        # inner loop: alpha at top/bottom compositions -> Fenske distribution
-        alpha_g = None
-        for _ in range(10):
-            xd = _frac({k: max(v, 1e-12) for k, v in d.items()}) if sum(d.values()) > 0 else z
-            xb = _frac({k: max(v, 1e-12) for k, v in b.items()}) if sum(b.values()) > 0 else z
-            a_top = _alphas(xd, spec.top_pressure_Pa, hk)
-            a_bot = _alphas(xb, P_bot, hk)
-            alpha = {k: math.sqrt(a_top[k] * a_bot[k]) for k in feed}
-            if alpha[lk] <= 1.0:
-                raise ValueError(f"alpha_LK/HK = {alpha[lk]:.3f} <= 1: {lk} is not more volatile than {hk} here")
-            between = [k for k in feed if k not in (lk, hk) and alpha[hk] < alpha[k] < alpha[lk]]
-            if between:
-                raise ValueError(f"Keys not adjacent: {between} have volatility between {lk} and {hk}")
-            n_min = fenske_min_stages(d[lk], b[lk], d[hk], b[hk], alpha[lk])
-            ratio_hk = d[hk] / b[hk]
-            d_new, b_new = {}, {}
-            for k in feed:
-                if k in (lk, hk):
-                    d_new[k], b_new[k] = d[k], b[k]
-                    continue
-                rr = ratio_hk * alpha[k] ** n_min
-                d_new[k] = feed[k] * rr / (1.0 + rr)
-                b_new[k] = feed[k] - d_new[k]
-            change = max(abs(d_new[k] - d[k]) for k in feed) / F
-            d, b = d_new, b_new
-            alpha_g = alpha
-            if change < 1e-7:
-                break
-        alpha = alpha_g
+        d, b, alpha, n_min = _fenske_distribution(feed, spec, z, F, d, b, P_bot)
         D, B = sum(d.values()), sum(b.values())
         x_d, x_b = _frac(d), _frac(b)
 
         P_feed = 0.5 * (spec.top_pressure_Pa + P_bot)
-        bub_f, dew_f = _bubble(z, P_feed), _dew(z, P_feed)
-        if feed_h_J_mol is not None:
-            h_f = feed_h_J_mol
-        elif feed_T_K is not None:
-            sf = _state(z); sf.update(CP.PT_INPUTS, P_feed, feed_T_K); h_f = sf.hmolar()
-        else:
-            h_f = bub_f.h_L
-        q = (dew_f.h_V - h_f) / (dew_f.h_V - bub_f.h_L)
+        h_f, q = _feed_condition(z, P_feed, feed_T_K, feed_h_J_mol)
 
         r_min, theta = underwood_min_reflux(alpha, z, x_d, q, lk, hk)
         r_min = max(r_min, R_MIN_FLOOR)
@@ -425,41 +495,9 @@ def size_column(
     Q_c = V * 1000.0 * (top_dew.h_V - top_bub.h_L) / 3600.0 / 1000.0   # kW
     Q_r = Q_c + (D * top_bub.h_L + B * bot_bub.h_L - F * h_f) * 1000.0 / 3600.0 / 1000.0
 
-    # Condenser service class + the pressure that would make it water/air-coolable
-    t_needed = spec.cooling_medium_T_K + spec.cooling_approach_K
-    service = ("cooling water / air" if top_bub.T >= t_needed
-               else "refrigerated (propane/ethylene-class refrigerant)")
-    p_cw = None
-    if top_bub.T < t_needed:
-        try:
-            sp = _state(x_d); sp.update(CP.QT_INPUTS, 0.0, t_needed); p_cw = sp.p()
-        except Exception:
-            notes.append(
-                f"No bubble point at {t_needed:.0f} K for the distillate (above its critical "
-                "temperature): a water/air-cooled total condenser is not possible at any pressure."
-            )
-
-    # Hydraulics: top and bottom sections
-    L_top = D * R
-    V_top = V
-    d_top = _flood_diameter(V_top, L_top, x_d, x_d, top_bub.T, spec.top_pressure_Pa, spec)
-    V_bot = V - (1.0 - q) * F
-    L_bot = V_bot + B
-    y_b = bot_bub.y
-    d_bot = _flood_diameter(V_bot, L_bot, y_b, x_b, bot_bub.T, P_bot, spec)
-    d_req = max(d_top, d_bot)
-    try:
-        d_std = match_standard_size(d_req * 1000.0, STANDARD_VESSEL_DIAMETERS_MM) / 1000.0
-    except ValueError:
-        d_std = math.ceil(d_req * 10.0) / 10.0
-        notes.append("Diameter exceeds the standard-vessel series: rounded up to 0.1 m (custom-fabricated shell).")
-
-    area = math.pi / 4.0 * d_std ** 2
-    b_vol_m3_s = B * bot_bub.MW_L / 3600.0 / bot_bub.rho_L
-    h_sump = b_vol_m3_s * spec.bottoms_residence_min * 60.0 / area
-    height = (n_real - 1) * spec.tray_spacing_m + spec.top_allowance_m + spec.bottom_allowance_m + h_sump
-    if height / d_std > 30.0:
-        notes.append(f"Height/diameter = {height/d_std:.0f} > 30: consider splitting into two shells.")
+    service, p_cw = _condenser_service(x_d, top_bub, spec, notes)
+    d_top, d_bot, d_std = _column_diameter(V, R, D, B, F, q, x_d, x_b, top_bub, bot_bub, P_bot, spec, notes)
+    height = _column_height(n_real, B, bot_bub, d_std, spec, notes)
 
     MW_d = sum(x_d[k] * _MW[k] for k in x_d) if all(k in _MW for k in x_d) else top_bub.MW_L
     MW_b = sum(x_b[k] * _MW[k] for k in x_b) if all(k in _MW for k in x_b) else bot_bub.MW_L

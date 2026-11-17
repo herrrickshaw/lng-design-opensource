@@ -179,15 +179,9 @@ class LiquefactionDesign:
         return self.end_flash.liquid_mass_flow_kg_s
 
 
-def size_liquefaction_train(basis: LiquefactionBasis | None = None) -> LiquefactionDesign:
-    b = basis or LiquefactionBasis()
-    notes: list[str] = []
-
-    feed = GasMixture(b.feed_composition)
-    m = b.capacity_mtpa * MTPA_TO_KG_S
-    rho = feed.density(b.feed_T_K, b.feed_P_Pa)
-    q = m / rho
-
+def _size_front_end(b: LiquefactionBasis, m: float, rho: float, q: float):
+    """Inlet separator, amine absorber, molecular sieve and trim air cooler.
+    Returns (v101, t301, v201, trim_duty_kW, a101)."""
     v101 = size_vertical_separator(q, rho, b.condensate_density_kg_m3, b.condensate_flow_m3_s)
     t301 = size_packed_absorber(
         gas_volumetric_flow_m3_s=q, gas_density_kg_m3=rho,
@@ -200,7 +194,11 @@ def size_liquefaction_train(basis: LiquefactionBasis | None = None) -> Liquefact
 
     trim_duty = m * b.trim_cooler_cp_kJ_kg_K * b.trim_cooler_dT_K
     a101 = size_air_cooler(trim_duty, design_ambient_T_C=b.design_ambient_C_air_cooler)
+    return v101, t301, v201, trim_duty, a101
 
+
+def _size_precool(b: LiquefactionBasis, m: float, notes: list[str]):
+    """C3 precool loop and its compressor frame. Returns (precool_duty_kW, precool, suction_m3_h, frame)."""
     precool_duty = m * b.precool_cp_kJ_kg_K * (b.precool_from_C - b.precool_to_C)
     precool = optimal_evap_temperature(
         precool_duty, T_cold_end_target_K=b.precool_to_C + 273.15, T_cond_K=b.ambient_T_K)
@@ -213,7 +211,12 @@ def size_liquefaction_train(basis: LiquefactionBasis | None = None) -> Liquefact
     except ValueError as e:
         notes.append(f"C3 compressor: {e}")
         frame = None
+    return precool_duty, precool, suction_m3_h, frame
 
+
+def _size_liquefaction_section(b: LiquefactionBasis, m: float, notes: list[str]):
+    """LRC/subcooling duty split, refrigerant cascade and MCHE pinch check.
+    Returns (lrc_duty_kW, subcooling_duty_kW, cascade, pinch, mche_technology)."""
     total_span = abs(b.end_C - b.precool_to_C)
     lrc_span = abs(b.lrc_floor_C - b.precool_to_C)
     src_span = total_span - lrc_span
@@ -235,7 +238,12 @@ def size_liquefaction_train(basis: LiquefactionBasis | None = None) -> Liquefact
     pinch = analyze_composite_curves(hot, cold, min_approach_K=b.mche_min_approach_K,
                                      overall_U_W_m2K=b.mche_U_W_m2K)
     tech = classify_mche_type(b.capacity_mtpa)
+    return lrc_duty, src_duty, cascade, pinch, tech
 
+
+def _size_end_flash_and_storage(b: LiquefactionBasis, m: float, precool):
+    """End-flash, flash-gas compressor, LNG storage and refrigerant storage.
+    Returns (end_flash, flash_gas_compressor | None, storage_tank, c3_charge_kg, refrigerant_storage)."""
     lng_comp = b.lng_composition or b.feed_composition
     ef = flash_end_gas(lng_comp, b.end_flash_inlet_T_K, b.end_flash_inlet_P_Pa, b.storage_P_Pa, m)
     fgc = None
@@ -251,7 +259,11 @@ def size_liquefaction_train(basis: LiquefactionBasis | None = None) -> Liquefact
     # Raises if the charge needs more than one standard vessel (the
     # catalog refuses rather than return an undersized match).
     v102 = size_refrigerant_storage(c3_charge, b.c3_liquid_density_kg_m3)
+    return ef, fgc, tank, c3_charge, v102
 
+
+def _size_ngl_and_mr(b: LiquefactionBasis, notes: list[str]):
+    """Optional NGL fractionation train and mixed-refrigerant blend/make-up. Returns (frac, blend, makeup)."""
     frac = blend = mk = None
     if b.ngl_feed_kmol_h is not None:
         if not b.fractionation_specs:
@@ -271,16 +283,38 @@ def size_liquefaction_train(basis: LiquefactionBasis | None = None) -> Liquefact
             if not blend.reachable:
                 notes.append(f"MR target not reachable from the available sources "
                              f"(max error {blend.max_abs_error:.3f}).")
+    return frac, blend, mk
 
-    supply = None
-    if b.include_refrigerant_supply:
-        supply = size_refrigerant_supply(RefrigerantSupplyBasis(
-            loops=[RefrigerantLoop("C3 precool", {"Propane": 1.0}, charge_kg=c3_charge),
-                   RefrigerantLoop("LRC mixed refrigerant", dict(b.lrc_blend), charge_kmol=b.mr_charge_kmol)],
-            storage_factor=b.refrigerant_storage_factor, fill_days=b.refrigerant_fill_days,
-            annual_loss_fraction=b.mr_annual_loss_fraction,
-            **({"ngl_feed_kmol_h": b.ngl_feed_kmol_h} if b.ngl_feed_kmol_h else {})))
-        notes.extend(supply.notes)
+
+def _size_refrigerant_supply_option(b: LiquefactionBasis, c3_charge: float, notes: list[str]):
+    """Optional refrigerant storage + supply train; None unless `include_refrigerant_supply`."""
+    if not b.include_refrigerant_supply:
+        return None
+    supply = size_refrigerant_supply(RefrigerantSupplyBasis(
+        loops=[RefrigerantLoop("C3 precool", {"Propane": 1.0}, charge_kg=c3_charge),
+               RefrigerantLoop("LRC mixed refrigerant", dict(b.lrc_blend), charge_kmol=b.mr_charge_kmol)],
+        storage_factor=b.refrigerant_storage_factor, fill_days=b.refrigerant_fill_days,
+        annual_loss_fraction=b.mr_annual_loss_fraction,
+        **({"ngl_feed_kmol_h": b.ngl_feed_kmol_h} if b.ngl_feed_kmol_h else {})))
+    notes.extend(supply.notes)
+    return supply
+
+
+def size_liquefaction_train(basis: LiquefactionBasis | None = None) -> LiquefactionDesign:
+    b = basis or LiquefactionBasis()
+    notes: list[str] = []
+
+    feed = GasMixture(b.feed_composition)
+    m = b.capacity_mtpa * MTPA_TO_KG_S
+    rho = feed.density(b.feed_T_K, b.feed_P_Pa)
+    q = m / rho
+
+    v101, t301, v201, trim_duty, a101 = _size_front_end(b, m, rho, q)
+    precool_duty, precool, suction_m3_h, frame = _size_precool(b, m, notes)
+    lrc_duty, src_duty, cascade, pinch, tech = _size_liquefaction_section(b, m, notes)
+    ef, fgc, tank, c3_charge, v102 = _size_end_flash_and_storage(b, m, precool)
+    frac, blend, mk = _size_ngl_and_mr(b, notes)
+    supply = _size_refrigerant_supply_option(b, c3_charge, notes)
 
     return LiquefactionDesign(
         basis=b, feed_mass_flow_kg_s=m, feed_density_kg_m3=rho,

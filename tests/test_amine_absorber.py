@@ -2,7 +2,6 @@
 equation limits (McCabe, Smith & Harriott, "Unit Operations of Chemical
 Engineering", absorption chapter) and basic flooding-correlation physics.
 """
-import math
 
 import pytest
 

@@ -39,7 +39,6 @@ buried in the math.
 """
 from __future__ import annotations
 
-import math
 from dataclasses import dataclass, field
 
 import CoolProp.CoolProp as CP

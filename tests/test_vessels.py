@@ -1,4 +1,3 @@
-import pytest
 
 from lng_design.vessels import size_vertical_separator
 

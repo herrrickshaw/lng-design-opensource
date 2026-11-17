@@ -24,7 +24,6 @@ from lng_design.cascade_loops import three_loop_cascade
 from lng_design.compressor import size_centrifugal_stage
 from lng_design.end_flash import flash_end_gas
 from lng_design.equipment_catalog import select_compressor_frame
-from lng_design.exchangers import size_shell_and_tube
 from lng_design.mche import analyze_composite_curves, classify_mche_type, StreamSegment
 from lng_design.molecular_sieve import size_molecular_sieve_bed
 from lng_design.precool import optimal_evap_temperature

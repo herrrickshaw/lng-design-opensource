@@ -8,7 +8,7 @@ rather than to a fitted shortcut.
 """
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 import CoolProp.CoolProp as CP
 
@@ -39,8 +39,6 @@ class GasMixture:
 
     def molecular_weight(self) -> float:
         """g/mol"""
-        names = "&".join(self.composition.keys())
-        fracs = list(self.composition.values())
         return CP.PropsSI("M", self._heos_string()) * 1000.0
 
     def prop(self, output: str, T: float, P: float) -> float:

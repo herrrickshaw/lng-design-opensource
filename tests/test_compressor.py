@@ -12,7 +12,6 @@ We use nitrogen at low pressure (near-ideal-gas conditions) as the test
 fluid so CoolProp's real-gas Z stays within ~0.1% of 1, isolating the
 compressor module's formula from real-gas effects for this check.
 """
-import math
 
 import pytest
 
